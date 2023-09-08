@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { DHConnectProvider } from "@daohaus/connect";
 import { HausThemeProvider } from "@daohaus/ui";
 
 import { App } from "./App";

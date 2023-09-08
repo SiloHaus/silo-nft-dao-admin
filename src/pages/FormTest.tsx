@@ -6,7 +6,7 @@ import { AppFieldLookup } from "../legos/fieldConfig";
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 
 export const FormTest = () => {
-  const { daoChain, daoId } = useCurrentDao();
+  const { daoChain } = useCurrentDao();
 
   return (
     <FormBuilder
