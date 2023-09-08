@@ -1,6 +1,6 @@
 import { FormLego } from "@daohaus/form-builder";
 import { FIELD } from "@daohaus/moloch-v3-legos";
-import { CustomFormLego } from "./fieldConfig";
+import { CustomFormLego } from "./legoConfig";
 import { APP_FIELD } from "./fields";
 import { APP_TX } from "./tx";
 

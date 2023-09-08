@@ -1,5 +1,5 @@
 import { FieldLego } from "@daohaus/form-builder";
-import { CustomFieldLego } from "./fieldConfig";
+import { CustomFieldLego } from "./legoConfig";
 
 export const APP_FIELD: Record<string, CustomFieldLego> = {
   TITLE: {
