@@ -18,10 +18,10 @@ import { Proposal } from "./pages/Proposal";
 import { Members } from "./pages/Members";
 import { Member } from "./pages/Member";
 import { TARGET_DAO } from "./targetDao";
-import RageQuit from "./pages/RageQuit";
 import { MULTI_DAO_ROUTER } from "@daohaus/moloch-v3-hooks";
 import { HomeContainer } from "./components/layout/HomeContainer";
 import { DaoContainer } from "./components/layout/DaoContainer";
+import { Claim } from "./pages/Claim";
 
 export const Routes = ({
   setDaoChainId,
@@ -50,6 +50,7 @@ export const Routes = ({
       </Route>
       <Route path={MULTI_DAO_ROUTER} element={<DaoContainer />}>
         <Route index element={<Dao />} />
+        <Route path="claim" element={<Claim />} />
         <Route path="formtest" element={<FormTest />} />
         <Route path="safes" element={<Safes />} />
         <Route path="settings" element={<Settings />} />
@@ -57,7 +58,6 @@ export const Routes = ({
         <Route path="proposal/:proposalId" element={<Proposal />} />
         <Route path="members" element={<Members />} />
         <Route path="member/:memberAddress" element={<Member />} />
-        <Route path="members/ragequit" element={<RageQuit />} />
       </Route>
     </Router>
   );

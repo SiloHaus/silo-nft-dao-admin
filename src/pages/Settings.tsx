@@ -1,7 +1,13 @@
 import React from "react";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { SingleColumnLayout } from "@daohaus/ui";
-import { DaoSettings } from "@daohaus/moloch-v3-macro-ui";
+import {
+  ContractSettings,
+  DaoSettings,
+  GovernanceSettings,
+  MetadataSettings,
+  ShamanSettings,
+} from "@daohaus/moloch-v3-macro-ui";
 import { Keychain } from "@daohaus/keychain-utils";
 
 export const Settings = () => {
@@ -10,8 +16,20 @@ export const Settings = () => {
 
   return (
     <SingleColumnLayout title="Settings">
-      {dao && (
-        <DaoSettings daoChain={daoChain as keyof Keychain} daoId={dao.id} />
+      {dao && daoChain && (
+        <>
+          <MetadataSettings dao={dao} daoChain={daoChain} includeLinks={true} />
+
+          <ContractSettings dao={dao} daoChain={daoChain} />
+
+          <GovernanceSettings
+            dao={dao}
+            daoChain={daoChain}
+            includeLinks={true}
+          />
+
+          <ShamanSettings dao={dao} daoChain={daoChain} includeLinks={true} />
+        </>
       )}
     </SingleColumnLayout>
   );
