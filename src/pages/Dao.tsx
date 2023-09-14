@@ -1,6 +1,7 @@
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
-import { DaoOverview } from "@daohaus/moloch-v3-macro-ui";
 import { SingleColumnLayout } from "@daohaus/ui";
+
+import DaoOverview from "../components/DaoOverview";
 
 export function Dao() {
   const { daoChain, daoId } = useCurrentDao();
