@@ -3,14 +3,17 @@ import { charLimit } from "@daohaus/utils";
 import { Keychain } from "@daohaus/keychain-utils";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
-import { AddressDisplay, H4, ParMd, ParXs, Button, Link } from "@daohaus/ui";
-
 import {
-  DaoProfileAvatar,
-  DaoProfileContainer,
-  MissingProfileCard,
-  TagListContainer,
-} from "./DaoOverview.styles";
+  AddressDisplay,
+  H4,
+  ParMd,
+  ParXs,
+  Button,
+  Link,
+  widthQuery,
+  ProfileAvatar,
+  Card,
+} from "@daohaus/ui";
 
 import {
   daoProfileHasLinks,
@@ -21,6 +24,44 @@ import {
   OverviewLinkList,
 } from "./layout/MetadataLinkLists";
 import { TagList } from "./layout/TagList";
+import { styled } from "styled-components";
+
+export const DaoProfileContainer = styled.div`
+  width: 100%;
+  border-radius: ${({ theme }) => theme.card.radius};
+  border: 1px ${({ theme }) => theme.secondary.step5} solid;
+  background-color: ${({ theme }) => theme.secondary.step3};
+  padding: 2.2rem;
+  .avatar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.7rem;
+    margin-bottom: 2.7rem;
+    p {
+      margin-right: auto;
+    }
+    @media ${widthQuery.xs} {
+      flex-direction: column;
+    }
+  }
+`;
+
+export const DaoProfileAvatar = styled(ProfileAvatar)`
+  width: 18rem;
+  height: 18rem;
+`;
+
+export const MissingProfileCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.3rem;
+`;
+
+export const TagListContainer = styled.div`
+  margin-top: 2.8rem;
+`;
 
 type DaoProfileProps = {
   dao: MolochV3Dao;

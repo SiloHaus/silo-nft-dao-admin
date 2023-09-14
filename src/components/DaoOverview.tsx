@@ -15,6 +15,7 @@ import {
 } from "@daohaus/utils";
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
 import { useDaoData } from "@daohaus/moloch-v3-hooks";
+
 import { DaoProfile } from "./DaoProfile";
 
 export const OverviewCard = styled(Card)`
@@ -32,7 +33,7 @@ export const TokensCard = styled(OverviewCard)`
   padding: 2.4rem;
 `;
 
-export const DataGrid = styled.div`
+export const OverviewDataGrid = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -105,7 +106,7 @@ export const DaoOverview = ({
         <>
           <OverviewCard>
             <DaoProfile dao={dao} />
-            <DataGrid>
+            <OverviewDataGrid>
               <DataIndicator
                 label="Total in Safes"
                 data={formatValueTo({
@@ -120,11 +121,11 @@ export const DaoOverview = ({
                 label="Active Proposals"
                 data={dao.activeProposals?.length || "0"}
               />
-            </DataGrid>
+            </OverviewDataGrid>
           </OverviewCard>
           <TokensCard>
             <H4>Tokens</H4>
-            <DataGrid>
+            <OverviewDataGrid>
               <DataIndicator
                 label="NFT"
                 data={charLimit(dao.shareTokenName, 20)}
@@ -137,8 +138,8 @@ export const DaoOverview = ({
                   format: "numberShort",
                 })}
               />
-            </DataGrid>
-            <DataGrid>
+            </OverviewDataGrid>
+            <OverviewDataGrid>
               <DataIndicator
                 label="Meme"
                 data={charLimit(lowerCaseLootToken(dao.lootTokenName), 20)}
@@ -151,7 +152,7 @@ export const DaoOverview = ({
                   format: "numberShort",
                 })}
               />
-            </DataGrid>
+            </OverviewDataGrid>
           </TokensCard>
         </>
       )}
