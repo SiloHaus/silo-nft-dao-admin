@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "0xsequence": "^1.2.2",
     "@daohaus/abis": "^0.2.3",
     "@daohaus/connect": "^0.2.3",
     "@daohaus/connect-context": "^0.2.3",
@@ -25,6 +26,7 @@
     "@daohaus/tx-builder": "^0.2.3",
     "@daohaus/ui": "^0.2.3",
     "@daohaus/utils": "^0.2.3",
+    "ethers": "^6.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
