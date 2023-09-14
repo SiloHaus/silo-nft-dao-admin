@@ -13,6 +13,8 @@ import {
   widthQuery,
 } from "@daohaus/ui";
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
+import { useDHConnect } from "@daohaus/connect";
+import { ProfileNftList } from "../components/ProfileNftList";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -38,6 +40,7 @@ const StyledArrowLeft = styled(BsArrowLeft)`
 
 export const Member = () => {
   const { isFetched, isFetching, member } = useDaoMember();
+  const { address } = useDHConnect();
   const { daoChain, daoId } = useCurrentDao();
   const { successToast } = useToast();
   const isMobile = useBreakpoint(widthQuery.sm);
@@ -50,6 +53,8 @@ export const Member = () => {
   };
 
   if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
+
+  const isConnectedMember = member?.memberAddress === address;
 
   return (
     <SingleColumnLayout title="Member Profile">
@@ -80,6 +85,11 @@ export const Member = () => {
             daoChain={daoChain}
             daoId={daoId}
             member={member}
+          />
+          <ProfileNftList
+            address={member.memberAddress}
+            daoChain={daoChain}
+            isHolder={isConnectedMember}
           />
         </>
       )}

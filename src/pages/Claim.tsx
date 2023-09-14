@@ -3,6 +3,8 @@ import React from "react";
 import { ParMd, ParXl, SingleColumnLayout } from "@daohaus/ui";
 import { useDHConnect } from "@daohaus/connect";
 import { styled } from "styled-components";
+import { ClaimList } from "../components/ClaimList";
+import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 
 const ContentContainer = styled.div`
   text-align: left;
@@ -11,6 +13,7 @@ const ContentContainer = styled.div`
 
 export const Claim = () => {
   const { address } = useDHConnect();
+  const { daoChain } = useCurrentDao();
 
   return (
     <SingleColumnLayout title="Claim your airdrop">
@@ -20,7 +23,9 @@ export const Claim = () => {
           <ParMd>Connect your wallet to see your available claims.</ParMd>
         </ContentContainer>
       )}
-      {address && <p>connected</p>}
+      {address && daoChain && (
+        <ClaimList address={address} daoChain={daoChain} />
+      )}
     </SingleColumnLayout>
   );
 };
