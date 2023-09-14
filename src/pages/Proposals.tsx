@@ -11,13 +11,13 @@ import {
 import { NewProposalList } from "../components/NewProposalList";
 import { prepareProposals } from "../utils/formHelpers";
 import {
-  ADVANCED_PROPOSAL_FORMS,
-  BASIC_PROPOSAL_FORMS,
-} from "@daohaus/moloch-v3-legos";
+  ADVANCED_PROPOSAL_FORMS_APP,
+  BASIC_PROPOSAL_FORMS_APP,
+} from "../legos/legoConfig";
 
 export const Proposals = () => {
-  const basicProposals = prepareProposals(BASIC_PROPOSAL_FORMS);
-  const advancedProposals = prepareProposals(ADVANCED_PROPOSAL_FORMS);
+  const basicProposals = prepareProposals(BASIC_PROPOSAL_FORMS_APP);
+  const advancedProposals = prepareProposals(ADVANCED_PROPOSAL_FORMS_APP);
 
   return (
     <SingleColumnLayout>
