@@ -1,9 +1,17 @@
-import { Card, widthQuery } from "@daohaus/ui";
+import { Card, Link, widthQuery } from "@daohaus/ui";
 import { styled } from "styled-components";
 
 export const StyledLink = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.primary.step10};
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+  color: unset;
   &:hover {
     text-decoration: none;
   }

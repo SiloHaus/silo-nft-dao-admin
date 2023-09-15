@@ -1,9 +1,18 @@
-import { Button, Dialog, DialogContent, DialogTrigger } from "@daohaus/ui";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  Loading,
+} from "@daohaus/ui";
 import { useState } from "react";
 import { ConnectTBAInstructions } from "./ConnectTBAInstructions";
-import { NFT_ADDRESS } from "../utils/constants";
+import { NFT_ADDRESS, TOKENBOUND_URL } from "../utils/constants";
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 import { ValidNetwork } from "@daohaus/keychain-utils";
+import { EthAddress } from "@daohaus/utils";
+import { useTba } from "../hooks/useTba";
+import { tbaAppLink } from "../utils/tokenboundHelpers";
 
 type ClaimButtonProps = {
   tokenId: string;
@@ -14,8 +23,31 @@ export const ConnectTBAButton = ({
   contractAddress,
 }: ClaimButtonProps) => {
   const { daoChain } = useCurrentDao();
+  const { tba, isDeployed, isError, isLoading } = useTba({
+    contractAddress: contractAddress as EthAddress,
+    tokenId,
+    chainId: daoChain,
+  });
+
+  console.log("tba ", tba, isDeployed);
 
   const [open, setOpen] = useState(false);
+
+  if (isError) return null;
+
+  if (isLoading) return <Loading />;
+
+  if (!isDeployed)
+    return (
+      <Button
+        href={tbaAppLink({ contractAddress, tokenId, daoChain })}
+        color="secondary"
+        size="sm"
+        fullWidth
+      >
+        Deploy TBA
+      </Button>
+    );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
