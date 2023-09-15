@@ -17,7 +17,7 @@ type HAvatar = {
   address: string;
   imgUrl?: string;
 };
-export const HeaderAvatar = ({ name, imgUrl, address }: HAvatar) => {
+export const TBAAddressDisplay = ({ name, imgUrl, address }: HAvatar) => {
   return (
     <DaoNavContainer>
       <DaoProfileAvatar image={imgUrl} address={address} />

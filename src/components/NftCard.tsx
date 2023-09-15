@@ -1,11 +1,13 @@
 import { TokenBalance } from "@0xsequence/indexer";
 import styled from "styled-components";
 
-import { AddressDisplay, Card, ParSm, ParXs } from "@daohaus/ui";
-import { useDaoData } from "@daohaus/moloch-v3-hooks";
+import { AddressDisplay, Card, ParSm } from "@daohaus/ui";
+import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { ClaimButton } from "./ClaimButton";
 import { ConnectTBAButton } from "./ConnectTBAButton";
 import { DelegateButton } from "./DelegateButton";
+import { useTba } from "../hooks/useTba";
+import { EthAddress } from "@daohaus/utils";
 
 const CardContainer = styled(Card)`
   padding: 0;
@@ -53,10 +55,14 @@ type NftCardProps = {
   isHolder?: boolean;
 };
 
-// TODO: need the TBA address here
-
 export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
   const { dao } = useDaoData();
+  const { daoChain } = useCurrentDao();
+  const { tba } = useTba({
+    contractAddress: nft.contractAddress as EthAddress,
+    tokenId: nft.tokenID,
+    chainId: daoChain,
+  });
 
   return (
     <CardContainer>
@@ -66,18 +72,21 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
         {isClaim && (
           <LowerSection>
             <ClaimPar>{dao?.lootTokenName}: 69,420</ClaimPar>
-            <ClaimButton tokenId={nft.tokenID} />
+            <ClaimButton
+              tokenId={nft.tokenID}
+              contractAddress={nft.contractAddress}
+            />
           </LowerSection>
         )}
 
         {!isClaim && (
           <LowerSection>
-            <AddressDisplay address={nft.contractAddress} truncate copy />
+            {tba && <AddressDisplay address={tba} truncate copy />}
             <ConnectTBAButton
               tokenId={nft.tokenID}
               contractAddress={nft.contractAddress}
             />
-            <DelegateButton />
+            {/* <DelegateButton /> */}
           </LowerSection>
         )}
       </CardLower>
