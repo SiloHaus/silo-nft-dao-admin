@@ -1,27 +1,12 @@
 import styled from "styled-components";
 
-import { MolochV3Membership } from "@daohaus/utils";
 import { breakpoints } from "@daohaus/ui";
+import { ListDaosQueryResDaos } from "@daohaus/moloch-v3-data";
 
-import { ListType } from "./HomeDashboard";
 import { DaoCard } from "./DaoCard";
-import { DaoTable } from "./DaoTable";
 
-export const DaoList = ({
-  daoData,
-  isMobile,
-  listType,
-}: {
-  daoData: MolochV3Membership[];
-  isMobile: boolean;
-  listType: ListType;
-}) => {
-  if (isMobile) {
-    return <DaoCards daoData={daoData} />;
-  }
-
-  if (listType === ListType.Cards) return <DaoCards daoData={daoData} />;
-  if (listType === ListType.Table) return <DaoTable daoData={daoData} />;
+export const DaoList = ({ daoData }: { daoData: ListDaosQueryResDaos }) => {
+  return <DaoCards daoData={daoData} />;
 
   return null;
 };
@@ -37,10 +22,10 @@ const CardListBox = styled.div`
   }
 `;
 
-const DaoCards = ({ daoData }: { daoData: MolochV3Membership[] }) => (
+const DaoCards = ({ daoData }: { daoData: ListDaosQueryResDaos }) => (
   <CardListBox>
     {daoData.map((dao) => (
-      <DaoCard key={dao.dao} {...dao} />
+      <DaoCard key={dao.id} {...dao} />
     ))}
   </CardListBox>
 );

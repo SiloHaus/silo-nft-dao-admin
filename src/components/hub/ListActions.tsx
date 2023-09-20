@@ -6,6 +6,8 @@ import { indigoDark } from "@radix-ui/colors";
 import { Noun } from "@daohaus/utils";
 import {
   Button,
+  ParLg,
+  ParXl,
   SingleColumnLayout,
   useBreakpoint,
   widthQuery,
@@ -15,16 +17,12 @@ import SearchInput from "./SearchInput";
 import { DAOFilterDropdown } from "./DaoFilterDropdown";
 import { SortDropdown } from "./SortDropdown";
 import { sortOptions } from "../../utils/hub";
+import { useDHConnect } from "@daohaus/connect";
+import { getNetworkName } from "@daohaus/keychain-utils";
 
 type ListActionsProps = {
   children: ReactNode;
   searchTerm: string;
-  filterNetworks: string[];
-  listType: ListType;
-  toggleListType: () => void;
-  toggleNetworkFilter: (event: MouseEvent<HTMLButtonElement>) => void;
-  filterDelegate: string;
-  toggleDelegateFilter: (event: MouseEvent<HTMLButtonElement>) => void;
   sortBy: string;
   switchSortBy: (event: ChangeEvent<HTMLSelectElement>) => void;
   setSearchTerm: (term: string) => void;
@@ -54,6 +52,7 @@ const IconList = styled(RiListCheck)`
 
 const ControlBarBox = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 100%;
   margin-bottom: 3rem;
   flex-wrap: wrap;
@@ -72,15 +71,10 @@ export const ListActions = ({
   setSearchTerm,
   totalDaos,
   noun,
-  filterNetworks,
-  filterDelegate,
-  toggleNetworkFilter,
-  toggleDelegateFilter,
-  toggleListType,
-  listType,
   sortBy,
   switchSortBy,
 }: ListActionsProps) => {
+  const { chainId } = useDHConnect();
   const isMobile = useBreakpoint(widthQuery.sm);
 
   return (
@@ -93,22 +87,7 @@ export const ListActions = ({
           noun={noun}
           full={isMobile}
         />
-        <DAOFilterDropdown
-          filterNetworks={filterNetworks}
-          filterDelegate={filterDelegate}
-          toggleDelegateFilter={toggleDelegateFilter}
-          toggleNetworkFilter={toggleNetworkFilter}
-        />
-        {isMobile || (
-          <Button
-            color="secondary"
-            onClick={toggleListType}
-            IconLeft={listType === ListType.Table ? IconGrid : IconList}
-            className="list-toggle"
-          >
-            {listType === ListType.Table ? "Card View" : "List View"}
-          </Button>
-        )}
+        <ParLg>RDF DAOs {getNetworkName(chainId)}</ParLg>
         <SortDropdown
           id="dao-sort"
           value={sortBy}
