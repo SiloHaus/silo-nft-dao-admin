@@ -13,6 +13,8 @@ import {
   Tooltip,
 } from "@daohaus/ui";
 import { ButtonRouterLink } from "../ButtonRouterLink";
+import { ListDaosQueryResDaos } from "@daohaus/moloch-v3-data";
+import { useDHConnect } from "@daohaus/connect";
 
 const StyledDaoCard = styled.div`
   background-color: ${(props) => props.theme.secondary.step2};
@@ -51,30 +53,26 @@ const StyledDaoCard = styled.div`
 `;
 
 export const DaoCard = ({
-  isDelegate,
-  dao,
-  daoAvatarImg,
+  id,
   activeMemberCount,
-  fiatTotal,
-  activeProposalCount,
-  totalProposalCount,
-  votingPower,
+  activeProposals,
+  proposalCount,
   name,
-  networkId,
-  contractType,
-}: MolochV3Membership) => {
+  avatarImg,
+}: ListDaosQueryResDaos[0]) => {
+  const { chainId } = useDHConnect();
   return (
     <StyledDaoCard className="dao-card">
       <div className="top-box">
         <div className="alert-box">
-          <ProfileAvatar size="xl" address={dao} image={daoAvatarImg} />
-          {activeProposalCount > 0 && (
+          <ProfileAvatar size="xl" address={id} image={avatarImg} />
+          {activeProposals && activeProposals.length > 0 && (
             <Tooltip
-              content={`${activeProposalCount} Active Proposals (in voting or grace period)`}
+              content={`${activeProposals.length} Active Proposals (in voting or grace period)`}
               triggerEl={
                 <Badge
                   badgeSize="sm"
-                  badgeLabel={activeProposalCount}
+                  badgeLabel={activeProposals.length}
                   className="badge"
                   badgeColor="blue"
                 />
@@ -82,10 +80,9 @@ export const DaoCard = ({
             />
           )}
         </div>
-        {isDelegate && <Tag tagColor="yellow">Delegate</Tag>}
       </div>
       <ParLg className="dao-title">
-        {name ? charLimit(name, 21) : charLimit(dao, 21)}{" "}
+        {name ? charLimit(name, 21) : charLimit(id, 21)}{" "}
       </ParLg>
       <div className="stats-box">
         {activeMemberCount && (
@@ -100,40 +97,22 @@ export const DaoCard = ({
               : "Members"}
           </ParMd>
         )}
-        {totalProposalCount && (
+        {proposalCount && (
           <ParMd>
-            <Bold>
-              {readableNumbers.toNumber({ value: totalProposalCount })}
-            </Bold>{" "}
-            {parseInt(
-              readableNumbers.toNumber({ value: totalProposalCount })
-            ) === 1
+            <Bold>{readableNumbers.toNumber({ value: proposalCount })}</Bold>{" "}
+            {parseInt(readableNumbers.toNumber({ value: proposalCount })) === 1
               ? "Proposal"
               : "Proposals"}
           </ParMd>
         )}
-        {votingPower > 0 ? (
-          <ParMd>
-            <Bold>
-              {readableNumbers.toPercentDecimals({
-                value: votingPower,
-                separator: "",
-              })}
-            </Bold>{" "}
-            Voting Power
-          </ParMd>
-        ) : (
-          <ParMd>No Voting Power</ParMd>
-        )}
       </div>
       <div className="tag-box">
-        <Tag tagColor="red">{getNetworkName(networkId)}</Tag>
-        <Tag tagColor="blue">{contractType}</Tag>
+        <Tag tagColor="red">{getNetworkName(chainId)}</Tag>
       </div>
       <ButtonRouterLink
         color="secondary"
         fullWidth
-        to={`/molochv3/${networkId}/${dao}`}
+        to={`/molochv3/${chainId}/${id}`}
       >
         Go
       </ButtonRouterLink>
