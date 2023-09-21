@@ -24,33 +24,57 @@ const fetchShaman = async ({
     rpcs,
   });
 
-  const getters = [
+  let shamanName;
+  try{
+    shamanName = await client.readContract({
+      abi: ClaimShamanAbi,
+      address: contractAddress,
+      functionName: "name",
+      args: [],
+    });
+  } catch (e) {
+    shamanName = ""
+    console.log("error", e);
+  }
+
+  let getters: string[] = [];
+  let sdata: {[key: string]: any } = {};
+
+  if(shamanName === "NFT6551ClaimerShaman") {
+  getters = [
     "nft",
     "lootPerNft",
     "sharesPerNft",
     "paused",
     "vault"
   ];
+}
   const shamanData = await Promise.all(
     getters.map(async (getter) => {
-      return (await client.readContract({
+        let res;
+        try{
+      res = (await client.readContract({
         abi: ClaimShamanAbi,
         address: contractAddress,
         functionName: getter,
         args: [],
       }));
+    } catch (e) {
+        console.log("error", e);
+        res = undefined
+    }
+      return res;
     })
   ) as string[];
 
+  // loop through getters and add to sdata as key value pairs
+    getters.forEach((getter, i) => {
+        sdata[getter] = shamanData[i];
+    });
 
-  const nftAddress = shamanData[0];
-  const lootPerNft = shamanData[1];
-  const sharesPerNft = shamanData[2];
-  const paused = shamanData[3];
-  const vaultAddress = shamanData[4];
-  console.log("shamanData", shamanData);
+  console.log("shamanData", sdata);
 
-  return {  nftAddress, lootPerNft, sharesPerNft, paused, vaultAddress };
+  return {  shamanName, sdata };
 };
 
 export const useClaimShaman = ({

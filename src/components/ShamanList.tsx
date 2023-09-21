@@ -59,7 +59,7 @@ export const ShamanList = ({
           <DataSm>Permissions</DataSm>
         </div>
         <div>
-          <DataSm className="loot">Loot</DataSm>
+          <DataSm className="loot">tag</DataSm>
         </div>
       </ShamanListContainer>
       {shamen &&

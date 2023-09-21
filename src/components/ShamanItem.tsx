@@ -1,11 +1,11 @@
-import { AddressDisplay, DataSm, widthQuery } from "@daohaus/ui";
+import { AddressDisplay, DataSm, Tag, Tooltip, widthQuery } from "@daohaus/ui";
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
 import { ButtonRouterLink } from "./ButtonRouterLink";
 import { styled } from "styled-components";
 import { ShamanListContainer } from "./ShamanList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { formatValueTo } from "@daohaus/utils";
-import { formatEther } from 'viem'
+import { formatEther } from "viem";
 
 type ShamanItemProps = {
   shaman: {
@@ -25,11 +25,11 @@ export const ShamanItem = ({
   daoId,
   includeLinks,
 }: ShamanItemProps) => {
-    // use claim shaman
-    const {  nftAddress, lootPerNft, sharesPerNft, paused, vaultAddress } = useClaimShaman({
-        contractAddress: shaman.shamanAddress as `0x${string}`,
-        chainId: daoChain,
-        });
+  // use claim shaman
+  const { shamanName, sdata } = useClaimShaman({
+    contractAddress: shaman.shamanAddress as `0x${string}`,
+    chainId: daoChain,
+  });
   return (
     <ShamanListContainer key={shaman.id}>
       <span className="contract">
@@ -40,8 +40,20 @@ export const ShamanItem = ({
         />
       </span>
       <div className="manage">
-        <DataSm>{shaman.permissions}</DataSm> 
-        <DataSm>{formatEther(BigInt(lootPerNft || "0"))}</DataSm>       
+        <DataSm>{shaman.permissions}</DataSm>
+        {shamanName ? (
+          <Tag tagColor="green">
+            <>
+              <Tooltip content={`maybe some info`} />
+              {shamanName as string}
+            </>
+          </Tag>
+        ) : (
+          <Tag tagColor="green"><>
+          <Tooltip content={`not sure but cool`} />
+          unknown
+        </></Tag>
+        )}
 
         {includeLinks && (
           <ButtonRouterLink
