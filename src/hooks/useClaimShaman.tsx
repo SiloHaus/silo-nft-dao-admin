@@ -56,6 +56,8 @@ const fetchShaman = async ({
         console.log("error", e);
         res = undefined;
       }
+      console.log("res", res);
+      
       return res;
     })
   )) as string[];
@@ -65,7 +67,9 @@ const fetchShaman = async ({
     sdata[getter] = shamanData[i];
   });
 
-  console.log("shamanData", sdata);
+  console.log("shamanData", shamanName, shamanData);  
+  console.log("sData", sdata);
+
 
   return { shamanName, sdata };
 };

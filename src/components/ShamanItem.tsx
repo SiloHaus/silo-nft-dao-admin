@@ -1,4 +1,4 @@
-import { AddressDisplay, DataSm, Tag, Tooltip, widthQuery } from "@daohaus/ui";
+import { AddressDisplay, DataSm, ParSm, Tag, Tooltip } from "@daohaus/ui";
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
 import { ButtonRouterLink } from "./ButtonRouterLink";
 
@@ -42,8 +42,23 @@ export const ShamanItem = ({
         {shamanName ? (
           <ShamanTag tagColor="green">
             <>
-              {shamanName as string}
-              <Tooltip content={`maybe some info`} />
+              {(shamanName as string).slice(0, 32)}
+              <Tooltip
+                content={
+                  <>
+                    {" "}
+                    {sdata && Object.keys(sdata).length > 0
+                      ? Object.keys(sdata).map((getter: string, idx) => {
+                          return (
+                            <ParSm key={idx}>
+                              {getter}: {sdata[getter].toString()}
+                            </ParSm>
+                          );
+                        })
+                      : "no further info here"}{" "}
+                  </>
+                }
+              />
             </>
           </ShamanTag>
         ) : (
