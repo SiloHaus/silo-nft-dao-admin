@@ -105,6 +105,13 @@
   },
   {
     "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "nft",
     "outputs": [
       { "internalType": "contract IERC721", "name": "", "type": "address" }
