@@ -27,12 +27,10 @@ export const ShamanListContainer = styled.div`
     }
   }
   .contract {
+    display: flex;
     width: 60%;
   }
   .permissions {
-    width: 20%;
-  }
-  .loot {
     width: 20%;
   }
   .manage {
@@ -57,9 +55,6 @@ export const ShamanList = ({
         </div>
         <div className="permissions">
           <DataSm>Permissions</DataSm>
-        </div>
-        <div>
-          <DataSm className="loot">tag</DataSm>
         </div>
       </ShamanListContainer>
       {shamen &&

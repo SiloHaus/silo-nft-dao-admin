@@ -1,11 +1,10 @@
 import { AddressDisplay, DataSm, Tag, Tooltip, widthQuery } from "@daohaus/ui";
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
 import { ButtonRouterLink } from "./ButtonRouterLink";
-import { styled } from "styled-components";
+
 import { ShamanListContainer } from "./ShamanList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
-import { formatValueTo } from "@daohaus/utils";
-import { formatEther } from "viem";
+import { styled } from "styled-components";
 
 type ShamanItemProps = {
   shaman: {
@@ -18,6 +17,8 @@ type ShamanItemProps = {
   daoId: string;
   includeLinks?: boolean;
 };
+
+export const ShamanTag = styled(Tag)``;
 
 export const ShamanItem = ({
   shaman,
@@ -38,24 +39,24 @@ export const ShamanItem = ({
           explorerNetworkId={daoChain as keyof Keychain}
           truncate
         />
+        {shamanName ? (
+          <ShamanTag tagColor="green">
+            <>
+              {shamanName as string}
+              <Tooltip content={`maybe some info`} />
+            </>
+          </ShamanTag>
+        ) : (
+          <ShamanTag tagColor="green">
+            <>
+              Unknown
+              <Tooltip content={`not sure but cool`} />
+            </>
+          </ShamanTag>
+        )}
       </span>
       <div className="manage">
         <DataSm>{shaman.permissions}</DataSm>
-        {shamanName ? (
-          <Tag tagColor="green">
-            <>
-              <Tooltip content={`maybe some info`} />
-              {shamanName as string}
-            </>
-          </Tag>
-        ) : (
-          <Tag tagColor="green">
-            <>
-              <Tooltip content={`not sure but cool`} />
-              unknown
-            </>
-          </Tag>
-        )}
 
         {includeLinks && (
           <ButtonRouterLink
