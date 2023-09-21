@@ -1,10 +1,19 @@
-import { AddressDisplay, DataSm, ParSm, Tag, Tooltip } from "@daohaus/ui";
+import {
+  AddressDisplay,
+  Button,
+  DataSm,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  Label,
+  ParSm,
+} from "@daohaus/ui";
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
 import { ButtonRouterLink } from "./ButtonRouterLink";
 
 import { ShamanListContainer } from "./ShamanList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
-import { styled } from "styled-components";
+import { formatValueTo, toWholeUnits } from "@daohaus/utils";
 
 type ShamanItemProps = {
   shaman: {
@@ -18,7 +27,6 @@ type ShamanItemProps = {
   includeLinks?: boolean;
 };
 
-export const ShamanTag = styled(Tag)``;
 
 export const ShamanItem = ({
   shaman,
@@ -39,35 +47,63 @@ export const ShamanItem = ({
           explorerNetworkId={daoChain as keyof Keychain}
           truncate
         />
+
         {shamanName ? (
-          <ShamanTag tagColor="green">
-            <>
-              {(shamanName as string).slice(0, 32)}
-              <Tooltip
-                content={
-                  <>
-                    {" "}
-                    {sdata && Object.keys(sdata).length > 0
-                      ? Object.keys(sdata).map((getter: string, idx) => {
-                          return (
-                            <ParSm key={idx}>
-                              {getter}: {sdata[getter].toString()}
-                            </ParSm>
-                          );
-                        })
-                      : "no further info here"}{" "}
-                  </>
-                }
-              />
-            </>
-          </ShamanTag>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size={"sm"} variant={"outline"}>
+                {(shamanName as string).slice(0, 32)}
+              </Button>
+            </DialogTrigger>
+            <DialogContent title={shamanName as string}>
+              {sdata && Object.keys(sdata).length > 0
+                ? Object.keys(sdata).map((getter: string, idx) => {
+                    return sdata[getter].type === "address" ? (
+                      <>
+                      <Label>{`${getter} Address:`}</Label>
+                      <AddressDisplay
+                        address={sdata[getter].result}
+                        explorerNetworkId={daoChain as keyof Keychain}
+                        truncate
+                      />
+                      </>
+                    ) : sdata[getter].type === "uint256" ? (
+                      <ParSm key={idx}>
+                        {getter}:{" "}
+                        {formatValueTo({
+                          value: toWholeUnits(sdata[getter].result, 18),
+                          decimals: 2,
+                          format: "number",
+                        })}
+                      </ParSm>
+                    ) : (
+                      <ParSm key={idx}>
+                        {getter}: {sdata[getter].result}
+                      </ParSm>
+                    );
+                  })
+                : "no further info here"}{" "}
+            </DialogContent>
+          </Dialog>
         ) : (
-          <ShamanTag tagColor="green">
-            <>
-              Unknown
-              <Tooltip content={`not sure but cool`} />
-            </>
-          </ShamanTag>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size={"sm"} variant={"outline"}>
+                Unknown
+              </Button>
+            </DialogTrigger>
+            <DialogContent title={"Unknown"}>
+              <>
+              <Label>Address</Label>
+                <AddressDisplay
+                  address={shaman.shamanAddress}
+                  explorerNetworkId={daoChain as keyof Keychain}
+                  truncate
+                />
+                <ParSm>No further info here</ParSm>
+              </>
+            </DialogContent>
+          </Dialog>
         )}
       </span>
       <div className="manage">

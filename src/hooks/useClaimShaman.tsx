@@ -35,12 +35,15 @@ const fetchShaman = async ({
     console.log("error", e);
   }
 
-  let getters: string[] = [];
-  let sdata: { [key: string]: any } = {};
+  let getters: string[] = [];  
+  let types: string[] = [];
+
+  let sdata: { [key: string]: {result: string, type: string} } = {};
 
   // switch if known shaman
   if (shamanName === "NFT6551ClaimerShaman") {
     getters = ["nft", "lootPerNft", "sharesPerNft", "paused", "vault"];
+    types = ["address", "uint256", "uint256", "bool", "address"];
   }
   const shamanData = (await Promise.all(
     getters.map(async (getter) => {
@@ -64,7 +67,7 @@ const fetchShaman = async ({
 
   // loop through getters and add to sdata as key value pairs
   getters.forEach((getter, i) => {
-    sdata[getter] = shamanData[i];
+    sdata[getter] = {result: shamanData[i].toString(), type: types[i]};
   });
 
   console.log("shamanData", shamanName, shamanData);  
