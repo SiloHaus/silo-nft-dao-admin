@@ -4,7 +4,6 @@ import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
 import { EthAddress, createViemClient } from "@daohaus/utils";
 import ClaimShamanAbi from "../abis/claimShaman.json";
 
-
 const fetchShaman = async ({
   contractAddress,
   chainId,
@@ -14,7 +13,6 @@ const fetchShaman = async ({
   chainId?: ValidNetwork;
   rpcs?: Keychain;
 }) => {
-
   if (!chainId) {
     throw new Error("Invalid ChainId");
   }
@@ -25,7 +23,7 @@ const fetchShaman = async ({
   });
 
   let shamanName;
-  try{
+  try {
     shamanName = await client.readContract({
       abi: ClaimShamanAbi,
       address: contractAddress,
@@ -33,48 +31,43 @@ const fetchShaman = async ({
       args: [],
     });
   } catch (e) {
-    shamanName = ""
+    shamanName = "";
     console.log("error", e);
   }
 
   let getters: string[] = [];
-  let sdata: {[key: string]: any } = {};
+  let sdata: { [key: string]: any } = {};
 
-  if(shamanName === "NFT6551ClaimerShaman") {
-  getters = [
-    "nft",
-    "lootPerNft",
-    "sharesPerNft",
-    "paused",
-    "vault"
-  ];
-}
-  const shamanData = await Promise.all(
+  // switch if known shaman
+  if (shamanName === "NFT6551ClaimerShaman") {
+    getters = ["nft", "lootPerNft", "sharesPerNft", "paused", "vault"];
+  }
+  const shamanData = (await Promise.all(
     getters.map(async (getter) => {
-        let res;
-        try{
-      res = (await client.readContract({
-        abi: ClaimShamanAbi,
-        address: contractAddress,
-        functionName: getter,
-        args: [],
-      }));
-    } catch (e) {
+      let res;
+      try {
+        res = await client.readContract({
+          abi: ClaimShamanAbi,
+          address: contractAddress,
+          functionName: getter,
+          args: [],
+        });
+      } catch (e) {
         console.log("error", e);
-        res = undefined
-    }
+        res = undefined;
+      }
       return res;
     })
-  ) as string[];
+  )) as string[];
 
   // loop through getters and add to sdata as key value pairs
-    getters.forEach((getter, i) => {
-        sdata[getter] = shamanData[i];
-    });
+  getters.forEach((getter, i) => {
+    sdata[getter] = shamanData[i];
+  });
 
   console.log("shamanData", sdata);
 
-  return {  shamanName, sdata };
+  return { shamanName, sdata };
 };
 
 export const useClaimShaman = ({

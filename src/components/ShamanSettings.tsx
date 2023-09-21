@@ -1,10 +1,10 @@
-import { Card, H3, ParSm, widthQuery } from '@daohaus/ui';
+import { Card, H3, ParSm, widthQuery } from "@daohaus/ui";
 
-import { MolochV3Dao } from '@daohaus/moloch-v3-data';
-import { ValidNetwork } from '@daohaus/keychain-utils';
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
+import { ValidNetwork } from "@daohaus/keychain-utils";
 
-import { styled } from 'styled-components';
-import { ShamanList } from './ShamanList';
+import { styled } from "styled-components";
+import { ShamanList } from "./ShamanList";
 
 type ShamanSettingsProps = {
   dao: MolochV3Dao;
@@ -38,7 +38,6 @@ export const ShamanCardHeader = styled.div`
   flex-wrap: wrap;
   margin-bottom: 3rem;
 `;
-
 
 export const ShamanSettings = ({
   dao,

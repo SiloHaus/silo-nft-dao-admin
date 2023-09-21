@@ -49,10 +49,12 @@ export const ShamanItem = ({
             </>
           </Tag>
         ) : (
-          <Tag tagColor="green"><>
-          <Tooltip content={`not sure but cool`} />
-          unknown
-        </></Tag>
+          <Tag tagColor="green">
+            <>
+              <Tooltip content={`not sure but cool`} />
+              unknown
+            </>
+          </Tag>
         )}
 
         {includeLinks && (
