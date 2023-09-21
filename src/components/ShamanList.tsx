@@ -58,15 +58,18 @@ export const ShamanList = ({
         </div>
       </ShamanListContainer>
       {shamen &&
-        shamen.map((shaman) => (
-          <ShamanItem
+        shamen.map((shaman) => {
+
+          if (!shaman.permissions) return null;
+
+          return(<ShamanItem
             shaman={shaman}
             daoChain={daoChain}
             daoId={daoId}
             includeLinks={includeLinks}
             key={shaman.id}
-          />
-        ))}
+          />)
+          })}
     </>
   );
 };

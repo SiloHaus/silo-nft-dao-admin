@@ -27,7 +27,6 @@ type ShamanItemProps = {
   includeLinks?: boolean;
 };
 
-
 export const ShamanItem = ({
   shaman,
   daoChain,
@@ -58,28 +57,32 @@ export const ShamanItem = ({
             <DialogContent title={shamanName as string}>
               {sdata && Object.keys(sdata).length > 0
                 ? Object.keys(sdata).map((getter: string, idx) => {
-                    return sdata[getter].type === "address" ? (
-                      <>
-                      <Label>{`${getter} Address:`}</Label>
-                      <AddressDisplay
-                        address={sdata[getter].result}
-                        explorerNetworkId={daoChain as keyof Keychain}
-                        truncate
-                      />
-                      </>
-                    ) : sdata[getter].type === "uint256" ? (
-                      <ParSm key={idx}>
-                        {getter}:{" "}
-                        {formatValueTo({
-                          value: toWholeUnits(sdata[getter].result, 18),
-                          decimals: 2,
-                          format: "number",
-                        })}
-                      </ParSm>
-                    ) : (
-                      <ParSm key={idx}>
-                        {getter}: {sdata[getter].result}
-                      </ParSm>
+                    return (
+                      <div key={idx}>
+                        {sdata[getter].type === "address" ? (
+                          <>
+                            <Label>{`${getter} Address:`}</Label>
+                            <AddressDisplay
+                              address={sdata[getter].result}
+                              explorerNetworkId={daoChain as keyof Keychain}
+                              truncate
+                            />
+                          </>
+                        ) : sdata[getter].type === "uint256" ? (
+                          <ParSm key={idx}>
+                            {getter}:{" "}
+                            {formatValueTo({
+                              value: toWholeUnits(sdata[getter].result, 18),
+                              decimals: 2,
+                              format: "number",
+                            })}
+                          </ParSm>
+                        ) : (
+                          <ParSm key={idx}>
+                            {getter}: {sdata[getter].result}
+                          </ParSm>
+                        )}
+                      </div>
                     );
                   })
                 : "no further info here"}{" "}
@@ -94,7 +97,7 @@ export const ShamanItem = ({
             </DialogTrigger>
             <DialogContent title={"Unknown"}>
               <>
-              <Label>Address</Label>
+                <Label>Address</Label>
                 <AddressDisplay
                   address={shaman.shamanAddress}
                   explorerNetworkId={daoChain as keyof Keychain}
