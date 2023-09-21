@@ -1,10 +1,11 @@
 import React from "react";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { SingleColumnLayout } from "@daohaus/ui";
-import { MetadataSettings, ShamanSettings } from "@daohaus/moloch-v3-macro-ui";
+import { MetadataSettings } from "@daohaus/moloch-v3-macro-ui";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import { ContractSettings } from "../components/ContractSettings";
 import { GovernanceSettings } from "../components/GovernanceSettings";
+import { ShamanSettings } from "../components/ShamanSettings";
 
 export const Settings = () => {
   const { daoChain } = useCurrentDao();

@@ -6,6 +6,9 @@ import { NFT_ADDRESS } from "../utils/constants";
 import { useAccountNfts } from "../hooks/useAccountNfts";
 import { Loading, breakpoints, widthQuery } from "@daohaus/ui";
 import { NftCard } from "./NftCard";
+import { useClaimShaman } from "../hooks/useClaimShaman";
+import { useDaoData } from "@daohaus/moloch-v3-hooks";
+import { ZeroAddress } from "ethers";
 
 const ListContainer = styled.div`
   display: flex;
@@ -32,8 +35,15 @@ export const ProfileNftList = ({
   daoChain: ValidNetwork;
   isHolder?: boolean;
 }) => {
-  //todo: will come from some shaman hook;
-  const nftAddress = NFT_ADDRESS;
+  const { dao } = useDaoData();
+
+  if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
+  const { shamanName, sdata } = useClaimShaman({
+    contractAddress: dao.shamen[0].shamanAddress as `0x${string}`,
+    chainId: daoChain,
+  });
+  
+  const nftAddress = sdata?.nft.result || ZeroAddress;
 
   const { accountNfts, isLoading } = useAccountNfts({
     accountAddress: address,
