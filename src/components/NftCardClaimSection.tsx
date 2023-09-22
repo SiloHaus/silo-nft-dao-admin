@@ -31,8 +31,6 @@ export const NftCardClaimSection = ({
     chainId: daoChain,
   });
 
-  console.log("isLoading", isLoading);
-
   if (isLoading) return <Loading />;
 
   return (
