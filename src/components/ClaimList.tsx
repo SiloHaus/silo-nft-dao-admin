@@ -2,13 +2,10 @@ import styled from "styled-components";
 
 import { ValidNetwork } from "@daohaus/keychain-utils";
 
-import { NFT_ADDRESS } from "../utils/constants";
 import { useAccountNfts } from "../hooks/useAccountNfts";
-import { Loading, breakpoints } from "@daohaus/ui";
+import { Loading, ParMd, breakpoints } from "@daohaus/ui";
 import { NftCard } from "./NftCard";
-import { useClaimShaman } from "../hooks/useClaimShaman";
 import { useDaoData } from "@daohaus/moloch-v3-hooks";
-import { ZeroAddress } from "ethers";
 
 const ListContainer = styled.div`
   display: flex;
@@ -24,19 +21,15 @@ const ListContainer = styled.div`
 export const ClaimList = ({
   address,
   daoChain,
+  nftAddress,
 }: {
   address: string;
   daoChain: ValidNetwork;
+  nftAddress: string;
 }) => {
   const { dao } = useDaoData();
 
   if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
-  const { shamanName, sdata } = useClaimShaman({
-    contractAddress: dao.shamen[0].shamanAddress as `0x${string}`,
-    chainId: daoChain,
-  });
-  
-  const nftAddress = sdata?.nft.result || ZeroAddress;
 
   const { accountNfts, isLoading } = useAccountNfts({
     accountAddress: address,
@@ -44,7 +37,13 @@ export const ClaimList = ({
     chainId: daoChain,
   });
 
+  console.log("accountNfts", accountNfts);
+
   if (isLoading) return <Loading />;
+
+  if (!isLoading && accountNfts?.length === 0) {
+    return <ParMd>No NFTs detected.</ParMd>;
+  }
 
   return (
     <ListContainer>
