@@ -25,11 +25,13 @@ export const NftCardClaimSection = ({
 }: NftCardClaimSectionProps) => {
   const { daoChain } = useCurrentDao();
 
-  const { isClaimed, claimTime, isLoading } = useClaimStatus({
+  const { isClaimed, isLoading } = useClaimStatus({
     shamanAddress,
     tokenId: nft.tokenID,
     chainId: daoChain,
   });
+
+  console.log("isLoading", isLoading);
 
   if (isLoading) return <Loading />;
 
