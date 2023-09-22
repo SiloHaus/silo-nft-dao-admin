@@ -1,7 +1,11 @@
 import { BsArrowLeft, BsShareFill } from "react-icons/bs";
 import styled from "styled-components";
 
-import { useCurrentDao, useDaoMember } from "@daohaus/moloch-v3-hooks";
+import {
+  useCurrentDao,
+  useDaoData,
+  useDaoMember,
+} from "@daohaus/moloch-v3-hooks";
 import { MemberProfileCard } from "@daohaus/moloch-v3-macro-ui";
 import {
   Button,
@@ -15,6 +19,8 @@ import {
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { useDHConnect } from "@daohaus/connect";
 import { ProfileNftList } from "../components/ProfileNftList";
+import { useClaimShaman } from "../hooks/useClaimShaman";
+import { ZERO_ADDRESS } from "@daohaus/utils";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -42,17 +48,26 @@ export const Member = () => {
   const { isFetched, isFetching, member } = useDaoMember();
   const { address } = useDHConnect();
   const { daoChain, daoId } = useCurrentDao();
+  const { dao } = useDaoData();
+
+  if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
+  const { sdata } = useClaimShaman({
+    contractAddress: dao.shamen[0].shamanAddress as `0x${string}`,
+    chainId: daoChain,
+  });
+
   const { successToast } = useToast();
   const isMobile = useBreakpoint(widthQuery.sm);
-
+  
   const handleOnClick = () => {
     navigator.clipboard.writeText(`${window.location.href}`);
     successToast({
       title: "URL copied to clipboard",
     });
   };
-
+  
   if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
+   
 
   const isConnectedMember = member?.memberAddress === address;
 
@@ -88,11 +103,11 @@ export const Member = () => {
             member={member}
           />
         )}
-        {address &&
-        (
+        {address && sdata?.nft.result && (
           <ProfileNftList
             address={address}
             daoChain={daoChain}
+            nftAddress={sdata.nft.result}
             isHolder={isConnectedMember}
           />
         )}
