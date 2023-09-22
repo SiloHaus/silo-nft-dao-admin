@@ -1,10 +1,7 @@
-import { AddressDisplay, DataSm, widthQuery } from "@daohaus/ui";
-import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
+import { DataSm, widthQuery } from "@daohaus/ui";
+import { ValidNetwork } from "@daohaus/keychain-utils";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
-import { ButtonRouterLink } from "./ButtonRouterLink";
 import { styled } from "styled-components";
-import { useClaimShaman } from "../hooks/useClaimShaman";
-import { EthAddress } from "@daohaus/utils";
 import { ShamanItem } from "./ShamanItem";
 
 type ShamanListProps = {
@@ -17,26 +14,31 @@ type ShamanListProps = {
 export const ShamanListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   align-content: space-between;
+  align-items: center;
+  width: 100%;
   div {
     margin-top: 3rem;
 
     @media ${widthQuery.sm} {
       min-width: 100%;
+      .manage {
+        justify-content: flex-start;
+        width: 100%;
+      }
     }
   }
   .contract {
     display: flex;
-    width: 60%;
+    width: 35%;
   }
   .permissions {
-    width: 20%;
+    width: 10%;
   }
   .manage {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 3rem;
     width: 40%;
   }
 `;
@@ -59,17 +61,18 @@ export const ShamanList = ({
       </ShamanListContainer>
       {shamen &&
         shamen.map((shaman) => {
-
           if (!shaman.permissions) return null;
 
-          return(<ShamanItem
-            shaman={shaman}
-            daoChain={daoChain}
-            daoId={daoId}
-            includeLinks={includeLinks}
-            key={shaman.id}
-          />)
-          })}
+          return (
+            <ShamanItem
+              shaman={shaman}
+              daoChain={daoChain}
+              daoId={daoId}
+              includeLinks={includeLinks}
+              key={shaman.id}
+            />
+          );
+        })}
     </>
   );
 };
