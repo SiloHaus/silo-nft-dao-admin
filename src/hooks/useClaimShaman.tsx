@@ -72,7 +72,7 @@ const fetchShaman = async ({
   console.log("shamanData", shamanName, shamanData);
   console.log("sData", sdata);
 
-  return { shamanName, sdata };
+  return { shamanName, sdata, shamanAddress: contractAddress };
 };
 
 export const useClaimShaman = ({
