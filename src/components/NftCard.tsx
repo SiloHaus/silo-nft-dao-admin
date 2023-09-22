@@ -78,6 +78,7 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
             <NftCardClaimSection
               dao={dao}
               nft={nft}
+              shamanAddress={shamanAddress}
             />
           </LowerSection>
         )}
