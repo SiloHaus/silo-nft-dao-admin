@@ -72,6 +72,8 @@ const fetchShaman = async ({
   console.log("shamanData", shamanName, shamanData);
   console.log("sData", sdata);
 
+  console.log("contractAddress", contractAddress);
+
   return { shamanName, sdata, shamanAddress: contractAddress };
 };
 

@@ -2,11 +2,11 @@ import { styled } from "styled-components";
 import { TokenBalance } from "@0xsequence/indexer";
 
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
-import { ParSm } from "@daohaus/ui";
+import { Loading, ParSm } from "@daohaus/ui";
 import { ClaimButton } from "./ClaimButton";
-import { useClaimShaman } from "../hooks/useClaimShaman";
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 import { EthAddress } from "@daohaus/utils";
+import { useClaimStatus } from "../hooks/useNftClaimStatus";
 
 const ClaimPar = styled(ParSm)`
   font-weight: 600;
@@ -16,24 +16,33 @@ const ClaimPar = styled(ParSm)`
 type NftCardClaimSectionProps = {
   nft: TokenBalance;
   dao: MolochV3Dao;
-  claimShamanAddress?: EthAddress;
+  shamanAddress?: EthAddress;
 };
 export const NftCardClaimSection = ({
   nft,
   dao,
-  claimShamanAddress,
+  shamanAddress,
 }: NftCardClaimSectionProps) => {
   const { daoChain } = useCurrentDao();
 
-  console.log("claimShamanAddress", claimShamanAddress);
-  // need a useClaimedStatus
+  const { isClaimed, claimTime, isLoading } = useClaimStatus({
+    shamanAddress,
+    tokenId: nft.tokenID,
+    chainId: daoChain,
+  });
+
+  console.log("isClaimed, claimTime", isClaimed, claimTime);
+
+  if (isLoading) return <Loading />;
 
   return (
     <>
       <ClaimPar>{dao?.lootTokenName}: 69,420</ClaimPar>
+
       <ClaimButton
         tokenId={nft.tokenID}
         contractAddress={nft.contractAddress}
+        isClaimed={isClaimed}
       />
     </>
   );
