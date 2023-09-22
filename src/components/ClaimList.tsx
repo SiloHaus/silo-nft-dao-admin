@@ -37,8 +37,6 @@ export const ClaimList = ({
     chainId: daoChain,
   });
 
-  console.log("accountNfts", accountNfts);
-
   if (isLoading) return <Loading />;
 
   if (!isLoading && accountNfts?.length === 0) {

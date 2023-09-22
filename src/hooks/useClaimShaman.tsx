@@ -69,9 +69,6 @@ const fetchShaman = async ({
     sdata[getter] = { result: shamanData[i].toString(), type: types[i] };
   });
 
-  console.log("shamanData", shamanName, shamanData);
-  console.log("sData", sdata);
-
   return { shamanName, sdata, shamanAddress: contractAddress };
 };
 

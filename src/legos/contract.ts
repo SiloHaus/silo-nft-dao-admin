@@ -2,7 +2,15 @@ import { LOCAL_ABI } from "@daohaus/abis";
 import { ContractLego } from "@daohaus/utils";
 import { CONTRACT_KEYCHAINS } from "@daohaus/keychain-utils";
 
+import ClaimShamanAbi from "../abis/claimShaman.json";
+
 export const APP_CONTRACT: Record<string, ContractLego> = {
+  LOCAL_CLAIM_SHAMAN: {
+    type: "static",
+    contractName: "LOCAL_CLAIM_SHAMAN",
+    abi: ClaimShamanAbi,
+    targetAddress: ".shamanAddress",
+  },
   POSTER: {
     type: "static",
     contractName: "Poster",
