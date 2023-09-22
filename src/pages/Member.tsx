@@ -12,9 +12,11 @@ import {
   useToast,
   widthQuery,
 } from "@daohaus/ui";
-import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { useDHConnect } from "@daohaus/connect";
+
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { ProfileNftList } from "../components/ProfileNftList";
+import { useConnectedTba } from "../hooks/useConnectedTba";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -45,6 +47,14 @@ export const Member = () => {
   const { successToast } = useToast();
   const isMobile = useBreakpoint(widthQuery.sm);
 
+  const { isDeployed, membership } = useConnectedTba({
+    chainId: daoChain,
+    daoId: daoId,
+    connectedAddress: address,
+  });
+
+  console.log("isDeployed, membership", isDeployed, membership);
+
   const handleOnClick = () => {
     navigator.clipboard.writeText(`${window.location.href}`);
     successToast({
@@ -54,7 +64,8 @@ export const Member = () => {
 
   if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
 
-  const isConnectedMember = member?.memberAddress === address;
+  const isConnectedMember =
+    member?.memberAddress.toLowerCase() === address?.toLowerCase();
 
   return (
     <SingleColumnLayout title="Member Profile">
@@ -88,8 +99,7 @@ export const Member = () => {
             member={member}
           />
         )}
-        {address &&
-        (
+        {address && (
           <ProfileNftList
             address={address}
             daoChain={daoChain}
