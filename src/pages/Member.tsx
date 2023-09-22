@@ -1,7 +1,11 @@
 import { BsArrowLeft, BsShareFill } from "react-icons/bs";
 import styled from "styled-components";
 
-import { useCurrentDao, useDaoMember } from "@daohaus/moloch-v3-hooks";
+import {
+  useCurrentDao,
+  useDaoData,
+  useDaoMember,
+} from "@daohaus/moloch-v3-hooks";
 import { MemberProfileCard } from "@daohaus/moloch-v3-macro-ui";
 import {
   Button,
@@ -16,7 +20,7 @@ import { useDHConnect } from "@daohaus/connect";
 
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { ProfileNftList } from "../components/ProfileNftList";
-import { useConnectedTba } from "../hooks/useConnectedTba";
+import { useClaimShaman } from "../hooks/useClaimShaman";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -44,16 +48,16 @@ export const Member = () => {
   const { isFetched, isFetching, member } = useDaoMember();
   const { address } = useDHConnect();
   const { daoChain, daoId } = useCurrentDao();
-  const { successToast } = useToast();
-  const isMobile = useBreakpoint(widthQuery.sm);
+  const { dao } = useDaoData();
 
-  const { isDeployed, membership } = useConnectedTba({
+  if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
+  const { sdata } = useClaimShaman({
+    contractAddress: dao.shamen[0].shamanAddress as `0x${string}`,
     chainId: daoChain,
-    daoId: daoId,
-    connectedAddress: address,
   });
 
-  console.log("isDeployed, membership", isDeployed, membership);
+  const { successToast } = useToast();
+  const isMobile = useBreakpoint(widthQuery.sm);
 
   const handleOnClick = () => {
     navigator.clipboard.writeText(`${window.location.href}`);
@@ -70,7 +74,7 @@ export const Member = () => {
   return (
     <SingleColumnLayout title="Member Profile">
       {!member && isFetching && <Loading size={12} />}
-      {!member && isFetched && <ParLg>Member Not Found</ParLg>}
+      {!member && isFetched && <ParLg>Connected Account is not a member</ParLg>}
 
       <>
         <ButtonsContainer>
@@ -99,10 +103,11 @@ export const Member = () => {
             member={member}
           />
         )}
-        {address && (
+        {address && sdata?.nft.result && (
           <ProfileNftList
             address={address}
             daoChain={daoChain}
+            nftAddress={sdata.nft.result}
             isHolder={isConnectedMember}
           />
         )}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { AddressDisplay, Button, Card, ParSm } from "@daohaus/ui";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
-import { EthAddress } from "@daohaus/utils";
+import { EthAddress, ZERO_ADDRESS } from "@daohaus/utils";
 
 import { ConnectTBAButton } from "./ConnectTBAButton";
 import { DelegateButton } from "./DelegateButton";
@@ -94,6 +94,9 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
             {!isHolder && (
               <DelegateToOwnerButton
                 tokenId={nft.tokenID}
+                shamanAddress={dao?.shamen
+                  ? (dao.shamen[0].shamanAddress as `0x${string}`)
+                  : ZERO_ADDRESS}
                 contractAddress={nft.contractAddress}
               />
             )}
