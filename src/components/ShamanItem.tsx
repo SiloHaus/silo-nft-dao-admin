@@ -33,20 +33,24 @@ export const ShamanItem = ({
   daoId,
   includeLinks,
 }: ShamanItemProps) => {
-  // use claim shaman
   const { shamanName, sdata } = useClaimShaman({
     contractAddress: shaman.shamanAddress as `0x${string}`,
     chainId: daoChain,
   });
   return (
     <ShamanListContainer key={shaman.id}>
-      <span className="contract">
+      <div className="contract">
         <AddressDisplay
           address={shaman.shamanAddress}
           explorerNetworkId={daoChain as keyof Keychain}
           truncate
         />
+      </div>
+      <div className="permissions">
+        <DataSm>{shaman.permissions}</DataSm>
+      </div>
 
+      <div className="manage">
         {shamanName ? (
           <Dialog>
             <DialogTrigger asChild>
@@ -108,10 +112,6 @@ export const ShamanItem = ({
             </DialogContent>
           </Dialog>
         )}
-      </span>
-      <div className="manage">
-        <DataSm>{shaman.permissions}</DataSm>
-
         {includeLinks && (
           <ButtonRouterLink
             size="sm"

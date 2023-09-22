@@ -30,10 +30,11 @@ const CardLower = styled.div`
 `;
 
 const NftCardImage = styled.img`
-  width: 120px;
+  max-width: 15rem;
   //todo: how to width on various nft image sizes
-  min-height: 18.3rem;
+  /* min-height: 18.3rem; */
   border-radius: ${({ theme }) => theme.card.radius};
+  object-fit: cover;
 `;
 
 const NamePar = styled(ParSm)`
