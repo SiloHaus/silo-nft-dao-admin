@@ -1,17 +1,56 @@
-import { Button } from "@daohaus/ui";
+import { useTxBuilder } from "@daohaus/tx-builder";
+import { Button, useToast } from "@daohaus/ui";
+import { APP_TX } from "../legos/tx";
+import { handleErrorMessage } from "@daohaus/utils";
+import { useState } from "react";
+
+enum TxStates {
+  Idle = "Idle",
+  Loading = "Loading",
+  Error = "Error",
+  Success = "Token Approved!",
+}
 
 type ClaimButtonProps = {
   tokenId: string;
-  contractAddress: string;
+  shamanAddress: string;
   isClaimed?: boolean;
 };
 export const ClaimButton = ({
   tokenId,
-  contractAddress,
+  shamanAddress,
   isClaimed = false,
 }: ClaimButtonProps) => {
-  const handleClaim = () => {
-    console.log("claiming tokenId, contractAddress", tokenId, contractAddress);
+  const { fireTransaction } = useTxBuilder();
+  const { errorToast, defaultToast, successToast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClaim = async () => {
+    console.log("claiming tokenId, shamanAddress", tokenId, shamanAddress);
+    setIsLoading(true);
+
+    await fireTransaction({
+      tx: { ...APP_TX.CLAIM_FOR_NFT, staticArgs: [tokenId] },
+      callerState: {
+        shamanAddress: shamanAddress,
+      },
+      lifeCycleFns: {
+        onTxError(error) {
+          const errMsg = handleErrorMessage({
+            error,
+          });
+          errorToast({ title: "Claim Failed", description: errMsg });
+          setIsLoading(false);
+        },
+        onTxSuccess() {
+          successToast({
+            title: TxStates.Success,
+            description: `Successful Claim.`,
+          });
+          setIsLoading(false);
+        },
+      },
+    });
   };
 
   return (
@@ -20,7 +59,7 @@ export const ClaimButton = ({
       color="secondary"
       size="sm"
       fullWidth
-      disabled={isClaimed}
+      disabled={isClaimed || isLoading}
     >
       {isClaimed ? "Claimed" : "Claim"}
     </Button>

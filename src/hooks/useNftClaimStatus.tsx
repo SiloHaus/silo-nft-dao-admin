@@ -1,12 +1,7 @@
 import { useQuery } from "react-query";
-import { TokenboundClient } from "@tokenbound/sdk";
 
-import {
-  HAUS_NETWORK_DATA,
-  Keychain,
-  ValidNetwork,
-} from "@daohaus/keychain-utils";
-import { EthAddress, createViemClient, isNumberish } from "@daohaus/utils";
+import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
+import { EthAddress, createViemClient } from "@daohaus/utils";
 
 import ClaimShamanAbi from "../abis/claimShaman.json";
 

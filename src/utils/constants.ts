@@ -2,9 +2,6 @@ import { Keychain } from "@daohaus/keychain-utils";
 
 export const NFT_DAO_REFERRER = "DHFixedLootShamanSummoner";
 
-// temp
-export const NFT_ADDRESS = "0x183cf837a551BD04A509F1cAE2b7C36394720b7c";
-
 export const SEQUENCE_ENDPOINTS: Keychain = {
   "0x1": "https://mainnet-indexer.sequence.app",
   "0x5": "https://goerli-indexer.sequence.app",

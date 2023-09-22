@@ -31,19 +31,19 @@ export const NftCardClaimSection = ({
     chainId: daoChain,
   });
 
-  console.log("isClaimed, claimTime", isClaimed, claimTime);
-
   if (isLoading) return <Loading />;
 
   return (
     <>
       <ClaimPar>{dao?.lootTokenName}: 69,420</ClaimPar>
 
-      <ClaimButton
-        tokenId={nft.tokenID}
-        contractAddress={nft.contractAddress}
-        isClaimed={isClaimed}
-      />
+      {shamanAddress && (
+        <ClaimButton
+          tokenId={nft.tokenID}
+          shamanAddress={shamanAddress}
+          isClaimed={isClaimed}
+        />
+      )}
     </>
   );
 };
