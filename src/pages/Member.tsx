@@ -16,11 +16,11 @@ import {
   useToast,
   widthQuery,
 } from "@daohaus/ui";
-import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { useDHConnect } from "@daohaus/connect";
+
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { ProfileNftList } from "../components/ProfileNftList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
-import { ZERO_ADDRESS } from "@daohaus/utils";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -58,18 +58,18 @@ export const Member = () => {
 
   const { successToast } = useToast();
   const isMobile = useBreakpoint(widthQuery.sm);
-  
+
   const handleOnClick = () => {
     navigator.clipboard.writeText(`${window.location.href}`);
     successToast({
       title: "URL copied to clipboard",
     });
   };
-  
-  if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
-   
 
-  const isConnectedMember = member?.memberAddress === address;
+  if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
+
+  const isConnectedMember =
+    member?.memberAddress.toLowerCase() === address?.toLowerCase();
 
   return (
     <SingleColumnLayout title="Member Profile">
