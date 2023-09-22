@@ -111,7 +111,7 @@ export const DelegateToOwnerButton = ({
 
   if (isLoading) return <Loading />;
 
-  if (!isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
+  if (isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -132,5 +132,6 @@ export const DelegateToOwnerButton = ({
         </DialogContent>
       </Dialog>
     );
+
   }
 };
