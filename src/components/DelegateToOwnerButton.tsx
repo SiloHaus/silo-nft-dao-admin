@@ -8,11 +8,11 @@ import {
 } from "@daohaus/ui";
 import { useState } from "react";
 import { ConnectTBAInstructions } from "./ConnectTBAInstructions";
-import { NFT_ADDRESS, TOKENBOUND_URL } from "../utils/constants";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import {
   EthAddress,
+  ZERO_ADDRESS,
   encodeFunction,
   encodeValues,
   handleErrorMessage,
@@ -26,13 +26,16 @@ import TBA_ACCOUNT from "../abis/tbaAccount.json";
 import { useTxBuilder } from "@daohaus/tx-builder";
 import { LOCAL_ABI } from "@daohaus/abis";
 import { useDHConnect } from "@daohaus/connect";
+import { useClaimStatus } from "../hooks/useNftClaimStatus";
 
 type ButtonProps = {
   tokenId: string;
+  shamanAddress: EthAddress;
   contractAddress: string;
 };
 export const DelegateToOwnerButton = ({
   tokenId,
+  shamanAddress,
   contractAddress,
 }: ButtonProps) => {
   const { daoChain, daoId } = useCurrentDao();
@@ -44,6 +47,11 @@ export const DelegateToOwnerButton = ({
   const { tba, isDeployed, isError, isLoading } = useTba({
     contractAddress: contractAddress as EthAddress,
     tokenId,
+    chainId: daoChain,
+  });
+  const { isClaimed,  isLoading: isClaimLoading } = useClaimStatus({
+    shamanAddress,
+    tokenId: tokenId,
     chainId: daoChain,
   });
 
@@ -111,7 +119,8 @@ export const DelegateToOwnerButton = ({
 
   if (isLoading) return <Loading />;
 
-  if (isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
+  if (isClaimed && isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
+    // todo: check if has claimed
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
