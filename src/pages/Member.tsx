@@ -60,39 +60,43 @@ export const Member = () => {
     <SingleColumnLayout title="Member Profile">
       {!member && isFetching && <Loading size={12} />}
       {!member && isFetched && <ParLg>Member Not Found</ParLg>}
-      {member && (
-        <>
-          <ButtonsContainer>
-            <ButtonRouterLink
-              to={`/molochv3/${daoChain}/${daoId}/members`}
-              IconLeft={StyledArrowLeft}
-              color="secondary"
-              linkType="no-icon-external"
-              variant="outline"
-              fullWidth={isMobile}
-            >
-              MEMBERS
-            </ButtonRouterLink>
-            <Button
-              IconLeft={BsShareFill}
-              onClick={handleOnClick}
-              fullWidth={isMobile}
-            >
-              SHARE PROFILE
-            </Button>
-          </ButtonsContainer>
+
+      <>
+        <ButtonsContainer>
+          <ButtonRouterLink
+            to={`/molochv3/${daoChain}/${daoId}/members`}
+            IconLeft={StyledArrowLeft}
+            color="secondary"
+            linkType="no-icon-external"
+            variant="outline"
+            fullWidth={isMobile}
+          >
+            MEMBERS
+          </ButtonRouterLink>
+          <Button
+            IconLeft={BsShareFill}
+            onClick={handleOnClick}
+            fullWidth={isMobile}
+          >
+            SHARE PROFILE
+          </Button>
+        </ButtonsContainer>
+        {member && member.memberAddress && (
           <MemberProfileCard
             daoChain={daoChain}
             daoId={daoId}
             member={member}
           />
+        )}
+        {address &&
+        (
           <ProfileNftList
-            address={member.memberAddress}
+            address={address}
             daoChain={daoChain}
             isHolder={isConnectedMember}
           />
-        </>
-      )}
+        )}
+      </>
     </SingleColumnLayout>
   );
 };

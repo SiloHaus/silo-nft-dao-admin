@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { ConnectTBAInstructions } from "./ConnectTBAInstructions";
 import { NFT_ADDRESS, TOKENBOUND_URL } from "../utils/constants";
-import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
+import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import {
   EthAddress,
@@ -36,7 +36,8 @@ export const DelegateToOwnerButton = ({
   contractAddress,
 }: ButtonProps) => {
   const { daoChain, daoId } = useCurrentDao();
-  const { address: currentMember } = useDHConnect();
+  const { dao } = useDaoData();
+  const { address: currentUser } = useDHConnect();
   const { fireTransaction } = useTxBuilder();
   const { errorToast, defaultToast, successToast } = useToast();
   const [isDataLoading, setIsDataLoading] = useState(false);
@@ -53,15 +54,17 @@ export const DelegateToOwnerButton = ({
   const handleClick = (
     tbaAddress: EthAddress,
     daoAddress: string,
-    memberAddress: string
+    userAddress: string,
+    sharesAddress: string
   ) => {
     setIsDataLoading(true);
 
     // get encoded delegate function
+    console.log("userAddress, sharesAddress, tbaAddress ", userAddress, sharesAddress, tbaAddress);
 
-    const encodedValues = encodeValues(["address"], [memberAddress]);
-    const encodedDelegate = encodeFunction(LOCAL_ABI.BAAL, "delegate", [
-      encodedValues,
+    // const encodedValues = encodeValues(["address"], [userAddress]);
+    const encodedDelegate = encodeFunction(LOCAL_ABI.SHARES, "delegate", [
+      userAddress,
     ]);
     if (!isString(encodedDelegate)) {
       throw new Error("Unable to encode delegate function");
@@ -79,7 +82,7 @@ export const DelegateToOwnerButton = ({
         method: "executeCall",
         disablePoll: true,
         args: [
-          { type: "static", value: daoAddress },
+          { type: "static", value: sharesAddress },
           { type: "static", value: 0 },
           { type: "static", value: encodedDelegate },
         ],
@@ -108,7 +111,7 @@ export const DelegateToOwnerButton = ({
 
   if (isLoading) return <Loading />;
 
-  if (!isDeployed && tba && daoId && currentMember) {
+  if (!isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -121,10 +124,10 @@ export const DelegateToOwnerButton = ({
           Delegate To Owner here
           <Button
             onClick={() =>
-              handleClick(tba, daoId, currentMember)
+              handleClick(tba, daoId, currentUser, dao?.sharesAddress)
             }
           >
-            Close
+            Delegate To Owner
           </Button>
         </DialogContent>
       </Dialog>
