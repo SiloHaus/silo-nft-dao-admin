@@ -1,8 +1,10 @@
 import { useTxBuilder } from "@daohaus/tx-builder";
 import { Button, useToast } from "@daohaus/ui";
 import { APP_TX } from "../legos/tx";
-import { handleErrorMessage } from "@daohaus/utils";
+import { EthAddress, handleErrorMessage } from "@daohaus/utils";
 import { useState } from "react";
+import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
+import { useClaimStatus } from "../hooks/useNftClaimStatus";
 
 enum TxStates {
   Idle = "Idle",
@@ -23,6 +25,13 @@ export const ClaimButton = ({
 }: ClaimButtonProps) => {
   const { fireTransaction } = useTxBuilder();
   const { errorToast, defaultToast, successToast } = useToast();
+  const { daoChain } = useCurrentDao();
+
+  const { refetch } = useClaimStatus({
+    shamanAddress: shamanAddress as EthAddress,
+    tokenId,
+    chainId: daoChain,
+  });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClaim = async () => {
@@ -48,6 +57,7 @@ export const ClaimButton = ({
             description: `Successful Claim.`,
           });
           setIsLoading(false);
+          refetch();
         },
       },
     });
