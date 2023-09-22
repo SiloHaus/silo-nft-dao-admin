@@ -1,9 +1,11 @@
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogContent,
   DialogTrigger,
   Loading,
+  ParMd,
   useToast,
 } from "@daohaus/ui";
 import { useState } from "react";
@@ -130,7 +132,7 @@ export const DelegateToOwnerButton = ({
         </DialogTrigger>
 
         <DialogContent title="Delegate To Owner">
-          Delegate To Owner here
+          <ParMd>You can delegate to your self or another address.</ParMd>
           <Button
             onClick={() =>
               handleClick(tba, daoId, currentUser, dao?.sharesAddress)
@@ -138,6 +140,7 @@ export const DelegateToOwnerButton = ({
           >
             Delegate To Owner
           </Button>
+          <Checkbox title="Delegate to a different address" />
         </DialogContent>
       </Dialog>
     );

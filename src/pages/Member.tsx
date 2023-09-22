@@ -74,7 +74,7 @@ export const Member = () => {
   return (
     <SingleColumnLayout title="Member Profile">
       {!member && isFetching && <Loading size={12} />}
-      {!member && isFetched && <ParLg>Member Not Found</ParLg>}
+      {!member && isFetched && <ParLg>Connected Account is not a member</ParLg>}
 
       <>
         <ButtonsContainer>
