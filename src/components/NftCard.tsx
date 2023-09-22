@@ -1,13 +1,14 @@
 import { TokenBalance } from "@0xsequence/indexer";
 import styled from "styled-components";
 
-import { AddressDisplay, Card, ParSm } from "@daohaus/ui";
+import { AddressDisplay, Button, Card, ParSm } from "@daohaus/ui";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { ClaimButton } from "./ClaimButton";
 import { ConnectTBAButton } from "./ConnectTBAButton";
 import { DelegateButton } from "./DelegateButton";
 import { useTba } from "../hooks/useTba";
 import { EthAddress } from "@daohaus/utils";
+import { DelegateToOwnerButton } from "./DelegateToOwnerButton";
 
 const CardContainer = styled(Card)`
   padding: 0;
@@ -86,7 +87,12 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
               tokenId={nft.tokenID}
               contractAddress={nft.contractAddress}
             />
-            {/* <DelegateButton /> */}
+            {!isHolder && (
+              <DelegateToOwnerButton
+                tokenId={nft.tokenID}
+                contractAddress={nft.contractAddress}
+              />
+            )}
           </LowerSection>
         )}
       </CardLower>
