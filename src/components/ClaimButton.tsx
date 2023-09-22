@@ -70,6 +70,7 @@ export const ClaimButton = ({
       size="sm"
       fullWidth
       disabled={isClaimed || isLoading}
+      isLoading={isLoading}
     >
       {isClaimed ? "Claimed" : "Claim"}
     </Button>
