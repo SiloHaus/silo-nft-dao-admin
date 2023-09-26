@@ -7,7 +7,6 @@ import {
 } from "@daohaus/ui";
 import { useState } from "react";
 import { ConnectTBAInstructions } from "./ConnectTBAInstructions";
-import { NFT_ADDRESS, TOKENBOUND_URL } from "../utils/constants";
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import { EthAddress } from "@daohaus/utils";
@@ -52,7 +51,7 @@ export const ConnectTBAButton = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button color="secondary" size="sm" fullWidth>
+        <Button color="secondary" size="sm">
           Connect
         </Button>
       </DialogTrigger>

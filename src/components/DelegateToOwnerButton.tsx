@@ -51,11 +51,6 @@ export const DelegateToOwnerButton = ({
     tokenId,
     chainId: daoChain,
   });
-  const { isClaimed,  isLoading: isClaimLoading } = useClaimStatus({
-    shamanAddress,
-    tokenId: tokenId,
-    chainId: daoChain,
-  });
 
   console.log("tba ", tba, isDeployed);
 
@@ -121,12 +116,12 @@ export const DelegateToOwnerButton = ({
 
   if (isLoading) return <Loading />;
 
-  if (isClaimed && isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
+  if (isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
     // todo: check if has claimed
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button color="secondary" size="sm" fullWidth>
+          <Button color="secondary" size="sm">
             Delegate
           </Button>
         </DialogTrigger>
