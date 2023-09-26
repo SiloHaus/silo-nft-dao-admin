@@ -5,6 +5,8 @@ import { ValidNetwork } from "@daohaus/keychain-utils";
 import { useAccountNfts } from "../hooks/useAccountNfts";
 import { Loading, breakpoints, widthQuery } from "@daohaus/ui";
 import { NftCard } from "./NftCard";
+import { useClaimShaman } from "../hooks/useClaimShaman";
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 
 const ListContainer = styled.div`
   display: flex;
@@ -12,7 +14,7 @@ const ListContainer = styled.div`
   column-gap: 4rem;
   row-gap: 2rem;
   justify-content: center;
-  width: 64rem;
+  width: 100rem;
   @media (min-width: ${breakpoints.xs}) {
     justify-content: flex-start;
   }
@@ -25,17 +27,22 @@ const ListContainer = styled.div`
 export const ProfileNftList = ({
   address,
   daoChain,
-  nftAddress,
+  dao,
   isHolder,
 }: {
   address: string;
   daoChain: ValidNetwork;
-  nftAddress: string;
+  dao: MolochV3Dao;
   isHolder?: boolean;
 }) => {
+  const { sdata } = useClaimShaman({
+    dao,
+    chainId: daoChain,
+  });
+  
   const { accountNfts, isLoading } = useAccountNfts({
     accountAddress: address,
-    contractAddress: nftAddress,
+    contractAddress: sdata?.nft.result,
     chainId: daoChain,
   });
 

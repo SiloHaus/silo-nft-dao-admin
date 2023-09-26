@@ -22,7 +22,7 @@ export const Claim = () => {
   });
 
   return (
-    <SingleColumnLayout title="Claim your airdrop">
+    <SingleColumnLayout title="Claim Your Airdrop">
       {!address && (
         <ContentContainer>
           <ParXl>SiloHaus RDF airdrop tool</ParXl>

@@ -9,9 +9,12 @@ const fetchNftsForAccount = async ({
   chainId,
 }: {
   accountAddress: string;
-  contractAddress: string;
+  contractAddress?: string;
   chainId: string;
 }) => {
+  if (!accountAddress || !contractAddress) {
+    throw new Error("Missing Args");
+  }
   const sequenceEndPoint = SEQUENCE_ENDPOINTS[chainId as ValidNetwork];
 
   if (!sequenceEndPoint) {
@@ -35,13 +38,13 @@ export const useAccountNfts = ({
   chainId,
 }: {
   accountAddress: string;
-  contractAddress: string;
+  contractAddress?: string;
   chainId: string;
 }) => {
   const { data, error, ...rest } = useQuery(
     [`accountNfts-${accountAddress}-${contractAddress}`],
     () => fetchNftsForAccount({ accountAddress, contractAddress, chainId }),
-    { enabled: !!accountAddress }
+    { enabled: !!accountAddress && !!contractAddress }
   );
 
   return { accountNfts: data?.balances, page: data?.page, error, ...rest };
