@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Button,
   Checkbox,
@@ -8,7 +10,6 @@ import {
   ParMd,
   useToast,
 } from "@daohaus/ui";
-import { useState } from "react";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import {
   EthAddress,
@@ -16,13 +17,12 @@ import {
   handleErrorMessage,
   isString,
 } from "@daohaus/utils";
-import { useTba } from "../hooks/useTba";
-
-import TBA_ACCOUNT from "../abis/tbaAccount.json";
-
 import { useTxBuilder } from "@daohaus/tx-builder";
 import { LOCAL_ABI } from "@daohaus/abis";
 import { useDHConnect } from "@daohaus/connect";
+
+import { useTba } from "../hooks/useTba";
+import TBA_ACCOUNT from "../abis/tbaAccount.json";
 
 type ButtonProps = {
   tokenId: string;

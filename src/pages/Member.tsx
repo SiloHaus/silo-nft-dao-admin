@@ -21,6 +21,8 @@ import { useDHConnect } from "@daohaus/connect";
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { ProfileNftList } from "../components/ProfileNftList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
+import { NonMemberCard } from "../components/NonMemberCard";
+import { useParams } from "react-router-dom";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -49,7 +51,7 @@ export const Member = () => {
   const { address } = useDHConnect();
   const { daoChain, daoId } = useCurrentDao();
   const { dao } = useDaoData();
-
+  const { memberAddress } = useParams();
 
   const { successToast } = useToast();
   const isMobile = useBreakpoint(widthQuery.sm);
@@ -66,12 +68,12 @@ export const Member = () => {
   const isConnectedMember =
     member?.memberAddress.toLowerCase() === address?.toLowerCase();
 
-  if (!dao || !daoChain ) return <Loading />;
+  if (!dao || !daoChain) return <Loading />;
 
   return (
     <SingleColumnLayout>
       {!member && isFetching && <Loading size={12} />}
-      {!member && isFetched && <ParLg>Connected Account is not a member</ParLg>}
+      {!member && isFetched && <NonMemberCard address={memberAddress} />}
 
       <>
         <ButtonsContainer>
@@ -93,6 +95,7 @@ export const Member = () => {
             SHARE PROFILE
           </Button>
         </ButtonsContainer>
+
         {member && member.memberAddress && (
           <MemberProfileCard
             daoChain={daoChain}
@@ -100,7 +103,8 @@ export const Member = () => {
             member={member}
           />
         )}
-        {address &&  (
+
+        {address && (
           <ProfileNftList
             dao={dao}
             address={address}
