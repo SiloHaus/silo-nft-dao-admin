@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import {
+  AddressDisplay,
   Button,
   Checkbox,
   Dialog,
@@ -23,6 +24,13 @@ import { useDHConnect } from "@daohaus/connect";
 
 import { useTba } from "../hooks/useTba";
 import TBA_ACCOUNT from "../abis/tbaAccount.json";
+import { styled } from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
 
 type ButtonProps = {
   tokenId: string;
@@ -116,14 +124,17 @@ export const DelegateToOwnerButton = ({
         </DialogTrigger>
 
         <DialogContent title="Delegate To Owner">
-          <ParMd>You can delegate to your self or another address.</ParMd>
-          <Button
-            onClick={() => handleClick(tba, currentUser, dao?.sharesAddress)}
-            disabled={mismatchedChain}
-          >
-            Delegate To Owner
-          </Button>
-          <Checkbox title="Delegate to a different address" />
+          <Container>
+            <ParMd>You can delegate to your connected address:</ParMd>
+            <AddressDisplay address={currentUser} truncate={true} />
+            <Button
+              onClick={() => handleClick(tba, currentUser, dao?.sharesAddress)}
+              disabled={mismatchedChain}
+            >
+              Delegate
+            </Button>
+          </Container>
+          {/* <Checkbox title="Delegate to a different address" /> */}
         </DialogContent>
       </Dialog>
     );

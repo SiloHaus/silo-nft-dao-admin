@@ -23,6 +23,7 @@ import { ProfileNftList } from "../components/ProfileNftList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { NonMemberCard } from "../components/NonMemberCard";
 import { useParams } from "react-router-dom";
+import { DelegateButton } from "../components/DelegateButton";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -72,30 +73,25 @@ export const Member = () => {
 
   return (
     <SingleColumnLayout>
+      <ButtonsContainer>
+        <ButtonRouterLink
+          to={`/molochv3/${daoChain}/${daoId}/members`}
+          IconLeft={StyledArrowLeft}
+          color="secondary"
+          linkType="no-icon-external"
+          variant="outline"
+          fullWidth={isMobile}
+        >
+          MEMBERS
+        </ButtonRouterLink>
+        {isConnectedMember && member && Number(member.shares) > 0 && (
+          <DelegateButton />
+        )}
+      </ButtonsContainer>
       {!member && isFetching && <Loading size={12} />}
       {!member && isFetched && <NonMemberCard address={memberAddress} />}
 
       <>
-        <ButtonsContainer>
-          <ButtonRouterLink
-            to={`/molochv3/${daoChain}/${daoId}/members`}
-            IconLeft={StyledArrowLeft}
-            color="secondary"
-            linkType="no-icon-external"
-            variant="outline"
-            fullWidth={isMobile}
-          >
-            MEMBERS
-          </ButtonRouterLink>
-          <Button
-            IconLeft={BsShareFill}
-            onClick={handleOnClick}
-            fullWidth={isMobile}
-          >
-            SHARE PROFILE
-          </Button>
-        </ButtonsContainer>
-
         {member && member.memberAddress && (
           <MemberProfileCard
             daoChain={daoChain}
