@@ -84,6 +84,9 @@ export const useClaimShaman = ({
   dao?: MolochV3Dao;
   chainId?: ValidNetwork;
 }) => {
+  if (!dao || !chainId) {
+    throw new Error("Missing Args");
+  }
   const { data, error, ...rest } = useQuery(
     [`claimShaman-${dao?.id}}`],
     () => fetchShaman({ shamen: dao?.shamen, chainId }),

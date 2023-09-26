@@ -50,11 +50,6 @@ export const Member = () => {
   const { daoChain, daoId } = useCurrentDao();
   const { dao } = useDaoData();
 
-  if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
-  const { sdata } = useClaimShaman({
-    dao,
-    chainId: daoChain,
-  });
 
   const { successToast } = useToast();
   const isMobile = useBreakpoint(widthQuery.sm);
@@ -70,6 +65,8 @@ export const Member = () => {
 
   const isConnectedMember =
     member?.memberAddress.toLowerCase() === address?.toLowerCase();
+
+  if (!dao || !daoChain ) return <Loading />;
 
   return (
     <SingleColumnLayout>
@@ -103,11 +100,11 @@ export const Member = () => {
             member={member}
           />
         )}
-        {address && sdata?.nft.result && (
+        {address &&  (
           <ProfileNftList
+            dao={dao}
             address={address}
             daoChain={daoChain}
-            nftAddress={sdata.nft.result}
             isHolder={isConnectedMember}
           />
         )}
