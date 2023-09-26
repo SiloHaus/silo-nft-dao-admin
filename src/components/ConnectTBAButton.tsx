@@ -56,7 +56,7 @@ export const ConnectTBAButton = ({
         </Button>
       </DialogTrigger>
 
-      <DialogContent title="TBA Connect">
+      <DialogContent title="Connect Avatar">
         <ConnectTBAInstructions
           contractAddress={contractAddress}
           tokenId={tokenId}

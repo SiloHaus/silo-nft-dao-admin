@@ -15,6 +15,15 @@ import { ShamanListContainer } from "./ShamanList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { formatValueTo, toWholeUnits } from "@daohaus/utils";
 import { useDaoData } from "@daohaus/moloch-v3-hooks";
+import { styled } from "styled-components";
+
+const DataPoint = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5rem;
+  margin-bottom: 1rem;
+`;
 
 type ShamanItemProps = {
   shaman: {
@@ -64,10 +73,10 @@ export const ShamanItem = ({
               {sdata && Object.keys(sdata).length > 0
                 ? Object.keys(sdata).map((getter: string, idx) => {
                     return (
-                      <div key={idx}>
+                      <DataPoint key={idx}>
                         {sdata[getter].type === "address" ? (
                           <>
-                            <Label>{`${getter} Address:`}</Label>
+                            <Label>{`${getter.toUpperCase()} ADDRESS:`}</Label>
                             <AddressDisplay
                               address={sdata[getter].result}
                               explorerNetworkId={daoChain as keyof Keychain}
@@ -75,20 +84,25 @@ export const ShamanItem = ({
                             />
                           </>
                         ) : sdata[getter].type === "uint256" ? (
-                          <ParSm key={idx}>
-                            {getter}:{" "}
-                            {formatValueTo({
-                              value: toWholeUnits(sdata[getter].result, 18),
-                              decimals: 2,
-                              format: "number",
-                            })}
-                          </ParSm>
+                          <>
+                            <Label>{`${getter.toUpperCase()}:`}</Label>
+                            <ParSm key={idx}>
+                              {formatValueTo({
+                                value: toWholeUnits(sdata[getter].result, 18),
+                                decimals: 2,
+                                format: "number",
+                              })}
+                            </ParSm>
+                          </>
                         ) : (
-                          <ParSm key={idx}>
-                            {getter}: {sdata[getter].result}
-                          </ParSm>
+                          <>
+                            <Label>{`${getter.toUpperCase()}:`}</Label>
+                            <ParSm key={idx}>
+                              {getter}: {sdata[getter].result}
+                            </ParSm>
+                          </>
                         )}
-                      </div>
+                      </DataPoint>
                     );
                   })
                 : "no further info here"}{" "}
@@ -102,15 +116,15 @@ export const ShamanItem = ({
               </Button>
             </DialogTrigger>
             <DialogContent title={"Unknown"}>
-              <>
+              <DataPoint>
                 <Label>Address</Label>
                 <AddressDisplay
                   address={shaman.shamanAddress}
                   explorerNetworkId={daoChain as keyof Keychain}
                   truncate
                 />
-                <ParSm>No further info here</ParSm>
-              </>
+              </DataPoint>
+              <ParSm>No further info here</ParSm>
             </DialogContent>
           </Dialog>
         )}

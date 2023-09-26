@@ -7,13 +7,14 @@ import { useDHConnect } from "@daohaus/connect";
 
 export const DelegateButton = () => {
   const { daoChain, daoId } = useCurrentDao();
+  const { address } = useDHConnect();
 
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button color="secondary" size="sm" fullWidth>
+        <Button color="secondary" size="md">
           Delegate
         </Button>
       </DialogTrigger>

@@ -1,12 +1,14 @@
 import { styled } from "styled-components";
 import { TokenBalance } from "@0xsequence/indexer";
 
+import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 import { Loading, ParSm } from "@daohaus/ui";
+import { EthAddress, fromWei } from "@daohaus/utils";
+
 import { ClaimButton } from "./ClaimButton";
-import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
-import { EthAddress } from "@daohaus/utils";
 import { useClaimStatus } from "../hooks/useNftClaimStatus";
+import { useClaimShaman } from "../hooks/useClaimShaman";
 
 const ClaimPar = styled(ParSm)`
   font-weight: 600;
@@ -31,11 +33,19 @@ export const NftCardClaimSection = ({
     chainId: daoChain,
   });
 
-  if (isLoading) return <Loading />;
+  const { sdata, isLoading: isShamanLoading } = useClaimShaman({
+    dao,
+    chainId: daoChain,
+  });
+
+  if (isLoading || isShamanLoading) return <Loading />;
 
   return (
     <>
-      <ClaimPar>{dao?.lootTokenName}: 69,420</ClaimPar>
+      <ClaimPar>
+        Claimable {dao?.lootTokenSymbol}:{" "}
+        {fromWei(sdata?.lootPerNft?.result || "0")}
+      </ClaimPar>
 
       {shamanAddress && (
         <ClaimButton

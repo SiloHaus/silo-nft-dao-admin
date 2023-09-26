@@ -14,7 +14,6 @@ const ListContainer = styled.div`
   column-gap: 4rem;
   row-gap: 2rem;
   justify-content: center;
-  width: 100rem;
   @media (min-width: ${breakpoints.xs}) {
     justify-content: flex-start;
   }
@@ -39,7 +38,7 @@ export const ProfileNftList = ({
     dao,
     chainId: daoChain,
   });
-  
+
   const { accountNfts, isLoading } = useAccountNfts({
     accountAddress: address,
     contractAddress: sdata?.nft.result,

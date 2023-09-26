@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 import {
+  AddressDisplay,
   Button,
   Checkbox,
   Dialog,
@@ -8,66 +11,64 @@ import {
   ParMd,
   useToast,
 } from "@daohaus/ui";
-import { useState } from "react";
-import { ConnectTBAInstructions } from "./ConnectTBAInstructions";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
-import { ValidNetwork } from "@daohaus/keychain-utils";
 import {
   EthAddress,
-  ZERO_ADDRESS,
   encodeFunction,
-  encodeValues,
   handleErrorMessage,
   isString,
 } from "@daohaus/utils";
-import { useTba } from "../hooks/useTba";
-import { tbaAppLink } from "../utils/tokenboundHelpers";
-
-import TBA_ACCOUNT from "../abis/tbaAccount.json";
-
 import { useTxBuilder } from "@daohaus/tx-builder";
 import { LOCAL_ABI } from "@daohaus/abis";
 import { useDHConnect } from "@daohaus/connect";
-import { useClaimStatus } from "../hooks/useNftClaimStatus";
+
+import { useTba } from "../hooks/useTba";
+import TBA_ACCOUNT from "../abis/tbaAccount.json";
+import { styled } from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
 
 type ButtonProps = {
   tokenId: string;
-  shamanAddress: EthAddress;
   contractAddress: string;
 };
 export const DelegateToOwnerButton = ({
   tokenId,
-  shamanAddress,
   contractAddress,
 }: ButtonProps) => {
   const { daoChain, daoId } = useCurrentDao();
   const { dao } = useDaoData();
   const { address: currentUser } = useDHConnect();
   const { fireTransaction } = useTxBuilder();
-  const { errorToast, defaultToast, successToast } = useToast();
-  const [isDataLoading, setIsDataLoading] = useState(false);
+  const { errorToast, defaultToast } = useToast();
   const { tba, isDeployed, isError, isLoading } = useTba({
     contractAddress: contractAddress as EthAddress,
     tokenId,
     chainId: daoChain,
   });
-
-  console.log("tba ", tba, isDeployed);
+  const { daoChainId, chainId } = useDHConnect();
 
   const [open, setOpen] = useState(false);
 
+  const mismatchedChain = daoChainId !== chainId;
+
   const handleClick = (
     tbaAddress: EthAddress,
-    daoAddress: string,
     userAddress: string,
     sharesAddress: string
   ) => {
-    setIsDataLoading(true);
-
     // get encoded delegate function
-    console.log("userAddress, sharesAddress, tbaAddress ", userAddress, sharesAddress, tbaAddress);
+    console.log(
+      "userAddress, sharesAddress, tbaAddress ",
+      userAddress,
+      sharesAddress,
+      tbaAddress
+    );
 
-    // const encodedValues = encodeValues(["address"], [userAddress]);
     const encodedDelegate = encodeFunction(LOCAL_ABI.SHARES, "delegate", [
       userAddress,
     ]);
@@ -98,15 +99,12 @@ export const DelegateToOwnerButton = ({
             error,
           });
           errorToast({ title: "Delegate Failed", description: errMsg });
-          setIsDataLoading(false);
         },
         onTxSuccess: () => {
           defaultToast({
             title: "Delegate Success",
             description: "Please wait...",
           });
-          // refetch();
-          setIsDataLoading(false);
         },
       },
     });
@@ -117,7 +115,6 @@ export const DelegateToOwnerButton = ({
   if (isLoading) return <Loading />;
 
   if (isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
-    // todo: check if has claimed
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -127,18 +124,19 @@ export const DelegateToOwnerButton = ({
         </DialogTrigger>
 
         <DialogContent title="Delegate To Owner">
-          <ParMd>You can delegate to your self or another address.</ParMd>
-          <Button
-            onClick={() =>
-              handleClick(tba, daoId, currentUser, dao?.sharesAddress)
-            }
-          >
-            Delegate To Owner
-          </Button>
-          <Checkbox title="Delegate to a different address" />
+          <Container>
+            <ParMd>You can delegate to your connected address:</ParMd>
+            <AddressDisplay address={currentUser} truncate={true} />
+            <Button
+              onClick={() => handleClick(tba, currentUser, dao?.sharesAddress)}
+              disabled={mismatchedChain}
+            >
+              Delegate
+            </Button>
+          </Container>
+          {/* <Checkbox title="Delegate to a different address" /> */}
         </DialogContent>
       </Dialog>
     );
-
   }
 };
