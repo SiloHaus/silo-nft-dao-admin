@@ -63,9 +63,7 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
     chainId: daoChain,
   });
   const { shamanAddress } = useClaimShaman({
-    contractAddress: dao?.shamen
-      ? (dao.shamen[0].shamanAddress as `0x${string}`)
-      : undefined,
+    dao,
     chainId: daoChain,
   });
 
@@ -79,7 +77,7 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
             <NftCardClaimSection
               dao={dao}
               nft={nft}
-              shamanAddress={shamanAddress}
+              shamanAddress={shamanAddress as EthAddress}
             />
           </LowerSection>
         )}
@@ -94,9 +92,11 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
             {!isHolder && (
               <DelegateToOwnerButton
                 tokenId={nft.tokenID}
-                shamanAddress={dao?.shamen
-                  ? (dao.shamen[0].shamanAddress as `0x${string}`)
-                  : ZERO_ADDRESS}
+                shamanAddress={
+                  dao?.shamen
+                    ? (dao.shamen[0].shamanAddress as `0x${string}`)
+                    : ZERO_ADDRESS
+                }
                 contractAddress={nft.contractAddress}
               />
             )}

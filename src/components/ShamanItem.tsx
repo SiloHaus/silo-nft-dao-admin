@@ -14,6 +14,7 @@ import { ButtonRouterLink } from "./ButtonRouterLink";
 import { ShamanListContainer } from "./ShamanList";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { formatValueTo, toWholeUnits } from "@daohaus/utils";
+import { useDaoData } from "@daohaus/moloch-v3-hooks";
 
 type ShamanItemProps = {
   shaman: {
@@ -33,8 +34,9 @@ export const ShamanItem = ({
   daoId,
   includeLinks,
 }: ShamanItemProps) => {
+  const { dao } = useDaoData();
   const { shamanName, sdata } = useClaimShaman({
-    contractAddress: shaman.shamanAddress as `0x${string}`,
+    dao,
     chainId: daoChain,
   });
   return (

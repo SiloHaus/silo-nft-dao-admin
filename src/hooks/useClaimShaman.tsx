@@ -1,88 +1,93 @@
 import { useQuery } from "react-query";
 
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
-import { createViemClient } from "@daohaus/utils";
+import { EthAddress, createViemClient } from "@daohaus/utils";
 import ClaimShamanAbi from "../abis/claimShaman.json";
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 
 const fetchShaman = async ({
-  contractAddress,
+  shamen,
   chainId,
   rpcs,
 }: {
-  contractAddress?: `0x${string}`;
+  shamen?: MolochV3Dao["shamen"];
   chainId?: ValidNetwork;
   rpcs?: Keychain;
 }) => {
-  if (!chainId || !contractAddress) {
-    throw new Error("Invalid ChainId");
+  if (!chainId || !shamen) {
+    throw new Error("Missing Args");
   }
-
   const client = createViemClient({
     chainId,
     rpcs,
   });
 
-  let shamanName;
-  try {
-    shamanName = await client.readContract({
-      abi: ClaimShamanAbi,
-      address: contractAddress,
-      functionName: "name",
-      args: [],
-    });
-  } catch (e) {
-    shamanName = "";
-    console.log("error", e);
-  }
+  const targetShamanName = "NFT6551ClaimerShaman";
 
-  let getters: string[] = [];
-  let types: string[] = [];
+  const claimShaman = shamen.find(async (shaman) => {
+    try {
+      const shamanName = await client.readContract({
+        abi: ClaimShamanAbi,
+        address: shaman.shamanAddress as EthAddress,
+        functionName: "name",
+        args: [],
+      });
 
-  let sdata: { [key: string]: { result: string; type: string } } = {};
-
-  // switch if known shaman
-  if (shamanName === "NFT6551ClaimerShaman") {
-    getters = ["nft", "lootPerNft", "sharesPerNft", "paused", "vault"];
-    types = ["address", "uint256", "uint256", "bool", "address"];
-  }
-  const shamanData = (await Promise.all(
-    getters.map(async (getter) => {
-      let res;
-      try {
-        res = await client.readContract({
-          abi: ClaimShamanAbi,
-          address: contractAddress,
-          functionName: getter,
-          args: [],
-        });
-      } catch (e) {
-        console.log("error", e);
-        res = undefined;
-      }
-
-      return res;
-    })
-  )) as string[];
-
-  // loop through getters and add to sdata as key value pairs
-  getters.forEach((getter, i) => {
-    sdata[getter] = { result: shamanData[i].toString(), type: types[i] };
+      return shamanName === targetShamanName;
+    } catch (e) {
+      return false;
+    }
   });
 
-  return { shamanName, sdata, shamanAddress: contractAddress };
+  if (claimShaman) {
+    const getters = ["nft", "lootPerNft", "sharesPerNft", "paused", "vault"];
+    const types = ["address", "uint256", "uint256", "bool", "address"];
+    let sdata: { [key: string]: { result: string; type: string } } = {};
+
+    const shamanData = (await Promise.all(
+      getters.map(async (getter) => {
+        let res;
+        try {
+          res = await client.readContract({
+            abi: ClaimShamanAbi,
+            address: claimShaman.shamanAddress as EthAddress,
+            functionName: getter,
+            args: [],
+          });
+        } catch (e) {
+          console.log("error", e);
+          res = undefined;
+        }
+
+        return res;
+      })
+    )) as string[];
+
+    getters.forEach((getter, i) => {
+      sdata[getter] = { result: shamanData[i].toString(), type: types[i] };
+    });
+
+    return {
+      shamanName: targetShamanName,
+      sdata,
+      shamanAddress: claimShaman.shamanAddress,
+    };
+  } else {
+    throw new Error("Shaman not found");
+  }
 };
 
 export const useClaimShaman = ({
-  contractAddress,
+  dao,
   chainId,
 }: {
-  contractAddress?: `0x${string}`;
+  dao?: MolochV3Dao;
   chainId?: ValidNetwork;
 }) => {
   const { data, error, ...rest } = useQuery(
-    [`tba-${contractAddress}}`],
-    () => fetchShaman({ contractAddress, chainId }),
-    { enabled: !!contractAddress && !!chainId }
+    [`claimShaman-${dao?.id}}`],
+    () => fetchShaman({ shamen: dao?.shamen, chainId }),
+    { enabled: !!dao && !!dao.shamen && !!chainId }
   );
 
   return { ...data, error, ...rest };

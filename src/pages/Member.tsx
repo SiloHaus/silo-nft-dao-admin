@@ -52,7 +52,7 @@ export const Member = () => {
 
   if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
   const { sdata } = useClaimShaman({
-    contractAddress: dao.shamen[0].shamanAddress as `0x${string}`,
+    dao,
     chainId: daoChain,
   });
 
