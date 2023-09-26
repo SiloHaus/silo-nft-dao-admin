@@ -104,20 +104,15 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
           <LowerSection>
             {tba && <AddressDisplay address={tba} truncate copy />}
             <ActionButton>
-            <ConnectTBAButton
-              tokenId={nft.tokenID}
-              contractAddress={nft.contractAddress}
-            />
+              <ConnectTBAButton
+                tokenId={nft.tokenID}
+                contractAddress={nft.contractAddress}
+              />
 
-            <DelegateToOwnerButton
-              tokenId={nft.tokenID}
-              shamanAddress={
-                dao?.shamen
-                  ? (dao.shamen[0].shamanAddress as `0x${string}`)
-                  : ZERO_ADDRESS
-              }
-              contractAddress={nft.contractAddress}
-            />
+              <DelegateToOwnerButton
+                tokenId={nft.tokenID}
+                contractAddress={nft.contractAddress}
+              />
             </ActionButton>
           </LowerSection>
         )}

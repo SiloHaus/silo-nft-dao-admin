@@ -5,6 +5,7 @@ import { EthAddress, handleErrorMessage } from "@daohaus/utils";
 import { useState } from "react";
 import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
 import { useClaimStatus } from "../hooks/useNftClaimStatus";
+import { useDHConnect } from "@daohaus/connect";
 
 enum TxStates {
   Idle = "Idle",
@@ -24,8 +25,9 @@ export const ClaimButton = ({
   isClaimed = false,
 }: ClaimButtonProps) => {
   const { fireTransaction } = useTxBuilder();
-  const { errorToast, defaultToast, successToast } = useToast();
+  const { errorToast, successToast } = useToast();
   const { daoChain } = useCurrentDao();
+  const { daoChainId, chainId } = useDHConnect();
 
   const { refetch } = useClaimStatus({
     shamanAddress: shamanAddress as EthAddress,
@@ -34,8 +36,9 @@ export const ClaimButton = ({
   });
   const [isLoading, setIsLoading] = useState(false);
 
+  const mismatchedChain = daoChainId !== chainId;
+
   const handleClaim = async () => {
-    console.log("claiming tokenId, shamanAddress", tokenId, shamanAddress);
     setIsLoading(true);
 
     await fireTransaction({
@@ -69,7 +72,7 @@ export const ClaimButton = ({
       color="secondary"
       size="sm"
       fullWidth
-      disabled={isClaimed || isLoading}
+      disabled={isClaimed || isLoading || mismatchedChain}
       isLoading={isLoading}
     >
       {isClaimed ? "Claimed" : "Claim"}
