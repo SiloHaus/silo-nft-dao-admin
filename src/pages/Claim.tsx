@@ -17,9 +17,7 @@ export const Claim = () => {
   const { daoChain } = useCurrentDao();
   const { dao } = useDaoData();
   const { sdata } = useClaimShaman({
-    contractAddress: dao?.shamen
-      ? (dao.shamen[0].shamanAddress as `0x${string}`)
-      : undefined,
+    dao,
     chainId: daoChain,
   });
 
