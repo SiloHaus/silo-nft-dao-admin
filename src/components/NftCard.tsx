@@ -1,27 +1,30 @@
 import { TokenBalance } from "@0xsequence/indexer";
 import styled from "styled-components";
+import { Link as RouterLink } from "react-router-dom";
 
 import { AddressDisplay, Button, Card, ParSm } from "@daohaus/ui";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { EthAddress, ZERO_ADDRESS } from "@daohaus/utils";
 
 import { ConnectTBAButton } from "./ConnectTBAButton";
-import { DelegateButton } from "./DelegateButton";
 import { useTba } from "../hooks/useTba";
 import { NftCardClaimSection } from "./NftCardClaimSection";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { DelegateToOwnerButton } from "./DelegateToOwnerButton";
+import { useClaimStatus } from "../hooks/useNftClaimStatus";
 
+const ClaimLink = styled(RouterLink)`
+  text-decoration: none;
+  font-weight: 600;
+`;
 const CardContainer = styled(Card)`
   padding: 0;
   padding-top: 1rem;
-  //todo: how to width on various nft image sizes
-  // how to position the image?
-  width: 17rem;
+  width: 30rem;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 `;
 
 const CardLower = styled.div`
@@ -30,9 +33,9 @@ const CardLower = styled.div`
 `;
 
 const NftCardImage = styled.img`
-  max-width: 15rem;
-  //todo: how to width on various nft image sizes
-  /* min-height: 18.3rem; */
+  max-width: 25rem;
+  min-height: 25rem;
+  margin: 0 auto;
   border-radius: ${({ theme }) => theme.card.radius};
   object-fit: cover;
 `;
@@ -45,6 +48,16 @@ const LowerSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+const ActionButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  button {
+    flex: 1;
+  }
 `;
 
 type NftCardProps = {
@@ -66,6 +79,11 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
     dao,
     chainId: daoChain,
   });
+  const { isClaimed, isLoading: isClaimLoading } = useClaimStatus({
+    shamanAddress: shamanAddress as `0x${string}`,
+    tokenId: nft.tokenID,
+    chainId: daoChain,
+  });
 
   return (
     <CardContainer>
@@ -82,24 +100,43 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
           </LowerSection>
         )}
 
-        {!isClaim && (
+        {!isClaim && isClaimed && (
           <LowerSection>
             {tba && <AddressDisplay address={tba} truncate copy />}
+            <ActionButton>
             <ConnectTBAButton
               tokenId={nft.tokenID}
               contractAddress={nft.contractAddress}
             />
-            {!isHolder && (
-              <DelegateToOwnerButton
-                tokenId={nft.tokenID}
-                shamanAddress={
-                  dao?.shamen
-                    ? (dao.shamen[0].shamanAddress as `0x${string}`)
-                    : ZERO_ADDRESS
-                }
-                contractAddress={nft.contractAddress}
-              />
-            )}
+
+            <DelegateToOwnerButton
+              tokenId={nft.tokenID}
+              shamanAddress={
+                dao?.shamen
+                  ? (dao.shamen[0].shamanAddress as `0x${string}`)
+                  : ZERO_ADDRESS
+              }
+              contractAddress={nft.contractAddress}
+            />
+            </ActionButton>
+          </LowerSection>
+        )}
+        {!isClaim && !isClaimed && (
+          <LowerSection>
+            <ParSm>Not Claimed</ParSm>
+            <ClaimLink to={`/molochv3/${daoChain}/${dao?.id}/claim`}>
+              <Button
+                color="secondary"
+                variant="outline"
+                size="sm"
+                fullWidth
+                onClick={() => {
+                  console.log("claiming");
+                }}
+              >
+                Check Claim
+              </Button>
+            </ClaimLink>
           </LowerSection>
         )}
       </CardLower>

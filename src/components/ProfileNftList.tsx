@@ -12,7 +12,7 @@ const ListContainer = styled.div`
   column-gap: 4rem;
   row-gap: 2rem;
   justify-content: center;
-  width: 64rem;
+  width: 100rem;
   @media (min-width: ${breakpoints.xs}) {
     justify-content: flex-start;
   }

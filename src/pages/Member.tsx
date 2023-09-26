@@ -72,7 +72,7 @@ export const Member = () => {
     member?.memberAddress.toLowerCase() === address?.toLowerCase();
 
   return (
-    <SingleColumnLayout title="Member Profile">
+    <SingleColumnLayout>
       {!member && isFetching && <Loading size={12} />}
       {!member && isFetched && <ParLg>Connected Account is not a member</ParLg>}
 
