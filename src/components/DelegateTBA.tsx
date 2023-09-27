@@ -7,8 +7,12 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
+  Input,
   Loading,
   ParMd,
+  Tooltip,
+  WarningText,
+  WrappedInput,
   useToast,
 } from "@daohaus/ui";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
@@ -25,6 +29,10 @@ import { useDHConnect } from "@daohaus/connect";
 import { useTba } from "../hooks/useTba";
 import TBA_ACCOUNT from "../abis/tbaAccount.json";
 import { styled } from "styled-components";
+import { APP_FORM } from "../legos/forms";
+import { MolochFields } from "@daohaus/moloch-v3-fields";
+import { AppFieldLookup } from "../legos/legoConfig";
+import { FormBuilder } from "@daohaus/form-builder";
 
 const Container = styled.div`
   display: flex;
@@ -36,10 +44,7 @@ type ButtonProps = {
   tokenId: string;
   contractAddress: string;
 };
-export const DelegateToOwnerButton = ({
-  tokenId,
-  contractAddress,
-}: ButtonProps) => {
+export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
   const { daoChain, daoId } = useCurrentDao();
   const { dao } = useDaoData();
   const { address: currentUser } = useDHConnect();
@@ -53,8 +58,19 @@ export const DelegateToOwnerButton = ({
   const { daoChainId, chainId } = useDHConnect();
 
   const [open, setOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [inputAddress, setInputAddress] = useState(currentUser);
 
   const mismatchedChain = daoChainId !== chainId;
+
+  const toggleChecked = () => {
+    setInputAddress(currentUser);
+    setChecked(!checked);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputAddress(e.target.value);
+  };
 
   const handleClick = (
     tbaAddress: EthAddress,
@@ -119,22 +135,45 @@ export const DelegateToOwnerButton = ({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button color="secondary" size="sm">
-            Delegate
+            Delegate{false && <Tooltip content="Delegate is not owner" />}
           </Button>
         </DialogTrigger>
 
-        <DialogContent title="Delegate To Owner">
+        <DialogContent title="Delegate TBA">
           <Container>
-            <ParMd>You can delegate to your connected address:</ParMd>
-            <AddressDisplay address={currentUser} truncate={true} />
+            <ParMd>
+              Delegate to {checked ? "a different Address" : "the NFT Owner"}:
+            </ParMd>
+            {!checked ? (
+              <AddressDisplay address={currentUser} truncate={true} />
+            ) : (
+              <Input
+                id="delegateAddress"
+                onChange={handleChange}
+                disabled={isLoading}
+                full
+                placeholder={"0x..."}
+              />
+            )}
+            <Checkbox
+              onCheckedChange={toggleChecked}
+              checked={checked}
+              defaultChecked={false}
+              title="Delegate to a different address"
+            />
             <Button
-              onClick={() => handleClick(tba, currentUser, dao?.sharesAddress)}
+              onClick={() =>
+                handleClick(
+                  tba,
+                  inputAddress || currentUser,
+                  dao?.sharesAddress
+                )
+              }
               disabled={mismatchedChain}
             >
               Delegate
             </Button>
           </Container>
-          {/* <Checkbox title="Delegate to a different address" /> */}
         </DialogContent>
       </Dialog>
     );

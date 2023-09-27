@@ -10,8 +10,8 @@ import { ConnectTBAButton } from "./ConnectTBAButton";
 import { useTba } from "../hooks/useTba";
 import { NftCardClaimSection } from "./NftCardClaimSection";
 import { useClaimShaman } from "../hooks/useClaimShaman";
-import { DelegateToOwnerButton } from "./DelegateToOwnerButton";
 import { useClaimStatus } from "../hooks/useNftClaimStatus";
+import { DelegateTBA } from "./DelegateTBA";
 
 const ClaimLink = styled(RouterLink)`
   text-decoration: none;
@@ -109,7 +109,7 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
                 contractAddress={nft.contractAddress}
               />
 
-              <DelegateToOwnerButton
+              <DelegateTBA
                 tokenId={nft.tokenID}
                 contractAddress={nft.contractAddress}
               />

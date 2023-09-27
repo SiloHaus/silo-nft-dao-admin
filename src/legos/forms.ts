@@ -23,4 +23,15 @@ export const APP_FORM: Record<string, CustomFormLego> = {
       ...PROPOSAL_SETTINGS_FIELDS,
     ],
   },
+  DELEGATE_TBA: {
+    id: "DELEGATE_TBA",
+    title: "Delegate Form",
+    subtitle: "Delegate Voting Power",
+    description: "Delegate your voting power to another member of the DAO.",
+    requiredFields: { },
+    log: true,
+    fields: [
+      FIELD.INPUT_ADDRESS,
+    ],
+  },
 };
