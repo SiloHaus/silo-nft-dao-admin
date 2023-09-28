@@ -4,7 +4,9 @@ import styled from "styled-components";
 const DaoNavContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1.7rem;
+  width: 100%;
 `;
 
 const DaoProfileAvatar = styled(ProfileAvatar)`
