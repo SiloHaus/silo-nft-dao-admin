@@ -2,7 +2,15 @@ import { TokenBalance } from "@0xsequence/indexer";
 import styled from "styled-components";
 import { Link as RouterLink } from "react-router-dom";
 
-import { AddressDisplay, Button, Card, ParSm } from "@daohaus/ui";
+import {
+  AddressDisplay,
+  Button,
+  Card,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  ParSm,
+} from "@daohaus/ui";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { EthAddress, ZERO_ADDRESS } from "@daohaus/utils";
 
@@ -12,6 +20,8 @@ import { NftCardClaimSection } from "./NftCardClaimSection";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { useClaimStatus } from "../hooks/useNftClaimStatus";
 import { DelegateTBA } from "./DelegateTBA";
+import { useState } from "react";
+import { NftImageDetails } from "./NftImageDetails";
 
 const ClaimLink = styled(RouterLink)`
   text-decoration: none;
@@ -38,6 +48,7 @@ const NftCardImage = styled.img`
   margin: 0 auto;
   border-radius: ${({ theme }) => theme.card.radius};
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const NamePar = styled(ParSm)`
@@ -84,10 +95,22 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
     tokenId: nft.tokenID,
     chainId: daoChain,
   });
+  const [open, setOpen] = useState(false);
 
   return (
     <CardContainer>
-      <NftCardImage src={nft.tokenMetadata?.image} />
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <NftCardImage src={nft.tokenMetadata?.image} />
+        </DialogTrigger>
+        <DialogContent title="Delegate TBA">
+          <NftImageDetails
+            tokenId={nft.tokenID}
+            contractAddress={nft.contractAddress}
+            nftImage={nft.tokenMetadata?.image || ""}
+          />
+        </DialogContent>
+      </Dialog>
       <CardLower>
         <NamePar>{`${nft.contractInfo?.name} #${nft.tokenID}`}</NamePar>
         {isClaim && dao && (

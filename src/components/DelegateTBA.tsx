@@ -15,7 +15,7 @@ import {
   WrappedInput,
   useToast,
 } from "@daohaus/ui";
-import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
+import { useCurrentDao, useDaoData, useDaoMember } from "@daohaus/moloch-v3-hooks";
 import {
   EthAddress,
   encodeFunction,
@@ -56,6 +56,13 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
     chainId: daoChain,
   });
   const { daoChainId, chainId } = useDHConnect();
+
+  const { isFetched, isFetching, member: tbaMember } = useDaoMember({
+    daoChain: daoChain || "0x5",
+    daoId: daoId || "",
+    memberAddress: tba,
+  });
+
 
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -135,7 +142,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button color="secondary" size="sm">
-            Delegate{false && <Tooltip content="Delegate is not owner" />}
+            Delegate{tbaMember?.delegatingTo != currentUser || tbaMember?.delegatingTo != tba  && <Tooltip content="Delegate is not owner or tba" />}
           </Button>
         </DialogTrigger>
 
