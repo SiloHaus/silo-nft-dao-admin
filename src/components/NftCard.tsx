@@ -103,11 +103,12 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
         <DialogTrigger asChild>
           <NftCardImage src={nft.tokenMetadata?.image} />
         </DialogTrigger>
-        <DialogContent title="Delegate TBA">
+        <DialogContent title="TBA Details">
           <NftImageDetails
             tokenId={nft.tokenID}
             contractAddress={nft.contractAddress}
             nftImage={nft.tokenMetadata?.image || ""}
+            isClaimed={isClaimed || false}
           />
         </DialogContent>
       </Dialog>
