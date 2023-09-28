@@ -1,7 +1,9 @@
 import { useQuery } from "react-query";
 import { TokenboundClient } from "@tokenbound/sdk";
+import { SequenceMetadataClient } from "@0xsequence/metadata";
 
 import { HAUS_NETWORK_DATA, ValidNetwork } from "@daohaus/keychain-utils";
+import { SEQUENCE_CHAIN_NAME } from "../utils/constants";
 
 const fetchNftForTba = async ({
   tbaAddress,
@@ -11,8 +13,9 @@ const fetchNftForTba = async ({
   chainId?: string;
 }) => {
   const networkId = HAUS_NETWORK_DATA[chainId as ValidNetwork]?.networkId;
+  const sequenceChain = SEQUENCE_CHAIN_NAME[chainId as ValidNetwork];
 
-  if (!networkId) {
+  if (!networkId || !sequenceChain) {
     throw new Error("Invalid ChainId");
   }
 
@@ -22,9 +25,20 @@ const fetchNftForTba = async ({
     accountAddress: tbaAddress,
   });
 
-  console.log("nft from tba sdk", nft);
+  let metadata;
+  if (nft) {
+    const metadataClient = new SequenceMetadataClient();
 
-  return nft;
+    const tokenMetadata = await metadataClient.getTokenMetadata({
+      chainID: sequenceChain,
+      contractAddress: nft.tokenContract,
+      tokenIDs: [nft.tokenId],
+    });
+
+    metadata = tokenMetadata.tokenMetadata[0];
+  }
+
+  return { tbaData: nft, metadata };
 };
 
 export const useTbaNft = ({
@@ -40,5 +54,5 @@ export const useTbaNft = ({
     { enabled: !!tbaAddress && !!chainId }
   );
 
-  return { ...data, error, ...rest };
+  return { nft: data, error, ...rest };
 };

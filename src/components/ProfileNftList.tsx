@@ -45,8 +45,6 @@ export const ProfileNftList = ({
     chainId: daoChain,
   });
 
-  console.log("accountNfts", accountNfts);
-
   if (isLoading) return <Loading />;
 
   return (

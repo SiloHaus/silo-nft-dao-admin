@@ -1,4 +1,4 @@
-import { BsArrowLeft, BsShareFill } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/bs";
 import styled from "styled-components";
 
 import {
@@ -8,22 +8,22 @@ import {
 } from "@daohaus/moloch-v3-hooks";
 import { MemberProfileCard } from "@daohaus/moloch-v3-macro-ui";
 import {
-  Button,
   ParLg,
   SingleColumnLayout,
   Loading,
   useBreakpoint,
-  useToast,
   widthQuery,
 } from "@daohaus/ui";
 import { useDHConnect } from "@daohaus/connect";
 
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
 import { ProfileNftList } from "../components/ProfileNftList";
-import { useClaimShaman } from "../hooks/useClaimShaman";
 import { NonMemberCard } from "../components/NonMemberCard";
 import { useParams } from "react-router-dom";
 import { DelegateButton } from "../components/DelegateButton";
+import { useTba, useTbaMember } from "../hooks/useTba";
+import { TbaProfile } from "../components/TbaProfile";
+import { EthAddress } from "@daohaus/utils";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -54,15 +54,12 @@ export const Member = () => {
   const { dao } = useDaoData();
   const { memberAddress } = useParams();
 
-  const { successToast } = useToast();
-  const isMobile = useBreakpoint(widthQuery.sm);
+  const { isDeployed, tbaAddress } = useTbaMember({
+    memberAddress: address as EthAddress,
+    chainId: daoChain,
+  });
 
-  const handleOnClick = () => {
-    navigator.clipboard.writeText(`${window.location.href}`);
-    successToast({
-      title: "URL copied to clipboard",
-    });
-  };
+  const isMobile = useBreakpoint(widthQuery.sm);
 
   if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
 
@@ -93,11 +90,14 @@ export const Member = () => {
 
       <>
         {member && member.memberAddress && (
-          <MemberProfileCard
-            daoChain={daoChain}
-            daoId={daoId}
-            member={member}
-          />
+          <>
+            {isDeployed && address && <TbaProfile tbaAddress={address} />}
+            <MemberProfileCard
+              daoChain={daoChain}
+              daoId={daoId}
+              member={member}
+            />
+          </>
         )}
 
         {address && (
