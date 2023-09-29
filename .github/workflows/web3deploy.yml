@@ -1,5 +1,5 @@
 name: Deploy to Web3
-run-name: ${{ github.actor }} is deploying to out Web3 🚀
+run-name: ${{ github.actor }} is deploying to Web3 🚀
 on:
   push:
     branches: ipfs-deploy
@@ -28,9 +28,9 @@ jobs:
           touch .env
           echo VITE_ALCHEMY_KEY=${{ secrets.VITE_ALCHEMY_KEY}}  >> .env
           echo VITE_RIVET_KEY=${{ secrets.VITE_RIVET_KEY }}  >> .env
-          echo VITE_GRAPH_API_KEY_MAINNET=${{ secrets.VITE_GRAPH_API_KEY_MAINNET }}
-          echo VITE_WALLET_CONNECT_ID=${{ secrets.VITE_WALLET_CONNECT_ID }}
-          echo VITE_EXPLORER_KEY=${{ secrets.VITE_EXPLORER_KEY }}
+          echo VITE_GRAPH_API_KEY_MAINNET=${{ secrets.VITE_GRAPH_API_KEY_MAINNET }}  >> .env
+          echo VITE_WALLET_CONNECT_ID=${{ secrets.VITE_WALLET_CONNECT_ID }}  >> .env
+          echo VITE_EXPLORER_KEY=${{ secrets.VITE_EXPLORER_KEY }}  >> .env
       - run: yarn build
       - name: cat env
         run: |
