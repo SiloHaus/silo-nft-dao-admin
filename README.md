@@ -1,6 +1,7 @@
 # SiloHAUS NFT DAO Admin
 
 Admin app for NFT DAOs.
+test web3storage
 
 ## Development
 
