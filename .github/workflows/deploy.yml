@@ -2,7 +2,7 @@ name: Deploy to Web3
 run-name: ${{ github.actor }} is deploying to Web3 🚀
 on:
   push:
-    branches: ipfs-deploy
+    branches: feat/ipfs-deploy
 jobs:
   Deploy-To-Web3-Storage:
     runs-on: ubuntu-latest
