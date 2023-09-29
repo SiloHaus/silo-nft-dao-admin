@@ -21,12 +21,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
+          cache: "npm"
       - run: rm -rf node_modules && yarn install --frozen-lockfile
       - name: Create env file
         run: |
           touch .env
-          echo VITE_ALCHEMY_KEY=${{ secrets.VITE_ALCHEMY_KEY}}  >> .env
+          echo VITE_ALCHEMY_KEY=${{ secrets.VITE_ALCHEMY_KEY }}  >> .env
           echo VITE_RIVET_KEY=${{ secrets.VITE_RIVET_KEY }}  >> .env
           echo VITE_GRAPH_API_KEY_MAINNET=${{ secrets.VITE_GRAPH_API_KEY_MAINNET }}  >> .env
           echo VITE_WALLET_CONNECT_ID=${{ secrets.VITE_WALLET_CONNECT_ID }}  >> .env
@@ -42,7 +42,7 @@ jobs:
         id: web3
         with:
           web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
-          path_to_add: 'dist'
+          path_to_add: "dist"
 
       # "bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am"
       - run: echo ${{ steps.web3.outputs.cid }}
