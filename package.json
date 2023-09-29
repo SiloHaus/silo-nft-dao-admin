@@ -32,7 +32,8 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.4.3",
-    "react-table": "^7.8.0"
+    "react-table": "^7.8.0",
+    "vite-plugin-singlefile": "^0.13.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.22",
