@@ -1,14 +1,14 @@
-import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
+import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { SingleColumnLayout } from "@daohaus/ui";
 
 import DaoOverview from "../components/DaoOverview";
 
 export function Dao() {
-  const { daoChain, daoId } = useCurrentDao();
-
+  const { daoChain } = useCurrentDao();
+  const { dao } = useDaoData();
   return (
     <SingleColumnLayout>
-      {daoId && daoChain && <DaoOverview daoChain={daoChain} daoId={daoId} />}
+      {daoChain && dao && <DaoOverview daoChain={daoChain} dao={dao} />}
     </SingleColumnLayout>
   );
 }
