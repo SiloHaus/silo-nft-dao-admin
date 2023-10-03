@@ -14,9 +14,13 @@ import {
   lowerCaseLootToken,
 } from "@daohaus/utils";
 import { Keychain, ValidNetwork } from "@daohaus/keychain-utils";
-import { useDaoData } from "@daohaus/moloch-v3-hooks";
+import { useDaoData, useDaoMembers } from "@daohaus/moloch-v3-hooks";
 
 import { DaoProfile } from "./DaoProfile";
+import { useMemo } from "react";
+import { useClaimShaman } from "../hooks/useClaimShaman";
+import { useNftCollectionMetadata } from "../hooks/useNftCollectionMetadata";
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 
 export const OverviewCard = styled(Card)`
   width: 64rem;
@@ -83,20 +87,25 @@ export const TagListContainer = styled.div`
 
 type DaoOverviewProps = {
   daoChain: ValidNetwork;
-  daoId: string;
   graphApiKeys?: Keychain;
+  dao: MolochV3Dao;
 };
 
-export const DaoOverview = ({
-  daoChain,
-  daoId,
-  graphApiKeys,
-}: DaoOverviewProps) => {
-  const { dao } = useDaoData({
-    daoChain,
-    daoId,
-    graphApiKeys,
+export const DaoOverview = ({ daoChain, dao }: DaoOverviewProps) => {
+  const { members } = useDaoMembers();
+  const { sdata } = useClaimShaman({
+    dao,
+    chainId: daoChain,
   });
+
+  const { nft } = useNftCollectionMetadata({
+    contractAddress: sdata?.nft.result,
+    chainId: daoChain,
+  });
+
+  const shareHolderCount = useMemo(() => {
+    return members.filter((mem) => mem.shares !== "0").length;
+  }, [members]);
 
   if (!dao) return null;
 
@@ -115,7 +124,7 @@ export const DaoOverview = ({
                   format: "currencyShort",
                 })}
               />
-              <DataIndicator label="Holders" data={dao.activeMemberCount} />
+              <DataIndicator label="Avatars" data={shareHolderCount} />
               <DataIndicator label="Proposals" data={dao.proposalCount} />
               <DataIndicator
                 label="Active Proposals"
@@ -126,12 +135,9 @@ export const DaoOverview = ({
           <TokensCard>
             <H4>Tokens</H4>
             <OverviewDataGrid>
+              <DataIndicator label="NFT Collection" data={nft?.name} />
               <DataIndicator
-                label="NFT"
-                data={charLimit(dao.shareTokenName, 20)}
-              />
-              <DataIndicator
-                label="Supply"
+                label="Claimed"
                 data={formatValueTo({
                   value: fromWei(dao.totalShares),
                   decimals: 2,

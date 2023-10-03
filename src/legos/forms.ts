@@ -1,4 +1,3 @@
-import { FormLego } from "@daohaus/form-builder";
 import { FIELD } from "@daohaus/moloch-v3-legos";
 import { CustomFormLego } from "./legoConfig";
 import { APP_FIELD } from "./fields";
@@ -28,10 +27,8 @@ export const APP_FORM: Record<string, CustomFormLego> = {
     title: "Delegate Form",
     subtitle: "Delegate Voting Power",
     description: "Delegate your voting power to another member of the DAO.",
-    requiredFields: { },
+    requiredFields: {},
     log: true,
-    fields: [
-      FIELD.INPUT_ADDRESS,
-    ],
+    fields: [FIELD.INPUT_ADDRESS],
   },
 };
