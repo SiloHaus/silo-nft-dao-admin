@@ -12,6 +12,7 @@ import { ValidNetwork } from "@daohaus/keychain-utils";
 import { EthAddress } from "@daohaus/utils";
 import { useTba } from "../hooks/useTba";
 import { tbaAppLink } from "../utils/tokenboundHelpers";
+import { DeployTBAInstructions } from "./DeployTBAInstructions";
 
 type ClaimButtonProps = {
   tokenId: string;
@@ -38,14 +39,21 @@ export const ConnectTBAButton = ({
 
   if (!isDeployed)
     return (
-      <Button
-        href={tbaAppLink({ contractAddress, tokenId, daoChain })}
-        color="secondary"
-        size="sm"
-        fullWidth
-      >
-        Deploy TBA
-      </Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button color="secondary" size="sm">
+            Deploy TBA
+          </Button>
+        </DialogTrigger>
+
+        <DialogContent title="Deploy TBA">
+          <DeployTBAInstructions
+            contractAddress={contractAddress}
+            tokenId={tokenId}
+            daoChain={daoChain as ValidNetwork}
+          />
+        </DialogContent>
+      </Dialog>
     );
 
   return (

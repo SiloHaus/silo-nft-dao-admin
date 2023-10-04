@@ -6,7 +6,6 @@ import {
   useDaoData,
   useDaoMember,
 } from "@daohaus/moloch-v3-hooks";
-import { MemberProfileCard } from "@daohaus/moloch-v3-macro-ui";
 import {
   ParLg,
   SingleColumnLayout,
@@ -24,11 +23,12 @@ import { DelegateButton } from "../components/DelegateButton";
 import { useTba, useTbaMember } from "../hooks/useTba";
 import { TbaProfile } from "../components/TbaProfile";
 import { EthAddress } from "@daohaus/utils";
+import { MemberProfileCard } from "../components/MemberProfileCard";
 
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 64rem;
+  width: 100%;
   margin-bottom: 3rem;
   @media ${widthQuery.md} {
     max-width: 100%;
@@ -89,21 +89,22 @@ export const Member = () => {
       {!member && isFetched && <NonMemberCard address={memberAddress} />}
 
       <>
-        {member && member.memberAddress && (
-          <>
-            {isDeployed && address && <TbaProfile tbaAddress={address} />}
-            <MemberProfileCard
-              daoChain={daoChain}
-              daoId={daoId}
-              member={member}
-            />
-          </>
-        )}
+        {member &&
+          member.memberAddress && (
+            <>
+              {isDeployed && address && <TbaProfile tbaAddress={address} />}
+              <MemberProfileCard
+                daoChain={daoChain}
+                daoId={daoId}
+                member={member}
+              />
+            </>
+          )}
 
-        {address && (
+        {memberAddress && (
           <ProfileNftList
             dao={dao}
-            address={address}
+            address={memberAddress}
             daoChain={daoChain}
             isHolder={isConnectedMember}
           />

@@ -23,6 +23,8 @@ import { DelegateTBA } from "./DelegateTBA";
 import { useState } from "react";
 import { NftImageDetails } from "./NftImageDetails";
 
+import { MdOutlineOpenInNew } from "react-icons/md";
+
 const ClaimLink = styled(RouterLink)`
   text-decoration: none;
   font-weight: 600;
@@ -49,6 +51,26 @@ const NftCardImage = styled.img`
   border-radius: ${({ theme }) => theme.card.radius};
   object-fit: cover;
   cursor: pointer;
+`;
+
+const NftCardImageOverlay = styled.div`
+
+    display: flex;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    font-size: 2rem;
+    border-radius: ${({ theme }) => theme.card.radius};
+    opacity: 0.7;
+  
+`;
+
+const NftCardImageWrapper = styled.div`
+  position: relative;
+  width: 25rem;
+  height: 25rem;
+  margin: 0 auto;
 `;
 
 const NamePar = styled(ParSm)`
@@ -101,7 +123,10 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
     <CardContainer>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <NftCardImage src={nft.tokenMetadata?.image} />
+          <NftCardImageWrapper>
+            <NftCardImage src={nft.tokenMetadata?.image} />
+            <NftCardImageOverlay> <MdOutlineOpenInNew /> </NftCardImageOverlay>
+          </NftCardImageWrapper>
         </DialogTrigger>
         <DialogContent title="TBA Details">
           <NftImageDetails
@@ -112,53 +137,55 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
           />
         </DialogContent>
       </Dialog>
-      <CardLower>
-        <NamePar>{`${nft.contractInfo?.name} #${nft.tokenID}`}</NamePar>
-        {isClaim && dao && (
-          <LowerSection>
-            <NftCardClaimSection
-              dao={dao}
-              nft={nft}
-              shamanAddress={shamanAddress as EthAddress}
-            />
-          </LowerSection>
-        )}
-
-        {!isClaim && isClaimed && (
-          <LowerSection>
-            {tba && <AddressDisplay address={tba} truncate copy />}
-            <ActionButton>
-              <ConnectTBAButton
-                tokenId={nft.tokenID}
-                contractAddress={nft.contractAddress}
+      {isHolder && (
+        <CardLower>
+          <NamePar>{`${nft.contractInfo?.name} #${nft.tokenID}`}</NamePar>
+          {isClaim && dao && (
+            <LowerSection>
+              <NftCardClaimSection
+                dao={dao}
+                nft={nft}
+                shamanAddress={shamanAddress as EthAddress}
               />
+            </LowerSection>
+          )}
 
-              <DelegateTBA
-                tokenId={nft.tokenID}
-                contractAddress={nft.contractAddress}
-              />
-            </ActionButton>
-          </LowerSection>
-        )}
-        {!isClaim && !isClaimed && (
-          <LowerSection>
-            <ParSm>Not Claimed</ParSm>
-            <ClaimLink to={`/molochv3/${daoChain}/${dao?.id}/claim`}>
-              <Button
-                color="secondary"
-                variant="outline"
-                size="sm"
-                fullWidth
-                onClick={() => {
-                  console.log("claiming");
-                }}
-              >
-                Check Claim
-              </Button>
-            </ClaimLink>
-          </LowerSection>
-        )}
-      </CardLower>
+          {!isClaim && isClaimed && (
+            <LowerSection>
+              {tba && <AddressDisplay address={tba} truncate copy />}
+              <ActionButton>
+                <ConnectTBAButton
+                  tokenId={nft.tokenID}
+                  contractAddress={nft.contractAddress}
+                />
+
+                <DelegateTBA
+                  tokenId={nft.tokenID}
+                  contractAddress={nft.contractAddress}
+                />
+              </ActionButton>
+            </LowerSection>
+          )}
+          {!isClaim && !isClaimed && (
+            <LowerSection>
+              <ParSm>Not Claimed</ParSm>
+              <ClaimLink to={`/molochv3/${daoChain}/${dao?.id}/claim`}>
+                <Button
+                  color="secondary"
+                  variant="outline"
+                  size="sm"
+                  fullWidth
+                  onClick={() => {
+                    console.log("claiming");
+                  }}
+                >
+                  Check Claim
+                </Button>
+              </ClaimLink>
+            </LowerSection>
+          )}
+        </CardLower>
+      )}
     </CardContainer>
   );
 };
