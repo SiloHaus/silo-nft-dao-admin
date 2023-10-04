@@ -9,6 +9,7 @@ import { useClaimShaman } from "../hooks/useClaimShaman";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 
 const ListContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   column-gap: 4rem;
