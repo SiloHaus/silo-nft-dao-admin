@@ -54,16 +54,14 @@ const NftCardImage = styled.img`
 `;
 
 const NftCardImageOverlay = styled.div`
-
-    display: flex;
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    right: 0;
-    font-size: 2rem;
-    border-radius: ${({ theme }) => theme.card.radius};
-    opacity: 0.7;
-  
+  display: flex;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+  border-radius: ${({ theme }) => theme.card.radius};
+  opacity: 0.7;
 `;
 
 const NftCardImageWrapper = styled.div`
@@ -125,7 +123,10 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
         <DialogTrigger asChild>
           <NftCardImageWrapper>
             <NftCardImage src={nft.tokenMetadata?.image} />
-            <NftCardImageOverlay> <MdOutlineOpenInNew /> </NftCardImageOverlay>
+            <NftCardImageOverlay>
+              {" "}
+              <MdOutlineOpenInNew />{" "}
+            </NftCardImageOverlay>
           </NftCardImageWrapper>
         </DialogTrigger>
         <DialogContent title="TBA Details">

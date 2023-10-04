@@ -1,15 +1,14 @@
-import styled from 'styled-components';
-import { ValidNetwork } from '@daohaus/keychain-utils';
-import { MolochV3Dao, MolochV3Member } from '@daohaus/moloch-v3-data';
-import { H5, DataXs, AddressDisplay, DataIndicator, ParMd } from '@daohaus/ui';
+import styled from "styled-components";
+import { ValidNetwork } from "@daohaus/keychain-utils";
+import { MolochV3Dao, MolochV3Member } from "@daohaus/moloch-v3-data";
+import { H5, DataXs, AddressDisplay, DataIndicator, ParMd } from "@daohaus/ui";
 import {
   AccountProfile,
   formatLongDateFromSeconds,
   formatValueTo,
   fromWei,
   votingPowerPercentage,
-} from '@daohaus/utils';
-
+} from "@daohaus/utils";
 
 import {
   AvatarLarge,
@@ -18,8 +17,11 @@ import {
   ProfileMetadataContainer,
   ProfileNameContainer,
   PSubContainer,
-} from './MemberProfileCard.styles';
-import { MemberProfileAvatar, MemberProfileMenu } from '@daohaus/moloch-v3-macro-ui';
+} from "./MemberProfileCard.styles";
+import {
+  MemberProfileAvatar,
+  MemberProfileMenu,
+} from "@daohaus/moloch-v3-macro-ui";
 
 export const Container = styled.div`
   display: flex;
@@ -59,14 +61,14 @@ export const MemberProfile = ({
       <PSubContainer>
         <ProfileMetadataContainer>
           <AvatarLarge
-            image={profile?.avatar || ''}
+            image={profile?.avatar || ""}
             size="lg"
             alt="profile image"
             address={profile.address}
           />
           <Container>
             <ProfileNameContainer>
-              {profile?.ens && <H5>{profile?.ens || ''}</H5>}
+              {profile?.ens && <H5>{profile?.ens || ""}</H5>}
             </ProfileNameContainer>
             {membership && (
               <AddressDisplay
@@ -100,11 +102,11 @@ export const MemberProfile = ({
               label="Delegated Power"
               data={formatValueTo({
                 value: votingPowerPercentage(
-                  dao?.totalShares || '0',
+                  dao?.totalShares || "0",
                   membership.delegateShares
                 ),
                 decimals: 2,
-                format: 'percent',
+                format: "percent",
               })}
             />
           </ProfileDataGrid>

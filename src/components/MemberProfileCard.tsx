@@ -1,11 +1,14 @@
-import { ValidNetwork } from '@daohaus/keychain-utils';
-import { MolochV3Member } from '@daohaus/moloch-v3-data';
-import { useDaoData, useProfile } from '@daohaus/moloch-v3-hooks';
-import { DataIndicator, ParLg, Loading } from '@daohaus/ui';
-import { formatValueTo, memberUsdValueShare } from '@daohaus/utils';
-import { AlertContainer, LoadingContainer, MProfileCard } from './MemberProfileCard.styles';
-import { MemberProfile } from './MemberProfile';
-
+import { ValidNetwork } from "@daohaus/keychain-utils";
+import { MolochV3Member } from "@daohaus/moloch-v3-data";
+import { useDaoData, useProfile } from "@daohaus/moloch-v3-hooks";
+import { DataIndicator, ParLg, Loading } from "@daohaus/ui";
+import { formatValueTo, memberUsdValueShare } from "@daohaus/utils";
+import {
+  AlertContainer,
+  LoadingContainer,
+  MProfileCard,
+} from "./MemberProfileCard.styles";
+import { MemberProfile } from "./MemberProfile";
 
 type MemberProfileCardProps = {
   daoChain: ValidNetwork;
@@ -27,7 +30,7 @@ export const MemberProfileCard = ({
     daoId,
   });
   const { profile: currentProfile, isLoading: isLoadingProfile } = useProfile({
-    address: member?.memberAddress || '',
+    address: member?.memberAddress || "",
   });
 
   if (

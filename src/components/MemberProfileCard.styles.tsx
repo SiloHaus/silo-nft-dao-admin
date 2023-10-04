@@ -1,5 +1,5 @@
-import { Link as RouterLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link as RouterLink } from "react-router-dom";
+import styled from "styled-components";
 
 import {
   breakpoints,
@@ -10,8 +10,8 @@ import {
   font,
   ProfileAvatar,
   widthQuery,
-} from '@daohaus/ui';
-import { indigoDark } from '@radix-ui/colors';
+} from "@daohaus/ui";
+import { indigoDark } from "@radix-ui/colors";
 
 export const MProfileCard = styled(Card)`
   width: 100%;
@@ -112,7 +112,7 @@ export const ProfileDataGrid = styled.div`
 export const ProfileMenuTrigger = styled(Button)`
   padding: 0 4px 0 4px;
 
-  &[data-state='open'] {
+  &[data-state="open"] {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }

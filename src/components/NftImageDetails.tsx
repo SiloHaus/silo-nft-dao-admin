@@ -103,7 +103,10 @@ export const NftImageDetails = ({
         {isClaimed ? (
           <>
             <ParMd>Power: {fromWei(tbaMember?.shares || "0")}</ParMd>
-            <ParMd>Meme Token: {fromWei(tbaMember?.loot || "0")} {dao?.lootTokenSymbol}</ParMd>
+            <ParMd>
+              Meme Token: {fromWei(tbaMember?.loot || "0")}{" "}
+              {dao?.lootTokenSymbol}
+            </ParMd>
             <ParMd>Delegating To:</ParMd>
             {tbaMember?.delegatingTo && (
               <AddressDisplay address={tbaMember.delegatingTo} truncate />
