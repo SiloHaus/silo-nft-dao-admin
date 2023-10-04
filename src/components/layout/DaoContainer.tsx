@@ -83,6 +83,7 @@ const Dao = ({
       }
     >
       <CurrentDaoProvider
+        userAddress={address}
         targetDao={{
           daoChain: daoChain,
           daoId: daoId,
