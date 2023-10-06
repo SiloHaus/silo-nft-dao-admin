@@ -23,7 +23,7 @@ import { DelegateButton } from "../components/DelegateButton";
 import { useTba, useTbaMember } from "../hooks/useTba";
 import { TbaProfile } from "../components/TbaProfile";
 import { EthAddress } from "@daohaus/utils";
-import { MemberProfileCard } from "../components/MemberProfileCard";
+import { ProfileCard } from "../components/ProfileCard";
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -62,9 +62,10 @@ export const Member = () => {
   const isMobile = useBreakpoint(widthQuery.sm);
 
   if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
+  if (!memberAddress) return <ParLg>Account Not Found</ParLg>;
 
   const isConnectedMember =
-    member?.memberAddress.toLowerCase() === address?.toLowerCase();
+    memberAddress.toLowerCase() === address?.toLowerCase();
 
   if (!dao || !daoChain) return <Loading />;
 
@@ -86,20 +87,20 @@ export const Member = () => {
         )}
       </ButtonsContainer>
       {!member && isFetching && <Loading size={12} />}
-      {!member && isFetched && <NonMemberCard address={memberAddress} />}
+      {/* {!member && isFetched && <NonMemberCard address={memberAddress} />} */}
 
       <>
-        {member &&
-          member.memberAddress && (
-            <>
-              {isDeployed && address && <TbaProfile tbaAddress={address} />}
-              <MemberProfileCard
-                daoChain={daoChain}
-                daoId={daoId}
-                member={member}
-              />
-            </>
-          )}
+        {memberAddress && (
+          <>
+            {isDeployed && address && <TbaProfile tbaAddress={address} />}
+            <ProfileCard
+              daoChain={daoChain}
+              daoId={daoId}
+              member={member}
+              profileAddress={memberAddress}
+            />
+          </>
+        )}
 
         {memberAddress && (
           <ProfileNftList
