@@ -7,34 +7,38 @@ import {
   AlertContainer,
   LoadingContainer,
   MProfileCard,
-} from "./MemberProfileCard.styles";
-import { MemberProfile } from "./MemberProfile";
+} from "./ProfileCard.styles";
+import { Profile } from "./Profile";
 
-type MemberProfileCardProps = {
+type ProfileCardProps = {
   daoChain: ValidNetwork;
   daoId: string;
-  member: MolochV3Member;
+  profileAddress: string;
+  member?: MolochV3Member;
   allowLinks?: boolean;
   allowMemberMenu?: boolean;
 };
 
-export const MemberProfileCard = ({
+export const ProfileCard = ({
   daoChain,
   daoId,
+  profileAddress,
   member,
   allowLinks = false,
   allowMemberMenu = false,
-}: MemberProfileCardProps) => {
+}: ProfileCardProps) => {
   const { dao, isLoading: isLoadingDao } = useDaoData({
     daoChain,
     daoId,
   });
   const { profile: currentProfile, isLoading: isLoadingProfile } = useProfile({
-    address: member?.memberAddress || "",
+    address: member?.memberAddress || profileAddress || "",
   });
 
+  console.log("currentProfile", currentProfile);
+
   if (
-    !member ||
+    // !member ||
     (!dao && !isLoadingDao) ||
     (!currentProfile && !isLoadingProfile)
   )
@@ -46,14 +50,18 @@ export const MemberProfileCard = ({
 
   return (
     <MProfileCard>
-      {(!dao || !member || !currentProfile) && (
+      {(!dao || 
+      // !member || 
+      !currentProfile) && (
         <LoadingContainer>
           <Loading size={120} />
         </LoadingContainer>
       )}
-      {dao && member && currentProfile && (
+      {dao && 
+      // member && 
+      currentProfile && (
         <>
-          <MemberProfile
+          <Profile
             daoChain={daoChain}
             dao={dao}
             profile={currentProfile}

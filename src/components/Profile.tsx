@@ -17,7 +17,7 @@ import {
   ProfileMetadataContainer,
   ProfileNameContainer,
   PSubContainer,
-} from "./MemberProfileCard.styles";
+} from "./ProfileCard.styles";
 import {
   MemberProfileAvatar,
   MemberProfileMenu,
@@ -43,12 +43,12 @@ type ProfileProps = {
   daoChain: ValidNetwork;
   dao: MolochV3Dao;
   profile: AccountProfile;
-  membership: MolochV3Member;
+  membership?: MolochV3Member;
   allowLinks?: boolean;
   allowMemberMenu?: boolean;
 };
 
-export const MemberProfile = ({
+export const Profile = ({
   daoChain,
   dao,
   profile,
@@ -70,13 +70,19 @@ export const MemberProfile = ({
             <ProfileNameContainer>
               {profile?.ens && <H5>{profile?.ens || ""}</H5>}
             </ProfileNameContainer>
-            {membership && (
+            {profile.address && (
               <AddressDisplay
-                address={membership.memberAddress}
+                address={membership?.memberAddress || profile.address}
                 truncate
                 textOverride={profile?.ens}
                 copy
               />
+            )}
+            {!membership && (
+              <>
+              <ParMd className="warn">DAO Profile Not Found</ParMd>
+              <ParMd className="warn">Delegate Power to this account to participate.</ParMd>
+              </>
             )}
             {membership && (
               <DataXs as="span">
@@ -89,7 +95,7 @@ export const MemberProfile = ({
           <MemberProfileMenu
             daoChain={daoChain}
             daoId={dao.id}
-            memberAddress={membership.memberAddress}
+            memberAddress={membership.memberAddress || profile.address}
             allowLinks={allowLinks}
             allowMemberMenu={allowMemberMenu}
           />
