@@ -1,31 +1,15 @@
-import { Outlet, useParams } from "react-router-dom";
-import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 import { DaoHausNav, useDHConnect } from "@daohaus/connect";
 import { TXBuilder } from "@daohaus/tx-builder";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import { CurrentDaoProvider, useDaoData } from "@daohaus/moloch-v3-hooks";
-import {
-  BiColumnLayout,
-  Card,
-  Footer,
-  MainLayout,
-  OuterLayout,
-} from "@daohaus/ui";
-import { MDaoProfile } from "../mini/MDaoProfile";
+import { MainLayout, OuterLayout } from "@daohaus/ui";
+
+import { Claim } from "../../pages/Claim";
 import { Header } from "./SharedLayout";
 
-const ColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const MDaoMembers = styled(Card)`
-  width: 14.4rem;
-  height: 51.2rem;
-`;
-
-export const MDaoContainer = () => {
+export const ClaimContainer = () => {
   const { proposalId, memberAddress, daoChain, daoId } = useParams<{
     daoChain: ValidNetwork;
     daoId: string;
@@ -36,7 +20,7 @@ export const MDaoContainer = () => {
   if (!daoId || !daoChain) return null;
 
   return (
-    <Dao
+    <ClaimGuts
       daoId={daoId}
       daoChain={daoChain}
       proposalId={proposalId}
@@ -45,7 +29,7 @@ export const MDaoContainer = () => {
   );
 };
 
-const Dao = ({
+const ClaimGuts = ({
   daoId,
   daoChain,
   proposalId,
@@ -61,6 +45,8 @@ const Dao = ({
     daoId: daoId as string,
     daoChain: daoChain as string,
   });
+
+  if (!dao) return null;
 
   return (
     <CurrentDaoProvider
@@ -86,27 +72,8 @@ const Dao = ({
           </Header>
 
           <MainLayout>
-            <BiColumnLayout
-              left={
-                dao &&
-                daoChain && (
-                  <ColumnContainer>
-                    <MDaoProfile dao={dao} daoChain={daoChain} />
-                    <MDaoMembers />
-                  </ColumnContainer>
-                )
-              }
-              right={
-                dao &&
-                daoChain && (
-                  <ColumnContainer>
-                    <Outlet />
-                  </ColumnContainer>
-                )
-              }
-            ></BiColumnLayout>
+            <Claim dao={dao} />
           </MainLayout>
-          <Footer />
         </OuterLayout>
       </TXBuilder>
     </CurrentDaoProvider>

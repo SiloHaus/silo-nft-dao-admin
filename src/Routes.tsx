@@ -26,8 +26,7 @@ import UpdateSettings from "./pages/UpdateSettings";
 import NewProposal from "./pages/NewProposal";
 import { MDaoContainer } from "./components/layout/MDaoContainer";
 import { MDao } from "./components/mini/MDao";
-
-const MINI_DAO_ROUTER = "mini/molochv3/:daoChain/:daoId";
+import { ClaimContainer } from "./components/layout/ClaimContainer";
 
 export const Routes = ({
   setDaoChainId,
@@ -54,13 +53,9 @@ export const Routes = ({
       <Route path="/" element={<HomeContainer />}>
         <Route path="/" element={<Home />} />
       </Route>
-      <Route path={MINI_DAO_ROUTER} element={<MDaoContainer />}>
+      <Route path={`${MULTI_DAO_ROUTER}/claim`} element={<ClaimContainer />} />
+      <Route path={MULTI_DAO_ROUTER} element={<MDaoContainer />}>
         <Route index element={<MDao />} />
-      </Route>
-      <Route path={MULTI_DAO_ROUTER} element={<DaoContainer />}>
-        <Route index element={<Dao />} />
-        <Route path="claim" element={<Claim />} />
-        <Route path="formtest" element={<FormTest />} />
         <Route path="safes" element={<Safes />} />
         <Route path="settings" element={<Settings />} />
         <Route path="settings/update" element={<UpdateSettings />} />

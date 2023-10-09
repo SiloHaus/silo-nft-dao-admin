@@ -1,7 +1,11 @@
-import { AddressDisplay, Button, Card, H4, ProfileAvatar } from "@daohaus/ui";
 import styled from "styled-components";
+
+import { AddressDisplay, Card, H4, ProfileAvatar } from "@daohaus/ui";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 import { ValidNetwork } from "@daohaus/keychain-utils";
+import { useDHConnect } from "@daohaus/connect";
+
+import { ButtonRouterLink } from "../ButtonRouterLink";
 
 const MDaoOverview = styled(Card)`
   width: 14.4rem;
@@ -26,7 +30,8 @@ type MDaoProfileProps = {
 };
 
 export const MDaoProfile = ({ dao, daoChain }: MDaoProfileProps) => {
-  console.log("dao", dao);
+  const { address } = useDHConnect();
+
   return (
     <MDaoOverview>
       <DaoProfileAvatar image={dao.avatarImg} address={dao.id} />
@@ -37,9 +42,15 @@ export const MDaoProfile = ({ dao, daoChain }: MDaoProfileProps) => {
         copy
         explorerNetworkId={daoChain as ValidNetwork}
       />
-      <Button size="sm" color="secondary">
-        My Profile
-      </Button>
+      {address && (
+        <ButtonRouterLink
+          size="sm"
+          color="secondary"
+          to={`/molochV3/${daoChain}/${dao.id}/member/${address}`}
+        >
+          My Profile
+        </ButtonRouterLink>
+      )}
     </MDaoOverview>
   );
 };

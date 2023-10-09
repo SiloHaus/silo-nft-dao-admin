@@ -6,16 +6,16 @@ import { styled } from "styled-components";
 import { ClaimList } from "../components/ClaimList";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { useClaimShaman } from "../hooks/useClaimShaman";
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 
 const ContentContainer = styled.div`
   text-align: left;
   width: 100%;
 `;
 
-export const Claim = () => {
+export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
   const { address } = useDHConnect();
   const { daoChain } = useCurrentDao();
-  const { dao } = useDaoData();
   const { sdata } = useClaimShaman({
     dao,
     chainId: daoChain,
