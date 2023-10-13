@@ -16,7 +16,7 @@ import { useDHConnect } from "@daohaus/connect";
 
 import { ButtonRouterLink } from "../ButtonRouterLink";
 import { daoProfileHasLinks } from "../../utils/daoDataDisplayHelpers";
-import { SettingsLinkList } from "../layout/MetadataLinkLists";
+import { OverviewIconLinkList } from "../layout/MetadataLinkLists";
 
 const MDaoOverview = styled(Card)`
   margin-bottom: 3rem;
@@ -82,7 +82,9 @@ export const MDaoProfile = ({ dao, daoChain }: MDaoProfileProps) => {
         explorerNetworkId={daoChain as ValidNetwork}
       />
       <ParXs>{dao.description}</ParXs>
-      {daoProfileHasLinks(dao.links) && <SettingsLinkList links={dao.links} />}
+      {daoProfileHasLinks(dao.links) && (
+        <OverviewIconLinkList links={dao.links} />
+      )}
       {address && (
         <ButtonRouterLink
           size="sm"

@@ -10,6 +10,14 @@ import { ContractSettings } from "../components/ContractSettings";
 import { GovernanceSettings } from "../components/GovernanceSettings";
 import { ShamanSettings } from "../components/ShamanSettings";
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
+import styled from "styled-components";
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+`;
 
 export const Settings = () => {
   const { daoId, daoChain } = useCurrentDao();
@@ -17,14 +25,24 @@ export const Settings = () => {
 
   return (
     <>
-      <ButtonRouterLink
-        color="secondary"
-        variant="outline"
-        to={`/molochV3/${daoChain}/${daoId}`}
-        IconLeft={RiArrowLeftLine}
-      >
-        DAO
-      </ButtonRouterLink>
+      <ButtonRow>
+        <ButtonRouterLink
+          color="secondary"
+          variant="outline"
+          to={`/molochV3/${daoChain}/${daoId}`}
+          IconLeft={RiArrowLeftLine}
+        >
+          DAO
+        </ButtonRouterLink>
+        <ButtonRouterLink
+          color="secondary"
+          variant="outline"
+          to={`/molochV3/${daoChain}/${daoId}/claim`}
+          IconLeft={RiArrowLeftLine}
+        >
+          Claims
+        </ButtonRouterLink>
+      </ButtonRow>
       <SingleColumnLayout>
         {dao && (
           <>

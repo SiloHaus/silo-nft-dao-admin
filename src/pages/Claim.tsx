@@ -1,4 +1,5 @@
 import React from "react";
+import { RiArrowRightLine } from "react-icons/ri";
 
 import { ParMd, ParXl, SingleColumnLayout } from "@daohaus/ui";
 import { useDHConnect } from "@daohaus/connect";
@@ -7,6 +8,7 @@ import { ClaimList } from "../components/ClaimList";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 
 const ContentContainer = styled.div`
   text-align: left;
@@ -15,14 +17,24 @@ const ContentContainer = styled.div`
 
 export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
   const { address } = useDHConnect();
-  const { daoChain } = useCurrentDao();
+  const { daoChain, daoId } = useCurrentDao();
   const { sdata } = useClaimShaman({
     dao,
     chainId: daoChain,
   });
 
   return (
-    <SingleColumnLayout title="Claim Your Airdrop">
+    <SingleColumnLayout
+      title="Claim Your Airdrop"
+      actions={
+        <ButtonRouterLink
+          to={`/molochV3/${daoChain}/${daoId}`}
+          IconRight={RiArrowRightLine}
+        >
+          Go to DAO
+        </ButtonRouterLink>
+      }
+    >
       {!address && (
         <ContentContainer>
           <ParXl>SiloHaus RDF airdrop tool</ParXl>
