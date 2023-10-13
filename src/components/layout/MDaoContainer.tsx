@@ -14,6 +14,7 @@ import {
 } from "@daohaus/ui";
 import { MDaoProfile } from "../mini/MDaoProfile";
 import { Header } from "./SharedLayout";
+import { Brand } from "../mini/Brand";
 
 const ColumnContainer = styled.div`
   display: flex;
@@ -81,7 +82,7 @@ const Dao = ({
       >
         <OuterLayout>
           <Header>
-            <div className="left-nav">{<p>smilo</p>}</div>
+            <div className="left-nav">{<Brand />}</div>
             <DaoHausNav />
           </Header>
 

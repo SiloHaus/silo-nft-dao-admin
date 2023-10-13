@@ -1,17 +1,23 @@
+import { useMemo } from "react";
+
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
-import { SingleColumnLayout } from "@daohaus/ui";
+import { ProposalList, SafeCard } from "@daohaus/moloch-v3-macro-ui";
 
-import DaoOverview from "../components/DaoOverview";
-
-export function Dao() {
+export const Dao = () => {
   const { daoChain } = useCurrentDao();
   const { dao } = useDaoData();
 
-  return (
-    <SingleColumnLayout>
-      {daoChain && dao && <DaoOverview daoChain={daoChain} dao={dao} />}
-    </SingleColumnLayout>
-  );
-}
+  const targetVault = useMemo(() => {
+    if (!dao) return;
+    return dao.vaults.find((v) => v.safeAddress === dao?.safeAddress);
+  }, [dao]);
 
-export default Dao;
+  if (!daoChain || !dao || !targetVault) return null;
+
+  return (
+    <>
+      <SafeCard dao={dao} daoChain={daoChain} safe={targetVault} />
+      <ProposalList />
+    </>
+  );
+};

@@ -8,8 +8,6 @@ import {
 
 import { ReactSetter } from "@daohaus/utils";
 
-import Dao from "./pages/Dao";
-import { FormTest } from "./pages/FormTest";
 import { Home } from "./pages/Home";
 import { Safes } from "./pages/Safes";
 import { Settings } from "./pages/Settings";
@@ -20,13 +18,11 @@ import { Member } from "./pages/Member";
 import { TARGET_DAO } from "./targetDao";
 import { MULTI_DAO_ROUTER } from "@daohaus/moloch-v3-hooks";
 import { HomeContainer } from "./components/layout/HomeContainer";
-import { DaoContainer } from "./components/layout/DaoContainer";
-import { Claim } from "./pages/Claim";
 import UpdateSettings from "./pages/UpdateSettings";
 import NewProposal from "./pages/NewProposal";
 import { MDaoContainer } from "./components/layout/MDaoContainer";
-import { MDao } from "./components/mini/MDao";
 import { ClaimContainer } from "./components/layout/ClaimContainer";
+import { Dao } from "./pages/Dao";
 
 export const Routes = ({
   setDaoChainId,
@@ -55,7 +51,7 @@ export const Routes = ({
       </Route>
       <Route path={`${MULTI_DAO_ROUTER}/claim`} element={<ClaimContainer />} />
       <Route path={MULTI_DAO_ROUTER} element={<MDaoContainer />}>
-        <Route index element={<MDao />} />
+        <Route index element={<Dao />} />
         <Route path="safes" element={<Safes />} />
         <Route path="settings" element={<Settings />} />
         <Route path="settings/update" element={<UpdateSettings />} />
