@@ -9,7 +9,8 @@ export const Dao = () => {
 
   const targetVault = useMemo(() => {
     if (!dao) return;
-    return dao.vaults.find((v) => v.safeAddress === dao?.safeAddress);
+    //toggle for daos that use the treasury?
+    return dao.vaults.find((v) => v.safeAddress !== dao?.safeAddress);
   }, [dao]);
 
   if (!daoChain || !dao || !targetVault) return null;
@@ -17,7 +18,7 @@ export const Dao = () => {
   return (
     <>
       <SafeCard dao={dao} daoChain={daoChain} safe={targetVault} />
-      <ProposalList />
+      <ProposalList allowLinks={true} />
     </>
   );
 };

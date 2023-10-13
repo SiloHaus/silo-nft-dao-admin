@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { RiArrowLeftLine } from "react-icons/ri";
 
 import { FormBuilder } from "@daohaus/form-builder";
 import { COMMON_FORMS } from "@daohaus/moloch-v3-legos";
@@ -7,6 +8,7 @@ import { MolochV3Dao } from "@daohaus/moloch-v3-data";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 
 import { AppFieldLookup } from "../legos/legoConfig";
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 
 export const formatDaoProfileForForm = (dao: MolochV3Dao) => {
   const links = dao?.links || [];
@@ -54,17 +56,27 @@ export function UpdateSettings() {
   }
 
   return (
-    <FormBuilder
-      defaultValues={defaultFields}
-      form={{ ...COMMON_FORMS.METADATA_SETTINGS }}
-      customFields={AppFieldLookup}
-      targetNetwork={daoChain}
-      lifeCycleFns={{
-        onPollSuccess: () => {
-          onFormComplete();
-        },
-      }}
-    />
+    <>
+      <ButtonRouterLink
+        color="secondary"
+        variant="outline"
+        to={`/molochV3/${daoChain}/${daoId}`}
+        IconLeft={RiArrowLeftLine}
+      >
+        DAO
+      </ButtonRouterLink>
+      <FormBuilder
+        defaultValues={defaultFields}
+        form={{ ...COMMON_FORMS.METADATA_SETTINGS }}
+        customFields={AppFieldLookup}
+        targetNetwork={daoChain}
+        lifeCycleFns={{
+          onPollSuccess: () => {
+            onFormComplete();
+          },
+        }}
+      />
+    </>
   );
 }
 

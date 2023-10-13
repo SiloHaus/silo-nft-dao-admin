@@ -1,12 +1,38 @@
-import { useMemo } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
+import { styled } from "styled-components";
 
-import { DHLayout, useDHConnect } from "@daohaus/connect";
+import { DaoHausNav, useDHConnect } from "@daohaus/connect";
 import { TXBuilder } from "@daohaus/tx-builder";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import { CurrentDaoProvider, useDaoData } from "@daohaus/moloch-v3-hooks";
+import { Card, Footer, MainLayout, OuterLayout, widthQuery } from "@daohaus/ui";
+import { Header } from "./SharedLayout";
+import { Brand } from "../Brand";
+import { BiColumnLayout } from "./BiColumnLayout/BiColumnLayout";
+import { DaoProfile } from "../DaoProfile";
 
-import { HeaderAvatar } from "../HeaderAvatar";
+const LeftColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  @media ${widthQuery.sm} {
+    width: 100%;
+  }
+`;
+
+const RightColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  @media ${widthQuery.sm} {
+    width: 100%;
+  }
+`;
+
+const MDaoMembers = styled(Card)`
+  width: 14.4rem;
+  height: 51.2rem;
+`;
 
 export const DaoContainer = () => {
   const { proposalId, memberAddress, daoChain, daoId } = useParams<{
@@ -39,68 +65,59 @@ const Dao = ({
   proposalId?: string;
   memberAddress?: string;
 }) => {
-  const location = useLocation();
-
   const { publicClient, address } = useDHConnect();
   const { dao } = useDaoData({
     daoId: daoId as string,
     daoChain: daoChain as string,
   });
 
-  const routePath = `molochv3/${daoChain}/${daoId}`;
-
-  const navLinks = useMemo(() => {
-    let baseLinks = [
-      { label: "Claim", href: `/${routePath}/claim` },
-      { label: "DAO", href: `/${routePath}` },
-      { label: "Safes", href: `/${routePath}/safes` },
-      { label: "Proposals", href: `/${routePath}/proposals` },
-      { label: "Members", href: `/${routePath}/members` },
-      { label: "Settings", href: `/${routePath}/settings` },
-    ];
-
-    return address
-      ? [
-          ...baseLinks,
-          { label: "Profile", href: `/${routePath}/member/${address}` },
-        ]
-      : baseLinks;
-  }, [daoChain, daoId, address]);
-
   return (
-    <DHLayout
-      pathname={location.pathname}
-      navLinks={navLinks}
-      leftNav={
-        dao?.name &&
-        dao?.id && (
-          <HeaderAvatar
-            name={dao.name}
-            address={dao.id}
-            imgUrl={dao?.avatarImg}
-          />
-        )
-      }
+    <CurrentDaoProvider
+      userAddress={address}
+      targetDao={{
+        daoChain: daoChain,
+        daoId: daoId,
+        proposalId,
+        memberAddress,
+      }}
     >
-      <CurrentDaoProvider
-        userAddress={address}
-        targetDao={{
-          daoChain: daoChain,
-          daoId: daoId,
-          proposalId,
-          memberAddress,
-        }}
+      <TXBuilder
+        publicClient={publicClient}
+        chainId={daoChain}
+        daoId={daoId}
+        safeId={dao?.safeAddress}
+        appState={{ dao, memberAddress: address }}
       >
-        <TXBuilder
-          publicClient={publicClient}
-          chainId={daoChain}
-          daoId={daoId}
-          safeId={dao?.safeAddress}
-          appState={{ dao, memberAddress: address }}
-        >
-          <Outlet />
-        </TXBuilder>
-      </CurrentDaoProvider>
-    </DHLayout>
+        <OuterLayout>
+          <Header>
+            <div className="left-nav">{<Brand />}</div>
+            <DaoHausNav />
+          </Header>
+
+          <MainLayout>
+            <BiColumnLayout
+              left={
+                dao &&
+                daoChain && (
+                  <LeftColumnContainer>
+                    <DaoProfile dao={dao} daoChain={daoChain} />
+                    <MDaoMembers />
+                  </LeftColumnContainer>
+                )
+              }
+              right={
+                dao &&
+                daoChain && (
+                  <RightColumnContainer>
+                    <Outlet />
+                  </RightColumnContainer>
+                )
+              }
+            ></BiColumnLayout>
+          </MainLayout>
+          <Footer />
+        </OuterLayout>
+      </TXBuilder>
+    </CurrentDaoProvider>
   );
 };

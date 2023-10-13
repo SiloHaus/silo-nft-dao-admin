@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { RiArrowLeftLine } from "react-icons/ri";
 
 import { FormBuilder } from "@daohaus/form-builder";
 import {
@@ -10,6 +11,7 @@ import {
 
 import { ALL_APP_FORMS, AppFieldLookup } from "../legos/legoConfig";
 import { getFormLegoByIdApp } from "../utils/formHelpers";
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 
 export function NewProposal() {
   const location = useLocation();
@@ -46,17 +48,27 @@ export function NewProposal() {
   if (!formLego) return null;
 
   return (
-    <FormBuilder
-      form={formLego}
-      defaultValues={defaults}
-      customFields={AppFieldLookup}
-      lifeCycleFns={{
-        onPollSuccess: () => {
-          onFormComplete();
-        },
-      }}
-      targetNetwork={daoChain}
-    />
+    <>
+      <ButtonRouterLink
+        color="secondary"
+        variant="outline"
+        to={`/molochV3/${daoChain}/${daoId}`}
+        IconLeft={RiArrowLeftLine}
+      >
+        DAO
+      </ButtonRouterLink>
+      <FormBuilder
+        form={formLego}
+        defaultValues={defaults}
+        customFields={AppFieldLookup}
+        lifeCycleFns={{
+          onPollSuccess: () => {
+            onFormComplete();
+          },
+        }}
+        targetNetwork={daoChain}
+      />
+    </>
   );
 }
 

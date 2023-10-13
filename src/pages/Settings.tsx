@@ -1,22 +1,29 @@
 import React from "react";
+import styled from "styled-components";
 import { RiArrowLeftLine } from "react-icons/ri";
 
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { SingleColumnLayout } from "@daohaus/ui";
-import { MetadataSettings } from "@daohaus/moloch-v3-macro-ui";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 
 import { ContractSettings } from "../components/ContractSettings";
 import { GovernanceSettings } from "../components/GovernanceSettings";
 import { ShamanSettings } from "../components/ShamanSettings";
 import { ButtonRouterLink } from "../components/ButtonRouterLink";
-import styled from "styled-components";
+import { MetadataSettings } from "../components/MetadataSettings";
 
 const ButtonRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 3rem;
+`;
+
+export const ColumnBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
 `;
 
 export const Settings = () => {

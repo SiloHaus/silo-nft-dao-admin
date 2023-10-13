@@ -20,7 +20,7 @@ import { MULTI_DAO_ROUTER } from "@daohaus/moloch-v3-hooks";
 import { HomeContainer } from "./components/layout/HomeContainer";
 import UpdateSettings from "./pages/UpdateSettings";
 import NewProposal from "./pages/NewProposal";
-import { MDaoContainer } from "./components/layout/MDaoContainer";
+import { DaoContainer } from "./components/layout/DaoContainer";
 import { ClaimContainer } from "./components/layout/ClaimContainer";
 import { Dao } from "./pages/Dao";
 
@@ -50,7 +50,7 @@ export const Routes = ({
         <Route path="/" element={<Home />} />
       </Route>
       <Route path={`${MULTI_DAO_ROUTER}/claim`} element={<ClaimContainer />} />
-      <Route path={MULTI_DAO_ROUTER} element={<MDaoContainer />}>
+      <Route path={MULTI_DAO_ROUTER} element={<DaoContainer />}>
         <Route index element={<Dao />} />
         <Route path="safes" element={<Safes />} />
         <Route path="settings" element={<Settings />} />

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import siloLogo from "../../assets/silo-logo.png";
+import siloLogo from "../assets/silo-logo.png";
 
 const ImageContainer = styled.div`
   display: flex;

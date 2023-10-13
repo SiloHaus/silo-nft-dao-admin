@@ -18,7 +18,7 @@ const ButtonLink = styled(Link)`
 `;
 
 export const SettingsContainer = styled(Card)`
-  width: 110rem;
+  /* width: 110rem; */
   padding: 3rem;
   border: none;
   margin-bottom: 3rem;
