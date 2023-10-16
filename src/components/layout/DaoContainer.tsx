@@ -10,11 +10,12 @@ import { Header } from "./SharedLayout";
 import { Brand } from "../Brand";
 import { BiColumnLayout } from "./BiColumnLayout/BiColumnLayout";
 import { DaoProfile } from "../DaoProfile";
+import { NftDaoMemberList } from "../NftDaoMemberList";
 
 const LeftColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 33%;
   @media ${widthQuery.sm} {
     width: 100%;
   }
@@ -23,15 +24,10 @@ const LeftColumnContainer = styled.div`
 const RightColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 67%;
   @media ${widthQuery.sm} {
     width: 100%;
   }
-`;
-
-const MDaoMembers = styled(Card)`
-  width: 14.4rem;
-  height: 51.2rem;
 `;
 
 export const DaoContainer = () => {
@@ -101,7 +97,7 @@ const Dao = ({
                 daoChain && (
                   <LeftColumnContainer>
                     <DaoProfile dao={dao} daoChain={daoChain} />
-                    <MDaoMembers />
+                    <NftDaoMemberList />
                   </LeftColumnContainer>
                 )
               }

@@ -27,9 +27,7 @@ const MDaoOverview = styled(Card)`
   gap: 1.1rem;
   border: none;
   text-align: center;
-  @media ${widthQuery.md} {
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 export const DaoProfileAvatar = styled(ProfileAvatar)`
