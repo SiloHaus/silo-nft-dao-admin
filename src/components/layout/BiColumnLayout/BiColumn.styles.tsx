@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const BiColumnBox = styled.div`
   margin-top: 5rem;
   width: 100%;
-  max-width: 110rem;
+  max-width: 140rem;
   .subtitle {
     margin-bottom: 1.2rem;
     opacity: 0.6;

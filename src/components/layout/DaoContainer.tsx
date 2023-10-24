@@ -15,7 +15,7 @@ import { NftDaoMemberList } from "../NftDaoMemberList";
 const LeftColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 25%;
   @media ${widthQuery.sm} {
     width: 100%;
   }
@@ -24,7 +24,7 @@ const LeftColumnContainer = styled.div`
 const RightColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 67%;
+  width: 75%;
   @media ${widthQuery.sm} {
     width: 100%;
   }
