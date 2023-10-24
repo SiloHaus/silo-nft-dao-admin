@@ -58,7 +58,6 @@ export const Routes = ({
         <Route path="proposals" element={<Proposals />} />
         <Route path="proposal/:proposalId" element={<Proposal />} />
         <Route path="new-proposal" element={<NewProposal />} />
-        <Route path="members" element={<Members />} />
         <Route path="member/:memberAddress" element={<Member />} />
       </Route>
     </Router>

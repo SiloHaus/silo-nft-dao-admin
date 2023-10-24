@@ -1,5 +1,6 @@
 import { BsArrowLeft } from "react-icons/bs";
 import styled from "styled-components";
+import { RiArrowLeftLine } from "react-icons/ri";
 
 import {
   useCurrentDao,
@@ -47,6 +48,13 @@ const StyledArrowLeft = styled(BsArrowLeft)`
   width: 1.6rem;
 `;
 
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+`;
+
 export const Member = () => {
   const { isFetched, isFetching, member } = useDaoMember();
   const { address } = useDHConnect();
@@ -70,47 +78,49 @@ export const Member = () => {
   if (!dao || !daoChain) return <Loading />;
 
   return (
-    <SingleColumnLayout>
-      <ButtonsContainer>
+    <>
+      <ButtonRow>
         <ButtonRouterLink
-          to={`/molochv3/${daoChain}/${daoId}/members`}
+          to={`/molochv3/${daoChain}/${daoId}`}
           IconLeft={StyledArrowLeft}
           color="secondary"
           linkType="no-icon-external"
           variant="outline"
           fullWidth={isMobile}
         >
-          MEMBERS
+          DAO
         </ButtonRouterLink>
         {isConnectedMember && member && Number(member.shares) > 0 && (
           <DelegateButton />
         )}
-      </ButtonsContainer>
-      {!member && isFetching && <Loading size={12} />}
-      {/* {!member && isFetched && <NonMemberCard address={memberAddress} />} */}
+      </ButtonRow>
+      <SingleColumnLayout>
+        {!member && isFetching && <Loading size={12} />}
+        {/* {!member && isFetched && <NonMemberCard address={memberAddress} />} */}
 
-      <>
-        {memberAddress && (
-          <>
-            {isDeployed && address && <TbaProfile tbaAddress={address} />}
-            <ProfileCard
+        <>
+          {memberAddress && (
+            <>
+              {isDeployed && address && <TbaProfile tbaAddress={address} />}
+              <ProfileCard
+                daoChain={daoChain}
+                daoId={daoId}
+                member={member}
+                profileAddress={memberAddress}
+              />
+            </>
+          )}
+
+          {memberAddress && (
+            <ProfileNftList
+              dao={dao}
+              address={memberAddress}
               daoChain={daoChain}
-              daoId={daoId}
-              member={member}
-              profileAddress={memberAddress}
+              isHolder={isConnectedMember}
             />
-          </>
-        )}
-
-        {memberAddress && (
-          <ProfileNftList
-            dao={dao}
-            address={memberAddress}
-            daoChain={daoChain}
-            isHolder={isConnectedMember}
-          />
-        )}
-      </>
-    </SingleColumnLayout>
+          )}
+        </>
+      </SingleColumnLayout>
+    </>
   );
 };
