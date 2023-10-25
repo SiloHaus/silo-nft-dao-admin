@@ -51,13 +51,13 @@ export const ClaimButton = ({
           const errMsg = handleErrorMessage({
             error,
           });
-          errorToast({ title: "Claim Failed", description: errMsg });
+          errorToast({ title: "Activation Failed", description: errMsg });
           setIsLoading(false);
         },
         onTxSuccess() {
           successToast({
             title: TxStates.Success,
-            description: `Successful Claim.`,
+            description: `Successful Activation.`,
           });
           setIsLoading(false);
           refetch();
@@ -75,7 +75,7 @@ export const ClaimButton = ({
       disabled={isClaimed || isLoading || mismatchedChain}
       isLoading={isLoading}
     >
-      {isClaimed ? "Claimed" : "Claim"}
+      {isClaimed ? "Activated" : "Activate"}
     </Button>
   );
 };

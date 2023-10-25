@@ -25,7 +25,7 @@ export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
 
   return (
     <SingleColumnLayout
-      title="Claim Your Airdrop"
+      title="Activate Your Avatar"
       actions={
         <ButtonRouterLink
           to={`/molochV3/${daoChain}/${daoId}`}
@@ -38,7 +38,7 @@ export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
       {!address && (
         <ContentContainer>
           <ParXl>SiloHaus RDF airdrop tool</ParXl>
-          <ParMd>Connect your wallet to see your available claims.</ParMd>
+          <ParMd>Connect your wallet to see your available avatars.</ParMd>
         </ContentContainer>
       )}
       {address && daoChain && sdata?.nft.result && (

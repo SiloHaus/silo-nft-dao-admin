@@ -44,10 +44,10 @@ export const Settings = () => {
         <ButtonRouterLink
           color="secondary"
           variant="outline"
-          to={`/molochV3/${daoChain}/${daoId}/claim`}
+          to={`/molochV3/${daoChain}/${daoId}/activate`}
           IconLeft={RiArrowLeftLine}
         >
-          Claims
+          Activations
         </ButtonRouterLink>
       </ButtonRow>
       <SingleColumnLayout>

@@ -9,11 +9,9 @@ import {
 import { ReactSetter } from "@daohaus/utils";
 
 import { Home } from "./pages/Home";
-import { Safes } from "./pages/Safes";
 import { Settings } from "./pages/Settings";
 import { Proposals } from "./pages/Proposals";
 import { Proposal } from "./pages/Proposal";
-import { Members } from "./pages/Members";
 import { Member } from "./pages/Member";
 import { TARGET_DAO } from "./targetDao";
 import { MULTI_DAO_ROUTER } from "@daohaus/moloch-v3-hooks";
@@ -49,10 +47,12 @@ export const Routes = ({
       <Route path="/" element={<HomeContainer />}>
         <Route path="/" element={<Home />} />
       </Route>
-      <Route path={`${MULTI_DAO_ROUTER}/claim`} element={<ClaimContainer />} />
+      <Route
+        path={`${MULTI_DAO_ROUTER}/activate`}
+        element={<ClaimContainer />}
+      />
       <Route path={MULTI_DAO_ROUTER} element={<DaoContainer />}>
         <Route index element={<Dao />} />
-        <Route path="safes" element={<Safes />} />
         <Route path="settings" element={<Settings />} />
         <Route path="settings/update" element={<UpdateSettings />} />
         <Route path="proposals" element={<Proposals />} />

@@ -8,6 +8,7 @@ import { MainLayout, OuterLayout } from "@daohaus/ui";
 
 import { Claim } from "../../pages/Claim";
 import { Header } from "./SharedLayout";
+import { Brand } from "../Brand";
 
 export const ClaimContainer = () => {
   const { proposalId, memberAddress, daoChain, daoId } = useParams<{
@@ -67,7 +68,7 @@ const ClaimGuts = ({
       >
         <OuterLayout>
           <Header>
-            <div className="left-nav">{<p>smilo</p>}</div>
+            <div className="left-nav">{<Brand />}</div>
             <DaoHausNav />
           </Header>
 
