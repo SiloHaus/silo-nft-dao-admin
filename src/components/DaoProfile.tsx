@@ -1,119 +1,98 @@
-import { useMemo } from "react";
-import { charLimit } from "@daohaus/utils";
-import { Keychain } from "@daohaus/keychain-utils";
-import { MolochV3Dao } from "@daohaus/moloch-v3-data";
-import { useCurrentDao } from "@daohaus/moloch-v3-hooks";
+import styled, { useTheme } from "styled-components";
+import { Link } from "react-router-dom";
+import { PiGearSix } from "react-icons/pi";
+
 import {
   AddressDisplay,
-  H4,
-  ParMd,
-  ParXs,
-  Button,
-  Link,
-  widthQuery,
-  ProfileAvatar,
   Card,
+  H4,
+  ParXs,
+  ProfileAvatar,
+  widthQuery,
 } from "@daohaus/ui";
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
+import { ValidNetwork } from "@daohaus/keychain-utils";
+import { useDHConnect } from "@daohaus/connect";
 
-import {
-  daoProfileHasLinks,
-  missingDaoProfileData,
-} from "../utils/daoDataDisplayHelpers";
-import {
-  OverviewIconLinkList,
-  OverviewLinkList,
-} from "./layout/MetadataLinkLists";
-import { TagList } from "./layout/TagList";
-import { styled } from "styled-components";
+import { ButtonRouterLink } from "./ButtonRouterLink";
+import { daoProfileHasLinks } from "../utils/daoDataDisplayHelpers";
+import { OverviewIconLinkList } from "./layout/MetadataLinkLists";
+import { charLimit } from "@daohaus/utils";
 
-export const DaoProfileContainer = styled.div`
-  width: 100%;
-  border-radius: ${({ theme }) => theme.card.radius};
-  border: 1px ${({ theme }) => theme.secondary.step5} solid;
-  background-color: ${({ theme }) => theme.secondary.step3};
-  padding: 2.2rem;
-  .avatar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1.7rem;
-    margin-bottom: 2.7rem;
-    p {
-      margin-right: auto;
-    }
-    @media ${widthQuery.xs} {
-      flex-direction: column;
-    }
-  }
-`;
-
-export const DaoProfileAvatar = styled(ProfileAvatar)`
-  width: 18rem;
-  height: 18rem;
-`;
-
-export const MissingProfileCard = styled(Card)`
+const MDaoOverview = styled(Card)`
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.3rem;
+  gap: 1.1rem;
+  border: none;
+  text-align: center;
+  width: 100%;
 `;
 
-export const TagListContainer = styled.div`
-  margin-top: 2.8rem;
+export const DaoProfileAvatar = styled(ProfileAvatar)`
+  width: 7.5rem;
+  height: 7.5rem;
+`;
+
+const ProfileHeader = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  .avatar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    transform: translateX(1rem);
+  }
+  .settings-link {
+    width: 3rem;
+    height: 3rem;
+  }
 `;
 
 type DaoProfileProps = {
   dao: MolochV3Dao;
+  daoChain: string;
 };
 
-export const DaoProfile = ({ dao }: DaoProfileProps) => {
-  const { daoChain, daoId } = useCurrentDao();
-
-  const missingProfile = useMemo(() => {
-    if (!missingDaoProfileData(dao)) return null;
-    return (
-      <MissingProfileCard>
-        <ParXs>
-          (ﾉ´ヮ`)ﾉ*: ･ﾟ Add some sparkle with a DAO avatar and description!
-        </ParXs>
-        <Link href={`/molochv3/${daoChain}/${daoId}/settings`}>
-          <Button>Go To Settings</Button>
-        </Link>
-      </MissingProfileCard>
-    );
-  }, [dao, daoChain, daoId]);
+export const DaoProfile = ({ dao, daoChain }: DaoProfileProps) => {
+  const theme = useTheme();
+  const { address } = useDHConnect();
 
   return (
-    <DaoProfileContainer>
-      <div className="avatar">
-        <DaoProfileAvatar address={dao.id} image={dao.avatarImg} />
-        <div>
-          <H4>{charLimit(dao.name, 21)}</H4>
-          <AddressDisplay
-            address={dao.id}
-            truncate
-            copy
-            explorerNetworkId={daoChain as keyof Keychain}
-          />
+    <MDaoOverview>
+      <ProfileHeader>
+        <div className="avatar">
+          <DaoProfileAvatar image={dao.avatarImg} address={dao.id} />
         </div>
-      </div>
-
-      {missingProfile || (
-        <>
-          <ParMd>{dao.description}</ParMd>
-
-          {daoProfileHasLinks(dao.links) && (
-            <>
-              <OverviewLinkList links={dao.links} />
-              <OverviewIconLinkList links={dao.links} />
-            </>
-          )}
-          <TagListContainer>
-            {dao.tags && <TagList tags={dao.tags} />}
-          </TagListContainer>
-        </>
+        <Link to={`/molochV3/${daoChain}/${dao.id}/settings`}>
+          <div className="settings-link">
+            <PiGearSix size="1.5rem" color={theme.addressDisplay.icon.color} />
+          </div>
+        </Link>
+      </ProfileHeader>
+      <H4>{charLimit(dao.name, 21)}</H4>
+      <AddressDisplay
+        address={dao.id}
+        truncate
+        copy
+        explorerNetworkId={daoChain as ValidNetwork}
+      />
+      <ParXs>{charLimit(dao.description, 200)}</ParXs>
+      {daoProfileHasLinks(dao.links) && (
+        <OverviewIconLinkList links={dao.links} />
       )}
-    </DaoProfileContainer>
+      {address && (
+        <ButtonRouterLink
+          size="sm"
+          color="secondary"
+          to={`/molochV3/${daoChain}/${dao.id}/member/${address}`}
+        >
+          My Profile
+        </ButtonRouterLink>
+      )}
+    </MDaoOverview>
   );
 };

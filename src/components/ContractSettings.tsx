@@ -25,18 +25,6 @@ export const MetaContent = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 3.4rem;
-  .icon {
-    margin-top: 1.2rem;
-  }
-  .section-middle {
-    width: 38rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-  .links {
-    margin: 1.2rem 0;
-  }
 `;
 
 type ContractSettingsProps = {

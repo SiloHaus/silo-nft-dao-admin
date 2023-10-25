@@ -1,4 +1,5 @@
 import React from "react";
+import { RiArrowRightLine } from "react-icons/ri";
 
 import { ParMd, ParXl, SingleColumnLayout } from "@daohaus/ui";
 import { useDHConnect } from "@daohaus/connect";
@@ -6,27 +7,38 @@ import { styled } from "styled-components";
 import { ClaimList } from "../components/ClaimList";
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { useClaimShaman } from "../hooks/useClaimShaman";
+import { MolochV3Dao } from "@daohaus/moloch-v3-data";
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 
 const ContentContainer = styled.div`
   text-align: left;
   width: 100%;
 `;
 
-export const Claim = () => {
+export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
   const { address } = useDHConnect();
-  const { daoChain } = useCurrentDao();
-  const { dao } = useDaoData();
+  const { daoChain, daoId } = useCurrentDao();
   const { sdata } = useClaimShaman({
     dao,
     chainId: daoChain,
   });
 
   return (
-    <SingleColumnLayout title="Claim Your Airdrop">
+    <SingleColumnLayout
+      title="Activate Your Avatar"
+      actions={
+        <ButtonRouterLink
+          to={`/molochV3/${daoChain}/${daoId}`}
+          IconRight={RiArrowRightLine}
+        >
+          Go to DAO
+        </ButtonRouterLink>
+      }
+    >
       {!address && (
         <ContentContainer>
           <ParXl>SiloHaus RDF airdrop tool</ParXl>
-          <ParMd>Connect your wallet to see your available claims.</ParMd>
+          <ParMd>Connect your wallet to see your available avatars.</ParMd>
         </ContentContainer>
       )}
       {address && daoChain && sdata?.nft.result && (

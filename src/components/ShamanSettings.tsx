@@ -5,23 +5,13 @@ import { ValidNetwork } from "@daohaus/keychain-utils";
 
 import { styled } from "styled-components";
 import { ShamanList } from "./ShamanList";
+import { SettingsContainer } from "./layout/GeneralLayouts";
 
 type ShamanSettingsProps = {
   dao: MolochV3Dao;
   daoChain: ValidNetwork;
   includeLinks?: boolean;
 };
-
-export const SettingsContainer = styled(Card)`
-  width: 110rem;
-  padding: 3rem;
-  border: none;
-  margin-bottom: 3rem;
-  @media ${widthQuery.lg} {
-    max-width: 100%;
-    min-width: 0;
-  }
-`;
 
 export const ShamanContainer = styled.div`
   .tokens {

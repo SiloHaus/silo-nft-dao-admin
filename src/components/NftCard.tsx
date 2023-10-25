@@ -169,18 +169,18 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
           )}
           {!isClaim && !isClaimed && (
             <LowerSection>
-              <ParSm>Not Claimed</ParSm>
-              <ClaimLink to={`/molochv3/${daoChain}/${dao?.id}/claim`}>
+              <ParSm>Not Activated</ParSm>
+              <ClaimLink to={`/molochv3/${daoChain}/${dao?.id}/activate`}>
                 <Button
                   color="secondary"
                   variant="outline"
                   size="sm"
                   fullWidth
                   onClick={() => {
-                    console.log("claiming");
+                    console.log("Activating");
                   }}
                 >
-                  Check Claim
+                  Check Avatar
                 </Button>
               </ClaimLink>
             </LowerSection>
