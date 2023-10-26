@@ -17,6 +17,8 @@ import {
   redDark,
   slate,
   slateDark,
+  tomatoDark,
+  tomatoDarkA,
 } from "@radix-ui/colors";
 
 /*
@@ -168,18 +170,18 @@ export const neutral = {
 };
 
 export const neutralDark = {
-  step1: slateDark.slate1,
-  step2: slateDark.slate2,
-  step3: slateDark.slate3,
-  step4: slateDark.slate4,
-  step5: slateDark.slate5,
-  step6: slateDark.slate6,
-  step7: slateDark.slate7,
-  step8: slateDark.slate8,
-  step9: slateDark.slate9,
-  step10: slateDark.slate10,
-  step11: slateDark.slate11,
-  step12: slateDark.slate12,
+  step1: tomatoDark.tomato1,
+  step2: tomatoDark.tomato2,
+  step3: tomatoDark.tomato3,
+  step4: tomatoDark.tomato4,
+  step5: tomatoDark.tomato5,
+  step6: tomatoDark.tomato6,
+  step7: tomatoDark.tomato7,
+  step8: tomatoDark.tomato8,
+  step9: tomatoDark.tomato9,
+  step10: tomatoDark.tomato10,
+  step11: tomatoDark.tomato11,
+  step12: tomatoDark.tomato12,
 };
 
 // * Utility Colors
