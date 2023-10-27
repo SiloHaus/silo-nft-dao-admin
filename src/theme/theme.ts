@@ -164,4 +164,10 @@ export const siloTheme: ThemeOverrides = {
       },
     },
   },
+  addressDisplay: {
+    color: siloMono.step5,
+    icon: {
+      color: siloMono.step5,
+    },
+  },
 };
