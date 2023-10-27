@@ -19,7 +19,7 @@ export const siloMono = {
   step3: "hsl(0, 0%, 22%)", // 
   step4: "hsl(0, 0%, 0%)",
   step5: "#DF7676", // hover bg
-  step6: "202020" // card bg
+  step6: "#202020" // card bg
 };
 
 export const siloPrimaryBtn = {
