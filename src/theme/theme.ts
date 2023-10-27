@@ -19,6 +19,7 @@ export const siloMono = {
   step3: "hsl(0, 0%, 22%)", // 
   step4: "hsl(0, 0%, 0%)",
   step5: "#DF7676", // hover bg
+  step6: "202020" // card bg
 };
 
 export const siloPrimaryBtn = {
@@ -49,5 +50,10 @@ export const siloTheme: ThemeOverrides = {
     warning: warningDarkBtn,
     danger: dangerDarkBtn,
     radius: border.radius,
+  },
+  card: {
+    bg: siloMono.step6,
+    border: secondaryDark.step6,
+    radius: '0.8rem',
   },
 };
