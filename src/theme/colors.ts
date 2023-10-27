@@ -170,7 +170,7 @@ export const neutral = {
 };
 
 export const neutralDark = {
-  step1: tomatoDark.tomato1,
+  step1: "#191919",
   step2: tomatoDark.tomato2,
   step3: tomatoDark.tomato3,
   step4: tomatoDark.tomato4,
