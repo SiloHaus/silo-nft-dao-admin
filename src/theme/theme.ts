@@ -34,6 +34,7 @@ export const siloPrimaryBtn = {
     bgDisabled: siloMono.step5,
     borderDisabled: siloMono.step3,
   },
+};
 
 export const siloTheme: ThemeOverrides = {
   themeName: "silo",
