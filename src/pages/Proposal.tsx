@@ -46,16 +46,6 @@ const RightCard = styled(Card)`
   }
 `;
 
-const ButtonRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 3rem;
-`;
-
-// TODO: Import TxLegos
-const TX: Record<string, TXLego> = {};
-
 export const Proposal = () => {
   const { proposal } = useDaoProposal();
   const { daoChain, daoId } = useCurrentDao();
@@ -76,17 +66,14 @@ export const Proposal = () => {
 
   return (
     <>
-      <ButtonRow>
-        <ButtonRouterLink
-          color="secondary"
-          variant="outline"
-          to={`/molochV3/${daoChain}/${daoId}`}
-          IconLeft={RiArrowLeftLine}
-        >
-          DAO
-        </ButtonRouterLink>
-      </ButtonRow>
-
+      <ButtonRouterLink
+        color="secondary"
+        variant="outline"
+        to={`/molochV3/${daoChain}/${daoId}`}
+        IconLeft={RiArrowLeftLine}
+      >
+        DAO
+      </ButtonRouterLink>
       <BiColumnLayout
         title={proposal?.title}
         subtitle={`${proposal?.proposalId} | ${getProposalTypeLabel(

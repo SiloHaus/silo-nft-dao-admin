@@ -66,7 +66,7 @@ export const ShamanItem = ({
           <Dialog>
             <DialogTrigger asChild>
               <Button size={"sm"} variant={"outline"}>
-                {(shamanName as string).slice(0, 32)}
+                Shaman Info
               </Button>
             </DialogTrigger>
             <DialogContent title={shamanName as string}>
@@ -112,7 +112,7 @@ export const ShamanItem = ({
           <Dialog>
             <DialogTrigger asChild>
               <Button size={"sm"} variant={"outline"}>
-                Unknown
+                Shaman Info
               </Button>
             </DialogTrigger>
             <DialogContent title={"Unknown"}>
