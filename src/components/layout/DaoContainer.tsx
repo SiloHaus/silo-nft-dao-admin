@@ -97,7 +97,7 @@ const Dao = ({
                 daoChain && (
                   <LeftColumnContainer>
                     <DaoProfile dao={dao} daoChain={daoChain} />
-                    <NftDaoMemberList />
+                    <NftDaoMemberList daoId={daoId} daoChain={daoChain} />
                   </LeftColumnContainer>
                 )
               }

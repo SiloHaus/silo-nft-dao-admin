@@ -28,7 +28,12 @@ export const Dao = () => {
 
   return (
     <>
-      <SafeCard dao={dao} daoChain={daoChain} safe={targetVault} />
+      <SafeCard
+        dao={dao}
+        daoChain={daoChain}
+        safe={targetVault}
+        includeLinks={true}
+      />
       <ProposalList
         allowLinks={true}
         rightActionEl={
