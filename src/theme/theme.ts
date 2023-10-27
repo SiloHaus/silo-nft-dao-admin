@@ -116,7 +116,7 @@ export const siloTheme: ThemeOverrides = {
     ...defaultDarkTheme.input,
     border: siloMono.step6,
     bg: siloMono.step6,
-    color: siloMono.step1,
+    color: siloMono.step2,
     hover: {
       bg: siloMono.step3,
       border: siloMono.step3,
