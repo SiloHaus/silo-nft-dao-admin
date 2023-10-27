@@ -18,7 +18,7 @@ export const siloMono = {
   step2: "#FFFFFF", // btn text
   step3: "#383838", // 2nd btn bg
   step4: "hsl(0, 0%, 0%)",
-  step5: "#DF7676", // hover bg
+  step5: "#DF7676", // hover btn bg
   step6: "#202020" // card bg
 };
 
@@ -58,12 +58,47 @@ export const siloSecondaryBtn = {
   },
 };
 
+const siloFontFamily = {
+  body: `'Open Sans', sans-serif`,
+  header: `'Open Sans', sans-serif`,
+  data: `'Open Sans', sans-serif`,
+};
+
 export const siloTheme: ThemeOverrides = {
   themeName: "silo",
   ...defaultDarkTheme,
   rootBgColor: neutralDark.step1,
   rootFontColor: secondaryDark.step12,
   primary: { ...primaryDark },
+  font: {
+    family: siloFontFamily,
+    size: {
+      xs: "1.2rem",
+      sm: "1.4rem",
+      md: "1.6rem",
+      lg: "2rem",
+      xl: "2.4rem",
+      xxl: "3.2rem",
+      xxxl: "4rem",
+      xxxxl: "4.8rem",
+    },
+    weight: {
+      extraLight: 200,
+      light: 300,
+      reg: 400,
+      med: 500,
+      bold: 700,
+      black: 900,
+    },
+    lineHeight: "150%",
+    letterSpacing: "1.5px",
+  },
+  field: {
+    ...defaultDarkTheme.field,
+    radius: "4px",
+    inputFont: siloFontFamily.data,
+    labelFont: siloFontFamily.header,
+  },
   button: {
     primary: siloPrimaryBtn,
     secondary: siloSecondaryBtn,
@@ -76,5 +111,19 @@ export const siloTheme: ThemeOverrides = {
     bg: siloMono.step6,
     border: siloMono.step6,
     radius: '0.8rem',
+  },
+  input: {
+    ...defaultDarkTheme.input,
+    border: siloMono.step6,
+    bg: siloMono.step6,
+    color: siloMono.step1,
+    hover: {
+      bg: siloMono.step3,
+      border: siloMono.step3,
+    },
+    focus: {
+      bg: siloMono.step3,
+      border: siloMono.step2,
+    },
   },
 };
