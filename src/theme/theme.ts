@@ -126,4 +126,42 @@ export const siloTheme: ThemeOverrides = {
       border: siloMono.step2,
     },
   },
+  dropdown: {
+    ...defaultDarkTheme.dropdown,
+    content: {
+      primary: {
+        bg: siloMono.step6,
+      },
+      secondary: {
+        bg: siloMono.step6,
+      },
+    },
+    item: {
+      primary: {
+        bg: "transparent",
+      },
+      secondary: {
+        bg: siloMono.step6,
+      },
+      focus: {
+        primary: {
+          bg: "transparent",
+        },
+        secondary: {
+          bg: "transparent",
+        },
+      },
+      highlight: {
+        primary: {
+          bg: siloMono.step3,
+        },
+        secondary: {
+          bg: siloMono.step3,
+        },
+      },
+      disabled: {
+        color: siloMono.step6,
+      },
+    },
+  },
 };
