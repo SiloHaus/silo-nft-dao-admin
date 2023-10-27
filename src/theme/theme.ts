@@ -14,9 +14,9 @@ const border = {
 };
 
 export const siloMono = {
-  step1: "#663333", // background
-  step2: "#FFFFFF", // text
-  step3: "hsl(0, 0%, 22%)", // 
+  step1: "#663333", // btn background
+  step2: "#FFFFFF", // btn text
+  step3: "#383838", // 2nd btn bg
   step4: "hsl(0, 0%, 0%)",
   step5: "#DF7676", // hover bg
   step6: "#202020" // card bg
@@ -30,9 +30,30 @@ export const siloPrimaryBtn = {
     border: siloMono.step1,
     bgHover: siloMono.step5,
     borderHover: siloMono.step5,
-    bgFocus: siloMono.step2,
+    bgFocus: siloMono.step1,
     borderFocus: siloMono.step1,
-    bgDisabled: siloMono.step5,
+    bgDisabled: siloMono.step1,
+    borderDisabled: siloMono.step1,
+  },
+  ghost: {
+    text: siloMono.step1,
+    bgHover: neutralDark.step1,
+    borderFocus: siloMono.step1,
+    disabled: siloMono.step1,
+  },
+};
+
+export const siloSecondaryBtn = {
+  ...secondaryDarkBtn,
+  solid: {
+    text: siloMono.step2,
+    bg: siloMono.step3,
+    border: siloMono.step3,
+    bgHover: siloMono.step1,
+    borderHover: siloMono.step1,
+    bgFocus: siloMono.step3,
+    borderFocus: siloMono.step3,
+    bgDisabled: siloMono.step3,
     borderDisabled: siloMono.step3,
   },
 };
@@ -45,7 +66,7 @@ export const siloTheme: ThemeOverrides = {
   primary: { ...primaryDark },
   button: {
     primary: siloPrimaryBtn,
-    secondary: secondaryDarkBtn,
+    secondary: siloSecondaryBtn,
     success: successDarkBtn,
     warning: warningDarkBtn,
     danger: dangerDarkBtn,
@@ -53,7 +74,7 @@ export const siloTheme: ThemeOverrides = {
   },
   card: {
     bg: siloMono.step6,
-    border: secondaryDark.step6,
+    border: siloMono.step6,
     radius: '0.8rem',
   },
 };
