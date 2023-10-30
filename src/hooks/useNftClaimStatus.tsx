@@ -5,7 +5,7 @@ import { EthAddress, createViemClient } from "@daohaus/utils";
 
 import ClaimShamanAbi from "../abis/claimShaman.json";
 
-const fetchClaimStatus = async ({
+export const fetchClaimStatus = async ({
   shamanAddress,
   tokenId,
   chainId,

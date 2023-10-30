@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 
 import { useAccountNfts } from "../hooks/useAccountNfts";
-import { Loading, ParMd, breakpoints } from "@daohaus/ui";
+import { Loading, ParLg, ParMd, breakpoints } from "@daohaus/ui";
 import { NftCard } from "./NftCard";
 import { useDaoData } from "@daohaus/moloch-v3-hooks";
+import { useClaimShaman } from "../hooks/useClaimShaman";
 
 const ListContainer = styled.div`
   display: flex;
@@ -13,6 +14,9 @@ const ListContainer = styled.div`
   column-gap: 4rem;
   row-gap: 2rem;
   justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+
   @media (min-width: ${breakpoints.xs}) {
     justify-content: flex-start;
   }
@@ -28,6 +32,7 @@ export const ClaimList = ({
   nftAddress: string;
 }) => {
   const { dao } = useDaoData();
+  const { shamanAddress } = useClaimShaman({ dao, chainId: daoChain });
 
   if (!dao || !dao.shamen || !dao.shamen.length) return <Loading />;
 
@@ -35,6 +40,7 @@ export const ClaimList = ({
     accountAddress: address,
     contractAddress: nftAddress,
     chainId: daoChain,
+    shamanAddress: shamanAddress,
   });
 
   if (isLoading) return <Loading />;
@@ -44,18 +50,40 @@ export const ClaimList = ({
   }
 
   return (
-    <ListContainer>
-      {accountNfts &&
-        accountNfts.map((nft) => {
-          return (
-            <NftCard
-              nft={nft}
-              key={nft.tokenID}
-              isClaim={true}
-              isHolder={true}
-            />
-          );
-        })}
-    </ListContainer>
+    <>
+      <ParLg>Unclaimed</ParLg>
+      <ListContainer>
+        {accountNfts &&
+          accountNfts
+            .filter((nft) => !nft.isClaimed)
+            .map((nft) => {
+              return (
+                <NftCard
+                  nft={nft}
+                  key={nft.tokenID}
+                  isClaim={true}
+                  isHolder={true}
+                />
+              );
+            })}
+      </ListContainer>
+
+      <ParLg>Claimed</ParLg>
+      <ListContainer>
+        {accountNfts &&
+          accountNfts
+            .filter((nft) => nft.isClaimed)
+            .map((nft) => {
+              return (
+                <NftCard
+                  nft={nft}
+                  key={nft.tokenID}
+                  isClaim={true}
+                  isHolder={true}
+                />
+              );
+            })}
+      </ListContainer>
+    </>
   );
 };

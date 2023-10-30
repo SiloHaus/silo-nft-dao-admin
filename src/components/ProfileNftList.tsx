@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 
 import { useAccountNfts } from "../hooks/useAccountNfts";
-import { Loading, breakpoints, widthQuery } from "@daohaus/ui";
+import { Loading, ParLg, breakpoints, widthQuery } from "@daohaus/ui";
 import { NftCard } from "./NftCard";
 import { useClaimShaman } from "../hooks/useClaimShaman";
 import { MolochV3Dao } from "@daohaus/moloch-v3-data";
@@ -15,6 +15,8 @@ const ListContainer = styled.div`
   column-gap: 4rem;
   row-gap: 2rem;
   justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
   @media (min-width: ${breakpoints.xs}) {
     justify-content: flex-start;
   }
@@ -22,6 +24,11 @@ const ListContainer = styled.div`
     max-width: 100%;
     min-width: 0;
   }
+`;
+
+const ContentContainer = styled.div`
+  text-align: left;
+  width: 100%;
 `;
 
 export const ProfileNftList = ({
@@ -35,7 +42,7 @@ export const ProfileNftList = ({
   dao: MolochV3Dao;
   isHolder?: boolean;
 }) => {
-  const { sdata } = useClaimShaman({
+  const { sdata, shamanAddress } = useClaimShaman({
     dao,
     chainId: daoChain,
   });
@@ -43,17 +50,37 @@ export const ProfileNftList = ({
   const { accountNfts, isLoading } = useAccountNfts({
     accountAddress: address,
     contractAddress: sdata?.nft.result,
+    shamanAddress,
     chainId: daoChain,
   });
 
   if (isLoading) return <Loading />;
 
   return (
-    <ListContainer>
-      {accountNfts &&
-        accountNfts.map((nft) => {
-          return <NftCard nft={nft} key={nft.tokenID} isHolder={isHolder} />;
-        })}
-    </ListContainer>
+    <ContentContainer>
+      <ParLg>Unclaimed</ParLg>
+      <ListContainer>
+        {accountNfts &&
+          accountNfts
+            .filter((nft) => !nft.isClaimed)
+            .map((nft) => {
+              return (
+                <NftCard nft={nft} key={nft.tokenID} isHolder={isHolder} />
+              );
+            })}
+      </ListContainer>
+
+      <ParLg>Claimed</ParLg>
+      <ListContainer>
+        {accountNfts &&
+          accountNfts
+            .filter((nft) => nft.isClaimed)
+            .map((nft) => {
+              return (
+                <NftCard nft={nft} key={nft.tokenID} isHolder={isHolder} />
+              );
+            })}
+      </ListContainer>
+    </ContentContainer>
   );
 };

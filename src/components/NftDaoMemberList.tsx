@@ -94,7 +94,7 @@ export const NftDaoMemberList = ({
       {members &&
         members.map((member) => {
           return (
-            <MemberItem>
+            <MemberItem key={member.id}>
               <MemberProfileAvatar
                 daoChain={daoChain}
                 daoId={daoId}

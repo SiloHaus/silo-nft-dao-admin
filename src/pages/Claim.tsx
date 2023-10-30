@@ -42,11 +42,13 @@ export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
         </ContentContainer>
       )}
       {address && daoChain && sdata?.nft.result && (
-        <ClaimList
-          address={address}
-          daoChain={daoChain}
-          nftAddress={sdata.nft.result}
-        />
+        <ContentContainer>
+          <ClaimList
+            address={address}
+            daoChain={daoChain}
+            nftAddress={sdata.nft.result}
+          />
+        </ContentContainer>
       )}
     </SingleColumnLayout>
   );
