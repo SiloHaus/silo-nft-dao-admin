@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { TokenboundClient } from "@tokenbound/sdk";
+import { TokenboundClient, TBVersion } from "@tokenbound/sdk";
 
 import {
   HAUS_NETWORK_DATA,
@@ -29,7 +29,10 @@ const fetchTbaMembership = async ({
     throw new Error("Invalid ChainId");
   }
 
-  const tokenboundClient = new TokenboundClient({ chainId: networkId });
+  const tokenboundClient = new TokenboundClient({
+    chainId: networkId,
+    version: TBVersion.V2,
+  });
 
   const isDeployed = await tokenboundClient.checkAccountDeployment({
     accountAddress: connectedAddress as EthAddress,
