@@ -1,22 +1,35 @@
-import { BsArrowLeft, BsShareFill } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/bs";
 import styled from "styled-components";
+import { RiArrowLeftLine } from "react-icons/ri";
 
-import { useCurrentDao, useDaoMember } from "@daohaus/moloch-v3-hooks";
-import { MemberProfileCard } from "@daohaus/moloch-v3-macro-ui";
 import {
-  Button,
+  useCurrentDao,
+  useDaoData,
+  useDaoMember,
+} from "@daohaus/moloch-v3-hooks";
+import {
   ParLg,
   SingleColumnLayout,
   Loading,
   useBreakpoint,
-  useToast,
   widthQuery,
 } from "@daohaus/ui";
+import { useDHConnect } from "@daohaus/connect";
+
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
+import { ProfileNftList } from "../components/ProfileNftList";
+import { NonMemberCard } from "../components/NonMemberCard";
+import { useParams } from "react-router-dom";
+import { DelegateButton } from "../components/DelegateButton";
+import { useTba, useTbaMember } from "../hooks/useTba";
+import { TbaProfile } from "../components/TbaProfile";
+import { EthAddress } from "@daohaus/utils";
+import { ProfileCard } from "../components/ProfileCard";
 
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 64rem;
+  width: 100%;
   margin-bottom: 3rem;
   @media ${widthQuery.md} {
     max-width: 100%;
@@ -35,59 +48,79 @@ const StyledArrowLeft = styled(BsArrowLeft)`
   width: 1.6rem;
 `;
 
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+`;
+
 export const Member = () => {
   const { isFetched, isFetching, member } = useDaoMember();
+  const { address } = useDHConnect();
   const { daoChain, daoId } = useCurrentDao();
-  const { successToast } = useToast();
+  const { dao } = useDaoData();
+  const { memberAddress } = useParams();
+
+  const { isDeployed, tbaAddress } = useTbaMember({
+    memberAddress: address as EthAddress,
+    chainId: daoChain,
+  });
+
   const isMobile = useBreakpoint(widthQuery.sm);
 
-  const handleOnClick = () => {
-    navigator.clipboard.writeText(`${window.location.href}`);
-    successToast({
-      title: "URL copied to clipboard",
-    });
-  };
-
   if (!daoChain || !daoId) return <ParLg>DAO Not Found</ParLg>;
+  if (!memberAddress) return <ParLg>Account Not Found</ParLg>;
+
+  const isConnectedMember =
+    memberAddress.toLowerCase() === address?.toLowerCase();
+
+  if (!dao || !daoChain) return <Loading />;
 
   return (
-    <SingleColumnLayout title="Member Profile">
-      {!member && isFetching && <Loading size={12} />}
-      {!member && isFetched && <ParLg>Member Not Found</ParLg>}
-      {member && (
+    <>
+      <ButtonRow>
+        <ButtonRouterLink
+          to={`/molochv3/${daoChain}/${daoId}`}
+          IconLeft={StyledArrowLeft}
+          color="secondary"
+          linkType="no-icon-external"
+          variant="outline"
+          fullWidth={isMobile}
+        >
+          DAO
+        </ButtonRouterLink>
+        {isConnectedMember && member && Number(member.shares) > 0 && (
+          <DelegateButton />
+        )}
+      </ButtonRow>
+      <SingleColumnLayout>
+        {!member && isFetching && <Loading size={12} />}
+        {/* {!member && isFetched && <NonMemberCard address={memberAddress} />} */}
+
         <>
-          <ButtonsContainer>
-            {/* <ButtonRouterLink
-              to={`/molochv3/${daoChain}/${daoId}/members`}
-              IconLeft={StyledArrowLeft}
-              color="secondary"
-              linkType="no-icon-external"
-              variant="outline"
-              fullWidth={isMobile}
-              // was centerAlign={isMobile}
-              // Default has always been center.
-              // Not sure what is supposed to happen here?
-              // justify={isMobile ? 'center' : 'flex-start'}
-            >
-              MEMBERS
-            </ButtonRouterLink> */}
-            <Button
-              IconLeft={BsShareFill}
-              onClick={handleOnClick}
-              fullWidth={isMobile}
-              // Same as above
-              // centerAlign={isMobile}
-            >
-              SHARE PROFILE
-            </Button>
-          </ButtonsContainer>
-          <MemberProfileCard
-            daoChain={daoChain}
-            daoId={daoId}
-            member={member}
-          />
+          {memberAddress && (
+            <>
+              {isDeployed && address && <TbaProfile tbaAddress={address} />}
+              <ProfileCard
+                daoChain={daoChain}
+                daoId={daoId}
+                member={member}
+                profileAddress={memberAddress}
+              />
+            </>
+          )}
+
+          {memberAddress && (
+            <ProfileNftList
+              dao={dao}
+              address={memberAddress}
+              daoChain={daoChain}
+              isHolder={isConnectedMember}
+            />
+          )}
         </>
-      )}
-    </SingleColumnLayout>
+      </SingleColumnLayout>
+    </>
   );
 };

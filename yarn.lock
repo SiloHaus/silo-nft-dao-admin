@@ -2,10 +2,219 @@
 # yarn lockfile v1
 
 
+"0xsequence@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/0xsequence/-/0xsequence-1.2.2.tgz#3a51791e8417e1c7d52a3b6fa420880dc6a2aa67"
+  integrity sha512-Ru9smpUUFAMX+8VbV+VJp8gIT6GLYarMUUBr72Ar7J71YPhBvAzKuhTzENivX8ZcKM5eZofiES8OntSV22OsIg==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/account" "1.2.2"
+    "@0xsequence/api" "1.2.2"
+    "@0xsequence/auth" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/guard" "1.2.2"
+    "@0xsequence/indexer" "1.2.2"
+    "@0xsequence/metadata" "1.2.2"
+    "@0xsequence/migration" "1.2.2"
+    "@0xsequence/multicall" "1.2.2"
+    "@0xsequence/network" "1.2.2"
+    "@0xsequence/provider" "1.2.2"
+    "@0xsequence/relayer" "1.2.2"
+    "@0xsequence/sessions" "1.2.2"
+    "@0xsequence/signhub" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+    "@0xsequence/wallet" "1.2.2"
+
+"@0xsequence/abi@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/abi/-/abi-1.2.2.tgz#eb1f2b8221c729936a58a1096da2df390edb55a1"
+  integrity sha512-QzOgs/Du16SpKMMOmLowdIVBobXeJZk5APkxhK+1wqxDyBgGno0z34A0RWOCvpL0aPuC1vLkp/xsz3w1+UYBkA==
+
+"@0xsequence/account@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/account/-/account-1.2.2.tgz#faa9d42629dba4e8897a84ab5882ef9f0b61a77c"
+  integrity sha512-gwUE37tq2iyQhN+nBVngsC1v1iVzhilkcUEvXVfVQ+ZKxdpPcOxlYDMWoPEBlnz2so4pVd3lo6LEZDH6VMJd0A==
+  dependencies:
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/migration" "1.2.2"
+    "@0xsequence/network" "1.2.2"
+    "@0xsequence/relayer" "1.2.2"
+    "@0xsequence/sessions" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+    "@0xsequence/wallet" "1.2.2"
+    ethers "^5.5.2"
+
+"@0xsequence/api@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/api/-/api-1.2.2.tgz#59c8090b742ebb140de80842694b07c6480d3e26"
+  integrity sha512-rzrNL6fiCSZt3/EkIxZ0Jc7zZUZl43WaBufkBf694FiLWGe1ki7P8Pcy+WJGL0HLdlCm1EmFRZ1Lbzir6MXbDQ==
+
+"@0xsequence/auth@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/auth/-/auth-1.2.2.tgz#1a63976021f0f20dafb36b0c1fb6789b9fc79c11"
+  integrity sha512-5onaEfxtx0MPI4qBtg110CXql5YocEeHEbAk7EELP7+i/hE91mQhMZLd2AIznsE2YPqHZLgHJ9MmQo5IczBcBg==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/account" "1.2.2"
+    "@0xsequence/api" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/ethauth" "^0.8.1"
+    "@0xsequence/indexer" "1.2.2"
+    "@0xsequence/metadata" "1.2.2"
+    "@0xsequence/migration" "1.2.2"
+    "@0xsequence/network" "1.2.2"
+    "@0xsequence/sessions" "1.2.2"
+    "@0xsequence/signhub" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+    "@0xsequence/wallet" "1.2.2"
+
+"@0xsequence/core@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/core/-/core-1.2.2.tgz#8c64ba5174a44be3bce2d2cfff73a5220c64773b"
+  integrity sha512-x9DByUZXqDTeixVjs1iyNaZ7MyEVgXkGzOhf8/Aw9XiSFnCgHk0+xFZmUkTBpekhzNegQkRfsQk6Jq85uT7WQg==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+
+"@0xsequence/ethauth@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@0xsequence/ethauth/-/ethauth-0.8.1.tgz#9b97a17e74ca9559b79a93a8e39ca77baaccc943"
+  integrity sha512-P21cxRSS+2mDAqFVAJt0lwQFtbObX+Ewlj8DMyDELp81+QbfHFh6LCyu8dTXNdBx6UbmRFOCSBno5Txd50cJPQ==
+  dependencies:
+    js-base64 "^3.7.2"
+
+"@0xsequence/guard@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/guard/-/guard-1.2.2.tgz#850e7438a6b66c264bb1afdc992b3e1494f9bc7e"
+  integrity sha512-N7BJeZolAE67yUMqxA+nIAGrMKVgOt2yG65jGzuI+bDlkJW46OeMVRGrbPmaes/tz1fR7C/VNbrnnJnzxPB+GQ==
+  dependencies:
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/signhub" "1.2.2"
+    ethers "^5.7.2"
+
+"@0xsequence/indexer@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/indexer/-/indexer-1.2.2.tgz#7ae8d3f30835f21d41c8f552a675d6168c61066e"
+  integrity sha512-c93GOAu0LgVqTch69ZHYtNRtbXLXQ2aktITi4jNbiY0rkJnod09ABJHCF16b+zAVIq1YF4tHR4obuLnuoGyjBw==
+
+"@0xsequence/metadata@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/metadata/-/metadata-1.2.2.tgz#8ee11b638513d523d6fc42643972212a9c40fff0"
+  integrity sha512-9C5Ha1UKO1BOf/UD8RPRf+/Uh2HZBo/eXn7XFsbsWxK2lrmN3NogCT2x6J7j94cWGRtyfSftUtn0oGveQ6xY1g==
+
+"@0xsequence/migration@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/migration/-/migration-1.2.2.tgz#223af65f554624138c95f37342d7137f2104f018"
+  integrity sha512-jpIyr9iOobtkBOw9PtnFczNByykZ3na4r3tGnnpD5MirlmqQ/a7n0phGYtQtiCjRCjZViLGqjHqAmQ1G3Szmnw==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/wallet" "1.2.2"
+    ethers "^5.5.2"
+
+"@0xsequence/multicall@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/multicall/-/multicall-1.2.2.tgz#6b963017d260ee6a8916f3f2b7d77aa8f0f578a5"
+  integrity sha512-+ZfPFDLOarMQtXvirVtrz+ZEFmVB/KdOhzeloe/OA6KtMLqihIBVilosO0/crxARdmW/KANge1vTXcbbzNJQIQ==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/network" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+
+"@0xsequence/network@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/network/-/network-1.2.2.tgz#3198b9af6f49aa6679fee59acf121019538bf7e7"
+  integrity sha512-uVccznv5fKTCfJRjjj2LGDfS7UFCIlxjPw/lCtZii4/1dw3MNV17Apol41/GLIjx5DuuDHQKDU+7TFIKyVT8Bw==
+  dependencies:
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/indexer" "1.2.2"
+    "@0xsequence/relayer" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+
+"@0xsequence/provider@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/provider/-/provider-1.2.2.tgz#41b294b133af04da41f5e4b6c29f85aa99b18646"
+  integrity sha512-3iCl6bJ/xvpLI6qBpJ9d9j8tkPrthhqew0CKvpbcD4/Xa1FIMGdz9ugXg5DlXlNJxjCiOY/FZ8k+x4k4oxWGAg==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/account" "1.2.2"
+    "@0xsequence/auth" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/migration" "1.2.2"
+    "@0xsequence/network" "1.2.2"
+    "@0xsequence/relayer" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+    "@0xsequence/wallet" "1.2.2"
+    eventemitter2 "^6.4.5"
+    webextension-polyfill "^0.10.0"
+
+"@0xsequence/relayer@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/relayer/-/relayer-1.2.2.tgz#f9d994f2bb9951f72e0963dc274e4c49f3a3d3ef"
+  integrity sha512-PaZ4BgFGG59b4rcm6K8sH62tqryQAB7JbvlbPtZTiHHdX3s8ly40ZC76TTtnDHS5oYVUFreDVntfxjeZJpaOkg==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+
+"@0xsequence/replacer@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/replacer/-/replacer-1.2.2.tgz#250299b3506ac92874865996f789557713e20252"
+  integrity sha512-f+ifZvopKFHOnDMy1RelA/A2TLrZ5zZQv+pdkTWw/DnL/6ItEFozP0L9n//tv0XiLGp8LE7U7fXAVxIvzxP/Ow==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+
+"@0xsequence/sessions@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/sessions/-/sessions-1.2.2.tgz#73de91b14f032503f6135795832b5a05f2ff5c50"
+  integrity sha512-3QoZ3DJ7diCxNaciCbOO8lk9W1AnB/2euuWSno0Tj57jBIzaJgjwxKqypC+mZdnOfhzaAyvVFSL1ci+MJgQzkg==
+  dependencies:
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/migration" "1.2.2"
+    "@0xsequence/replacer" "1.2.2"
+    ethers "^5.5.2"
+    idb "^7.1.1"
+
+"@0xsequence/signhub@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/signhub/-/signhub-1.2.2.tgz#96e4cf91eb916b506af76efefaf2eabfde464ce6"
+  integrity sha512-aZ4UHsy/b8hD+tirLP6zTZmxIZqBHCcvUO7rDmkYjBTnlX7TtPAvgQiTT1TdjzfhtbDhdiAVijde7+0qT7/glg==
+  dependencies:
+    ethers "^5.5.2"
+
+"@0xsequence/utils@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/utils/-/utils-1.2.2.tgz#1a4bf634310a11440342714aa79398e71bb6ee9d"
+  integrity sha512-1w/VN5jgv2TZNgKj16Mc8DPq0jiJ5WQjcc9kiQHJ5HEG+jxw6OzPJXhVzKAo+PYOAZQL23QEYQIlKQ4ecUjPSA==
+  dependencies:
+    js-base64 "^3.7.2"
+
+"@0xsequence/wallet@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/wallet/-/wallet-1.2.2.tgz#3f36d20ee9a6ea44c2e10b5a94811535885a85d2"
+  integrity sha512-QhkTVBomgI0Qx7p5bnUFhpYOA9Lvuwue2/SF/4XOkywwWX2783abItHDyxsIXURfr9jbct0XBxYtaUxWABMSJA==
+  dependencies:
+    "@0xsequence/abi" "1.2.2"
+    "@0xsequence/core" "1.2.2"
+    "@0xsequence/network" "1.2.2"
+    "@0xsequence/relayer" "1.2.2"
+    "@0xsequence/signhub" "1.2.2"
+    "@0xsequence/utils" "1.2.2"
+
+"@adraffy/ens-normalize@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.0.tgz#d2a39395c587e092d77cbbc80acf956a54f38bf7"
+  integrity sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==
+
 "@adraffy/ens-normalize@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.9.0.tgz#223572538f6bea336750039bb43a4016dcc8182d"
   integrity sha512-iowxq3U30sghZotgl4s/oJRci6WPBfNO5YYgk2cIOMCHr3LeGPcsZjCEr+33Q4N+oV3OABDAtA+pyvWjbvBifQ==
+
+"@adraffy/ens-normalize@1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.9.2.tgz#60111a5d9db45b2e5cbb6231b0bb8d97e8659316"
+  integrity sha512-0h+FrQDqe2Wn+IIGFkTCd4aAwTJ+7834Ek1COohCyV26AXhwQ7WQaz+4F/nLOeVl/3BtWHOHLPsq46V8YB46Eg==
 
 "@ampproject/remapping@^2.2.0":
   version "2.2.1"
@@ -1229,10 +1438,10 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@daohaus/abis@0.2.2", "@daohaus/abis@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/abis/-/abis-0.2.2.tgz#8c6dfc5f0b51388d5fbf9e99dbda29fdca933669"
-  integrity sha512-acsJLumyZc2NKFyuIKvKroQAqJXvC0ETbxTGnmpYIEs8tqkzjpawNt4Bv2NDD92udgZxXw/fM5zEuUWeOCQB5A==
+"@daohaus/abis@0.3.0", "@daohaus/abis@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/abis/-/abis-0.3.0.tgz#d20342f5d8a94a44a0686061d19e1fa105e4bc09"
+  integrity sha512-J5ye8DuPrszmP/irqiyRxj9kNyVz6BEctA51mpEGFFMSN4EirujMR7STY1yW3sF60FUv9kO4cvHwcc19ImLfjQ==
 
 "@daohaus/baal-contracts@1.2.9":
   version "1.2.9"
@@ -1244,43 +1453,43 @@
     "@openzeppelin/hardhat-upgrades" "^1.21.0"
     hardhat-contract-sizer "^2.4.0"
 
-"@daohaus/connect-context@0.2.2", "@daohaus/connect-context@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/connect-context/-/connect-context-0.2.2.tgz#115efe970146aeb6e082ff590c056256b8b675cc"
-  integrity sha512-JXiqjr8IcOER6tBojupv5OJFoIqC/7yJL5erVzI1wVILYUINVEFQ4DhjKIohMchx9Q5z86PLlkPgBiayeKhtdA==
+"@daohaus/connect-context@0.3.0", "@daohaus/connect-context@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/connect-context/-/connect-context-0.3.0.tgz#54e2234cee7295f4facd0c89544411db06a09165"
+  integrity sha512-Tob9y6KcP9/JeUwPUbvJZLlnFKf4itt3hHNyw6+RGNfzquGKTV6lrDxzUKt53eGAW1Tjxb61gv5pGs+aRpNAiA==
   dependencies:
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/profile-data" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/profile-data" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@wagmi/connectors" "2.7.0"
     "@web3modal/ethereum" "2.7.1"
     "@web3modal/react" "2.7.1"
     react "18.2.0"
     wagmi "1.3.10"
 
-"@daohaus/connect@0.2.2", "@daohaus/connect@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/connect/-/connect-0.2.2.tgz#8a9b636a37e446454fbf835be3f5ec07a9ac1b70"
-  integrity sha512-X5EiF8yK3VDdlH88WmoQ6WzXHf9fc2wJpK2NS5SYLk6RoFOCBK3G97OihQSkXu+IHuEb6xzJtwcekQES0WngUQ==
+"@daohaus/connect@0.3.0", "@daohaus/connect@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/connect/-/connect-0.3.0.tgz#a7b513db227d09afbf8d63078e047ad1e98d70a0"
+  integrity sha512-ESbMWeR+czH5SxGCSX454Bb4NZrgCTN5pAeF4YW0G4sXGWShDNX2UbBaLcNzNBGMMBQaVOg1TO7IoengWNsaDg==
   dependencies:
-    "@daohaus/connect-context" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/ui" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/connect-context" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/ui" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@radix-ui/colors" "0.1.9"
     react "18.2.0"
     react-icons "4.10.1"
     styled-components "6.0.7"
 
-"@daohaus/contract-utils@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/contract-utils/-/contract-utils-0.2.2.tgz#7a5b721ee4db218c5dae5626602e25c2984371ea"
-  integrity sha512-CpLD3R2+XvD2atJhmqIvI4XpjvJRQ/lr1P8ikYvkn90X9ovxALeBd9yDXv1BxkjdaGNtgrchbDN8Wxc/RYCq1g==
+"@daohaus/contract-utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/contract-utils/-/contract-utils-0.3.0.tgz#5096b9fd8f83a6c0dde7b5d78a637a6f06a497ab"
+  integrity sha512-2e5mRa9t1E2LsbFXYAStT745zKP/iyRD3wb+l/zcNt7CZFtKPsg7BeRmPv08dNMo7Vy8dWHJa/7vs6C00eqxfw==
   dependencies:
-    "@daohaus/abis" "0.2.2"
+    "@daohaus/abis" "0.3.0"
     "@daohaus/baal-contracts" "1.2.9"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     date-fns "2.30.0"
     ethers "5.7.2"
     localforage "1.10.0"
@@ -1291,12 +1500,12 @@
     viem "1.6.0"
     wagmi "1.3.10"
 
-"@daohaus/data-fetch-utils@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/data-fetch-utils/-/data-fetch-utils-0.2.2.tgz#170d0146e262946a677a7c46be9ce974f7c452a3"
-  integrity sha512-FkqC/tBEq3w8vGEm+UC58GKjBCD9z30LZYHCumy04P/lF/rwuyj1y23O1pCIjWbw7As+lNLXQqkLSI0fngfp4A==
+"@daohaus/data-fetch-utils@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/data-fetch-utils/-/data-fetch-utils-0.3.0.tgz#101b051553f343223c3ef274467eaca2ca7cda49"
+  integrity sha512-dm7ZgHOrFuZw3aPlN4VnUBFtk+TLDN+PVPJRAXm616jDY3PikTxcicrlSyYimuyvOFFjppOIxAjJWRynLeciww==
   dependencies:
-    "@daohaus/keychain-utils" "0.2.2"
+    "@daohaus/keychain-utils" "0.3.0"
     "@graphql-typed-document-node/core" "3.2.0"
     cross-fetch "3.1.8"
     graphql "16.3.0"
@@ -1304,48 +1513,48 @@
     tslib "2.6.1"
     wagmi "1.3.10"
 
-"@daohaus/form-builder-base@0.2.2", "@daohaus/form-builder-base@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/form-builder-base/-/form-builder-base-0.2.2.tgz#4766e54d7ed58a2abc486e07c0f4da64fd02780d"
-  integrity sha512-QzXaV4dLXh0+XkkKdbgkOncYqqJRUYauplFBH11rJWhUZ9/TW7FJ9QnZlTs2q+wDCfQIHQFOyF3tgYpkky5MHw==
+"@daohaus/form-builder-base@0.3.0", "@daohaus/form-builder-base@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/form-builder-base/-/form-builder-base-0.3.0.tgz#9109e8c3a9e8cc63e4e1bb030075d4c5d4419314"
+  integrity sha512-hJqGgYJUkOoYbG3lASGLjGKsNGMELCPyIlNK7cp5VmhxDOZiu40NbstuvD6v2qnkdCppFO5h703hZDb6o18P2Q==
   dependencies:
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/utils" "0.3.0"
     "@hookform/devtools" "4.3.1"
     react "18.2.0"
     react-hook-form "7.45.4"
     styled-components "6.0.7"
 
-"@daohaus/form-builder@0.2.2", "@daohaus/form-builder@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/form-builder/-/form-builder-0.2.2.tgz#79ba580ea8459f84d18fe26b0c69c151ad4377b9"
-  integrity sha512-NQixlbgktbvdFZzUGhVDF7MnpTrSeSp/qh8IPINFEn6nK9TdXveWB3eJnwZYnlqwfhPZ1Wqdzkj3rkqrdW+C2A==
+"@daohaus/form-builder@0.3.0", "@daohaus/form-builder@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/form-builder/-/form-builder-0.3.0.tgz#463a6e3141113fb02d99787726f8c2f67f2e9b39"
+  integrity sha512-xHs+e9Ip+caGU3xH3MOiNOyhAgqzCMhz9Uo+Y48e4iEy1ag9fS/cS5jUgo8SGxyOkERX/SR9VjSKnrsT/CMv7g==
   dependencies:
-    "@daohaus/connect" "0.2.2"
-    "@daohaus/form-builder-base" "0.2.2"
-    "@daohaus/tx-builder" "0.2.2"
-    "@daohaus/ui" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/connect" "0.3.0"
+    "@daohaus/form-builder-base" "0.3.0"
+    "@daohaus/tx-builder" "0.3.0"
+    "@daohaus/ui" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     react "18.2.0"
     react-hook-form "7.45.4"
     react-icons "4.10.1"
     styled-components "6.0.7"
 
-"@daohaus/keychain-utils@0.2.2", "@daohaus/keychain-utils@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/keychain-utils/-/keychain-utils-0.2.2.tgz#4ab2de4ba58c47e7f875286aaec40845ff18bb39"
-  integrity sha512-/gIaNiNBy+5lnJCGk4Kh9p7QdzphihmJRBMvDb8e2oNddTWR5EjFR48Ag6uFjEtls6pZTNT+lyaz2oG4l2b8lg==
+"@daohaus/keychain-utils@0.3.0", "@daohaus/keychain-utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/keychain-utils/-/keychain-utils-0.3.0.tgz#e6b4340d2c2fc11a82a3a25e7ed11165c9c70357"
+  integrity sha512-4GpyyJS0VOi8G6wvqLXnRqp96qKcbpfjhDEIkrdqiveMujRbV1SaJcYn2nPImYoiPTg0WUOqE6Qaj1lDQcjhzg==
   dependencies:
     tslib "2.6.1"
     wagmi "1.3.10"
 
-"@daohaus/moloch-v3-data@0.2.2", "@daohaus/moloch-v3-data@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-data/-/moloch-v3-data-0.2.2.tgz#4e78ba81ac15b5deb477311aff136bd47078f98d"
-  integrity sha512-AaGG34/ThfdBjxJu3jqgJYqEhra5Bv6xKC5wcxnckuByKXBcM45Ckn+jIAfQbE6A85z3jZjHwLbqZ1hhVqFpuw==
+"@daohaus/moloch-v3-data@0.3.0", "@daohaus/moloch-v3-data@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-data/-/moloch-v3-data-0.3.0.tgz#e48bbcf99a1a1b48eaea6fc03c841c3fd98f7c28"
+  integrity sha512-Ej0R4j0Yp2HCWGgs+VoYJp8tNwZD4/rnjMBMtxIeV+pdvnoYc0TnSoQ7TUyi8NrsaAxrhU5qFNhTaW4vrQCaHQ==
   dependencies:
-    "@daohaus/data-fetch-utils" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/data-fetch-utils" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@graphql-typed-document-node/core" "3.2.0"
     cross-fetch "3.1.8"
     date-fns "2.30.0"
@@ -1359,26 +1568,26 @@
     viem "1.6.0"
     wagmi "1.3.10"
 
-"@daohaus/moloch-v3-fields@0.2.2", "@daohaus/moloch-v3-fields@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-fields/-/moloch-v3-fields-0.2.2.tgz#bb31905498aea81686afadb3fb4429bf06a25a49"
-  integrity sha512-VJxQgT/+Hj5L2R1CD2H3gLTn5FGFqKBZLRMXGWDre3Y3eTGGYyYMkanNH4PiCSyvvuMLSmkyUF4zFQiEdOY/yg==
+"@daohaus/moloch-v3-fields@0.3.0", "@daohaus/moloch-v3-fields@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-fields/-/moloch-v3-fields-0.3.0.tgz#b070f859751c16a2120c6036db0d5a68b9db7331"
+  integrity sha512-5HyhJyDzZ8ffhx4fiyUMngS5Mygxt1o/vtZCdEX9UrOatD5GzHDUFfD+LuQSciDQdUL9ZE21BOCAC6Po0leF7Q==
   dependencies:
-    "@daohaus/abis" "0.2.2"
-    "@daohaus/connect" "0.2.2"
-    "@daohaus/form-builder" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/moloch-v3-data" "0.2.2"
-    "@daohaus/moloch-v3-hooks" "0.2.2"
-    "@daohaus/tx-builder" "0.2.2"
-    "@daohaus/ui" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/abis" "0.3.0"
+    "@daohaus/connect" "0.3.0"
+    "@daohaus/form-builder" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/moloch-v3-data" "0.3.0"
+    "@daohaus/moloch-v3-hooks" "0.3.0"
+    "@daohaus/tx-builder" "0.3.0"
+    "@daohaus/ui" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@ethersproject/abi" "5.7.0"
     "@radix-ui/react-checkbox" "1.0.4"
     "@walletconnect/client" "1.8.0"
-    "@walletconnect/core" "2.9.2"
+    "@walletconnect/core" "2.10.0"
     "@walletconnect/legacy-types" "2.0.0"
-    "@walletconnect/web3wallet" "1.8.8"
+    "@walletconnect/web3wallet" "1.9.0"
     date-fns "2.30.0"
     ethers "5.7.2"
     react "18.2.0"
@@ -1389,38 +1598,38 @@
     uuid "9.0.0"
     viem "1.6.0"
 
-"@daohaus/moloch-v3-hooks@0.2.2", "@daohaus/moloch-v3-hooks@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-hooks/-/moloch-v3-hooks-0.2.2.tgz#f1351df743263ee9ea9d8253ed8f2cafe7196804"
-  integrity sha512-O34FdCL8jaV0v70M3ICn9XyF2JI0UtcEoABXzRKN7Ff283toqBWA1Z8JQQXFuk3azneiiG9FZkvDy2Wy7HOCHg==
+"@daohaus/moloch-v3-hooks@0.3.0", "@daohaus/moloch-v3-hooks@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-hooks/-/moloch-v3-hooks-0.3.0.tgz#60025156366d25f0afd63fa4064753d676d0a7d7"
+  integrity sha512-wWIyMEHQMcLBOLYiYqOOGYccEyLw3AFAia2F9KT6hRs8uZNsWm+Q407l46w2SwgcUoM23wRotX+erUn4EQbYfg==
   dependencies:
-    "@daohaus/abis" "0.2.2"
-    "@daohaus/data-fetch-utils" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/moloch-v3-data" "0.2.2"
-    "@daohaus/profile-data" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/abis" "0.3.0"
+    "@daohaus/data-fetch-utils" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/moloch-v3-data" "0.3.0"
+    "@daohaus/profile-data" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     react "18.2.0"
 
-"@daohaus/moloch-v3-legos@0.2.2", "@daohaus/moloch-v3-legos@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-legos/-/moloch-v3-legos-0.2.2.tgz#e5dd0c4997de844864788ec22271135df31cb49a"
-  integrity sha512-F1u/r5zvUN60FjKngMwvRgFySq/q4jyTXNCGRqYSExQ22jSPW52zxBzFzlmCRX9+6v5Mu8jf6uYqJI7lKeHhjQ==
+"@daohaus/moloch-v3-legos@0.3.0", "@daohaus/moloch-v3-legos@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-legos/-/moloch-v3-legos-0.3.0.tgz#9f83df338152cb3d5af488e41822c29db46a179a"
+  integrity sha512-l/sqG/V4pCMtRr8PFuOLldaSFIdX4d8233WB1daVPNCaFV7FWY6ZPeoE54X/Q/yTCfvCD/GMPO33F6DLTK7gsQ==
   dependencies:
-    "@daohaus/abis" "0.2.2"
-    "@daohaus/connect" "0.2.2"
-    "@daohaus/connect-context" "0.2.2"
-    "@daohaus/data-fetch-utils" "0.2.2"
-    "@daohaus/form-builder" "0.2.2"
-    "@daohaus/form-builder-base" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/moloch-v3-data" "0.2.2"
-    "@daohaus/moloch-v3-fields" "0.2.2"
-    "@daohaus/moloch-v3-hooks" "0.2.2"
-    "@daohaus/profile-data" "0.2.2"
-    "@daohaus/tx-builder" "0.2.2"
-    "@daohaus/ui" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/abis" "0.3.0"
+    "@daohaus/connect" "0.3.0"
+    "@daohaus/connect-context" "0.3.0"
+    "@daohaus/data-fetch-utils" "0.3.0"
+    "@daohaus/form-builder" "0.3.0"
+    "@daohaus/form-builder-base" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/moloch-v3-data" "0.3.0"
+    "@daohaus/moloch-v3-fields" "0.3.0"
+    "@daohaus/moloch-v3-hooks" "0.3.0"
+    "@daohaus/profile-data" "0.3.0"
+    "@daohaus/tx-builder" "0.3.0"
+    "@daohaus/ui" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@ethersproject/abi" "5.7.0"
     "@gnosis.pm/safe-contracts" "1.3.0"
     "@graphql-typed-document-node/core" "3.2.0"
@@ -1442,9 +1651,9 @@
     "@wagmi/connectors" "2.7.0"
     "@wagmi/core" "1.3.9"
     "@walletconnect/client" "1.8.0"
-    "@walletconnect/core" "2.9.2"
+    "@walletconnect/core" "2.10.0"
     "@walletconnect/legacy-types" "2.0.0"
-    "@walletconnect/web3wallet" "1.8.8"
+    "@walletconnect/web3wallet" "1.9.0"
     "@web3modal/ethereum" "2.7.1"
     "@web3modal/react" "2.7.1"
     classnames "2.3.2"
@@ -1469,41 +1678,36 @@
     viem "1.6.0"
     wagmi "1.3.10"
 
-"@daohaus/moloch-v3-macro-ui@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-macro-ui/-/moloch-v3-macro-ui-0.2.2.tgz#5855d9843321e801c38ab3011343defde9cecfa6"
-  integrity sha512-HwWwdazriI3h0laZBzoPCqFRjKHxQPsve4k2Cyl9enZtJq/v5MVspGsVpF/2ttJvplKgTnbQIoDdX22eVVuhSg==
+"@daohaus/moloch-v3-macro-ui@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/moloch-v3-macro-ui/-/moloch-v3-macro-ui-0.3.0.tgz#11e8ddd3aebfb1dca2f754997efbfaf77f2d00de"
+  integrity sha512-dgKzMBnHcaj+CqBMdw85vfAcQP1Z+/iJ9QlOI4lRcm3WilKbNhwlT9715g5ntbvRG37J+NaYMXONs/D8RwCngA==
   dependencies:
-    "@daohaus/abis" "0.2.2"
-    "@daohaus/connect" "0.2.2"
-    "@daohaus/form-builder" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/moloch-v3-data" "0.2.2"
-    "@daohaus/moloch-v3-fields" "0.2.2"
-    "@daohaus/moloch-v3-hooks" "0.2.2"
-    "@daohaus/moloch-v3-legos" "0.2.2"
-    "@daohaus/tx-builder" "0.2.2"
-    "@daohaus/ui" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/abis" "0.3.0"
+    "@daohaus/connect" "0.3.0"
+    "@daohaus/form-builder" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/moloch-v3-data" "0.3.0"
+    "@daohaus/moloch-v3-fields" "0.3.0"
+    "@daohaus/moloch-v3-hooks" "0.3.0"
+    "@daohaus/moloch-v3-legos" "0.3.0"
+    "@daohaus/tx-builder" "0.3.0"
+    "@daohaus/ui" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@radix-ui/colors" "0.1.9"
     react "18.2.0"
     react-icons "4.10.1"
     react-table "7.8.0"
     styled-components "6.0.7"
 
-"@daohaus/profile-data@0.2.2", "@daohaus/profile-data@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/profile-data/-/profile-data-0.2.2.tgz#bf79f8ed8306a3540f7006e2c4177553ca5b88d0"
-  integrity sha512-XxYoVzHKvbwdjueGwMrwMb6XNlQcRCEqX2qH9OKY8sRVoKHolJKM/MVA4ZEU/HCkGU3jDSUJ5stYoOeAWKHLjg==
+"@daohaus/profile-data@0.3.0", "@daohaus/profile-data@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/profile-data/-/profile-data-0.3.0.tgz#2a36738fc1aa3bf0da566683118f6cbe6f9f5c11"
+  integrity sha512-3qmaK8DOrNTh8niqLRPoK0wuxenqEJfbb8xQBTphWKDH8kBxGOQeYDAdYkrPMN3zAIBzYj63dSVArilvHAPCOg==
   dependencies:
-    "@daohaus/data-fetch-utils" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/utils" "0.2.2"
-    "@graphql-typed-document-node/core" "3.2.0"
-    cross-fetch "3.1.8"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     date-fns "2.30.0"
-    graphql "16.3.0"
-    graphql-request "4.3.0"
     localforage "1.10.0"
     numbro "2.3.6"
     react "18.2.0"
@@ -1512,16 +1716,16 @@
     viem "1.6.0"
     wagmi "1.3.10"
 
-"@daohaus/tx-builder@0.2.2", "@daohaus/tx-builder@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/tx-builder/-/tx-builder-0.2.2.tgz#d640e8eedc15373575cdc334d94f4ad4974b4421"
-  integrity sha512-VRXhRN2WF6HwfUeh29Y7YsQs40hnt1aaZZScTHbYhdjDICwQTLJ74o6JKWEMmUDwcu/JKDdVCVyWZvpWyaanSQ==
+"@daohaus/tx-builder@0.3.0", "@daohaus/tx-builder@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/tx-builder/-/tx-builder-0.3.0.tgz#f332a442a1611017d312bc2d8bd2930f3d0edbce"
+  integrity sha512-yomjM8RlKvt4CdWnsb/YrsT1QonRGYYMezPg3KLB5Mc+2zT9iOfsw6oaNXZfF+HUf3kWi0qztK2hQXhsq0KMuQ==
   dependencies:
-    "@daohaus/abis" "0.2.2"
-    "@daohaus/data-fetch-utils" "0.2.2"
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/moloch-v3-data" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/abis" "0.3.0"
+    "@daohaus/data-fetch-utils" "0.3.0"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/moloch-v3-data" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@gnosis.pm/safe-contracts" "1.3.0"
     "@wagmi/core" "1.3.9"
     ethers "5.7.2"
@@ -1530,13 +1734,13 @@
     viem "1.6.0"
     wagmi "1.3.10"
 
-"@daohaus/ui@0.2.2", "@daohaus/ui@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/ui/-/ui-0.2.2.tgz#a8cd9c90918b6fbbe1a0eaf40c73f847b6d40c9e"
-  integrity sha512-82NwV8ashiCyeeCDgQ5OHwO/AemuRfaXU7x4c0XY7zsTpgYqSUplJ2STFyr4Z/iVbsXAiJEQ9Zi8yo7qbJgZ7A==
+"@daohaus/ui@0.3.0", "@daohaus/ui@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/ui/-/ui-0.3.0.tgz#90424e9b02e7dc44b901d45e0f9d82097c02d4c5"
+  integrity sha512-tokMecGF8qgv8LWzAl3I2JShCfG1aVjWQBCWcRegj3jb41o6Lwsk0ixMRz1kW8KCvx7MAQtiX5+yz7D70/6Kzw==
   dependencies:
-    "@daohaus/keychain-utils" "0.2.2"
-    "@daohaus/utils" "0.2.2"
+    "@daohaus/keychain-utils" "0.3.0"
+    "@daohaus/utils" "0.3.0"
     "@radix-ui/colors" "0.1.9"
     "@radix-ui/react-accessible-icon" "1.0.3"
     "@radix-ui/react-avatar" "1.0.3"
@@ -1560,12 +1764,12 @@
     rollup-plugin-sourcemaps "0.6.3"
     styled-components "6.0.7"
 
-"@daohaus/utils@0.2.2", "@daohaus/utils@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@daohaus/utils/-/utils-0.2.2.tgz#ff9e0e04c885fe3206ba1cbd82487dd77fb79aa6"
-  integrity sha512-YJ2+/ULkFP/W6fEsNuyIprKFGi/StIrlYFvj/N4tYuiJTw9wQY6ewdQ0k+/z4NkvNOGytnHz8iUka9tY18nzgg==
+"@daohaus/utils@0.3.0", "@daohaus/utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@daohaus/utils/-/utils-0.3.0.tgz#2e5b7d2f5c7bcb14a98487930de064f208d8cd5e"
+  integrity sha512-gmrEqjpLgFlYb4i0e+gY853ApsO8S2p9EsWLmdyTPTfP84N8XwWTSnF4rhdaviFdkzXnVORMws0ytMFiSsVZyQ==
   dependencies:
-    "@daohaus/keychain-utils" "0.2.2"
+    "@daohaus/keychain-utils" "0.3.0"
     date-fns "2.30.0"
     localforage "1.10.0"
     numbro "2.3.6"
@@ -2246,7 +2450,7 @@
   dependencies:
     "@noble/hashes" "1.3.1"
 
-"@noble/curves@^1.0.0":
+"@noble/curves@1.2.0", "@noble/curves@^1.0.0", "@noble/curves@~1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.2.0.tgz#92d7e12e4e49b23105a2555c6984d41733d65c35"
   integrity sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==
@@ -2260,6 +2464,11 @@
   dependencies:
     "@noble/hashes" "1.3.0"
 
+"@noble/hashes@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.1.2.tgz#e9e035b9b166ca0af657a7848eb2718f0f22f183"
+  integrity sha512-KYRCASVTv6aeUi1tsF8/vpyR7zpfs3FUzy2Jqm+MU+LmUKhQ0y2FpfwqkCcxSg2ua4GALJd8k2R76WxwZGbQpA==
+
 "@noble/hashes@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.0.tgz#085fd70f6d7d9d109671090ccae1d3bec62554a1"
@@ -2270,10 +2479,15 @@
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.1.tgz#8831ef002114670c603c458ab8b11328406953a9"
   integrity sha512-EbqwksQwz9xDRGfDST86whPBgM65E0OH/pCgqW0GBVzO22bNE+NuIbeTb714+IfSjU3aRk47EUvXIb5bTsenKA==
 
-"@noble/hashes@1.3.2", "@noble/hashes@^1.3.1", "@noble/hashes@~1.3.0":
+"@noble/hashes@1.3.2", "@noble/hashes@^1.3.1", "@noble/hashes@~1.3.0", "@noble/hashes@~1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.2.tgz#6f26dbc8fbc7205873ce3cee2f690eba0d421b39"
   integrity sha512-MVC8EAQp7MvEcm30KWENFjgR+Mkmf+D189XJTkFIlwohU5hcBbn1ZkKq7KVTi2Hme3PMGF390DaL52beVrIihQ==
+
+"@noble/secp256k1@1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-1.7.1.tgz#b251c70f824ce3ca7f8dc3df08d58f005cc0507c"
+  integrity sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==
 
 "@opengsn/contracts@2.2.5":
   version "2.2.5"
@@ -2820,6 +3034,11 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.1.tgz#ebb651ee52ff84f420097055f4bf46cfba403938"
   integrity sha512-ZxOhsSyxYwLJj3pLZCefNitxsj093tb2vq90mp2txoYeBqbcjDjqFhyM8eUjq/uFm6zJ+mUuqxlS2FkuSY1MTA==
 
+"@scure/base@~1.1.2":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.3.tgz#8584115565228290a6c6c4961973e0903bb3df2f"
+  integrity sha512-/+SgoRjLq7Xlf0CWuLHq2LUZeL/w65kfzAPG5NH9pcmBhs+nunQTn4gvdwgMTIXnt9b2C/1SeL2XiysZEyIC9Q==
+
 "@scure/bip32@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.0.tgz#6c8d980ef3f290987736acd0ee2e0f0d50068d87"
@@ -2829,10 +3048,27 @@
     "@noble/hashes" "~1.3.0"
     "@scure/base" "~1.1.0"
 
+"@scure/bip32@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.2.tgz#90e78c027d5e30f0b22c1f8d50ff12f3fb7559f8"
+  integrity sha512-N1ZhksgwD3OBlwTv3R6KFEcPojl/W4ElJOeCZdi+vuI5QmTFwLq3OFf2zd2ROpKvxFdgZ6hUpb0dx9bVNEwYCA==
+  dependencies:
+    "@noble/curves" "~1.2.0"
+    "@noble/hashes" "~1.3.2"
+    "@scure/base" "~1.1.2"
+
 "@scure/bip39@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.0.tgz#a207e2ef96de354de7d0002292ba1503538fc77b"
   integrity sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==
+  dependencies:
+    "@noble/hashes" "~1.3.0"
+    "@scure/base" "~1.1.0"
+
+"@scure/bip39@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.2.1.tgz#5cee8978656b272a917b7871c981e0541ad6ac2a"
+  integrity sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==
   dependencies:
     "@noble/hashes" "~1.3.0"
     "@scure/base" "~1.1.0"
@@ -3115,6 +3351,13 @@
     "@tanstack/query-core" "4.33.0"
     use-sync-external-store "^1.2.0"
 
+"@tokenbound/sdk@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@tokenbound/sdk/-/sdk-0.4.5.tgz#aee9d4d9c45b15c45c56f1b0e342dd4e058b44ff"
+  integrity sha512-kfvvrYBOVVhuId74ZFkN6kd/YSTFQCUnOT/yv0L22fqIQVF0i58G0bYoSgQmmW2Yypv7AglIazKXFTRuwrnByg==
+  dependencies:
+    viem "^1.19.11"
+
 "@types/bn.js@^5.1.0":
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/@types/bn.js/-/bn.js-5.1.1.tgz#b51e1b55920a4ca26e9285ff79936bbdec910682"
@@ -3174,6 +3417,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.3.tgz#fa52c147f405d56b2f1dd8780d840aa87ddff629"
   integrity sha512-ITI7rbWczR8a/S6qjAW7DMqxqFMjjTo61qZVWJ1ubPvbIQsL5D/TvwjYEalM8Kthpe3hTzOGrF2TGbAu2uyqeA==
 
+"@types/node@18.15.13":
+  version "18.15.13"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.13.tgz#f64277c341150c979e42b00e4ac289290c9df469"
+  integrity sha512-N+0kuo9KgrUQ1Sn/ifDXsvg0TTleP7rIy4zOBGECxAljqvqfqpTfzx0Q1NUedOixRMBfe2Whhb056a42cWs26Q==
+
 "@types/node@^12.12.54":
   version "12.20.55"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.55.tgz#c329cbd434c42164f846b909bd6f85b5537f6240"
@@ -3215,6 +3463,13 @@
   version "18.2.7"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.7.tgz#67222a08c0a6ae0a0da33c3532348277c70abb63"
   integrity sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-table@^7.7.15":
+  version "7.7.15"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.7.15.tgz#e9a093a5f2be4fff5ccb41f1aec9516b520ed9b3"
+  integrity sha512-tlXKCeq4gk2xT2lB+Hbp/dO5yYZ899HwQOAp/3o3hKw8wp7ngNpdB90BNWE6kWCm5K2KzmEsHnYoJheSS5SVjg==
   dependencies:
     "@types/react" "*"
 
@@ -3362,6 +3617,28 @@
     "@walletconnect/types" "^1.8.0"
     "@walletconnect/utils" "^1.8.0"
 
+"@walletconnect/core@2.10.0", "@walletconnect/core@^2.9.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@walletconnect/core/-/core-2.10.0.tgz#b659de4dfb374becd938964abd4f2150d410e617"
+  integrity sha512-Z8pdorfIMueuiBXLdnf7yloiO9JIiobuxN3j0OTal+MYc4q5/2O7d+jdD1DAXbLi1taJx3x60UXT/FPVkjIqIQ==
+  dependencies:
+    "@walletconnect/heartbeat" "1.2.1"
+    "@walletconnect/jsonrpc-provider" "1.0.13"
+    "@walletconnect/jsonrpc-types" "1.0.3"
+    "@walletconnect/jsonrpc-utils" "1.0.8"
+    "@walletconnect/jsonrpc-ws-connection" "1.0.13"
+    "@walletconnect/keyvaluestorage" "^1.0.2"
+    "@walletconnect/logger" "^2.0.1"
+    "@walletconnect/relay-api" "^1.0.9"
+    "@walletconnect/relay-auth" "^1.0.4"
+    "@walletconnect/safe-json" "^1.0.2"
+    "@walletconnect/time" "^1.0.2"
+    "@walletconnect/types" "2.10.0"
+    "@walletconnect/utils" "2.10.0"
+    events "^3.3.0"
+    lodash.isequal "4.5.0"
+    uint8arrays "^3.1.0"
+
 "@walletconnect/core@2.9.2":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@walletconnect/core/-/core-2.9.2.tgz#c46734ca63771b28fd77606fd521930b7ecfc5e1"
@@ -3392,28 +3669,6 @@
     "@walletconnect/socket-transport" "^1.8.0"
     "@walletconnect/types" "^1.8.0"
     "@walletconnect/utils" "^1.8.0"
-
-"@walletconnect/core@^2.9.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@walletconnect/core/-/core-2.10.0.tgz#b659de4dfb374becd938964abd4f2150d410e617"
-  integrity sha512-Z8pdorfIMueuiBXLdnf7yloiO9JIiobuxN3j0OTal+MYc4q5/2O7d+jdD1DAXbLi1taJx3x60UXT/FPVkjIqIQ==
-  dependencies:
-    "@walletconnect/heartbeat" "1.2.1"
-    "@walletconnect/jsonrpc-provider" "1.0.13"
-    "@walletconnect/jsonrpc-types" "1.0.3"
-    "@walletconnect/jsonrpc-utils" "1.0.8"
-    "@walletconnect/jsonrpc-ws-connection" "1.0.13"
-    "@walletconnect/keyvaluestorage" "^1.0.2"
-    "@walletconnect/logger" "^2.0.1"
-    "@walletconnect/relay-api" "^1.0.9"
-    "@walletconnect/relay-auth" "^1.0.4"
-    "@walletconnect/safe-json" "^1.0.2"
-    "@walletconnect/time" "^1.0.2"
-    "@walletconnect/types" "2.10.0"
-    "@walletconnect/utils" "2.10.0"
-    events "^3.3.0"
-    lodash.isequal "4.5.0"
-    uint8arrays "^3.1.0"
 
 "@walletconnect/crypto@^1.0.2", "@walletconnect/crypto@^1.0.3":
   version "1.0.3"
@@ -3674,6 +3929,21 @@
   dependencies:
     tslib "1.14.1"
 
+"@walletconnect/sign-client@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@walletconnect/sign-client/-/sign-client-2.10.0.tgz#0fee8f12821e37783099f0c7bd64e6efdfbd9d86"
+  integrity sha512-hbDljDS53kR/It3oXD91UkcOsT6diNnW5+Zzksm0YEfwww5dop/YfNlcdnc8+jKUhWOL/YDPNQCjzsCSNlVzbw==
+  dependencies:
+    "@walletconnect/core" "2.10.0"
+    "@walletconnect/events" "^1.0.1"
+    "@walletconnect/heartbeat" "1.2.1"
+    "@walletconnect/jsonrpc-utils" "1.0.8"
+    "@walletconnect/logger" "^2.0.1"
+    "@walletconnect/time" "^1.0.2"
+    "@walletconnect/types" "2.10.0"
+    "@walletconnect/utils" "2.10.0"
+    events "^3.3.0"
+
 "@walletconnect/sign-client@2.9.2":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@walletconnect/sign-client/-/sign-client-2.9.2.tgz#ff4c81c082c2078878367d07f24bcb20b1f7ab9e"
@@ -3802,19 +4072,19 @@
     js-sha3 "0.8.0"
     query-string "6.13.5"
 
-"@walletconnect/web3wallet@1.8.8":
-  version "1.8.8"
-  resolved "https://registry.yarnpkg.com/@walletconnect/web3wallet/-/web3wallet-1.8.8.tgz#f8424a96617cacecba633343cd21e0144cc734da"
-  integrity sha512-/dkP5jOvoRIi5RggoeSoxGvsDfZCYvC0AgwwXpzVURZKcac/h2iN2DbMHnV4L95RmGmrlQ6Jcv59S3EqsVOk5w==
+"@walletconnect/web3wallet@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@walletconnect/web3wallet/-/web3wallet-1.9.0.tgz#ad4094e1e2ed757bc75efa961121b66b2eeb4306"
+  integrity sha512-3uu6GbOz2uwcmVaIpijkPlReywC1GsFtwJOB1bJZOkc8wjtNmR3jUMwqxWUv8ojbmDVVWQl1HN7Sptkrmq9Xyw==
   dependencies:
     "@walletconnect/auth-client" "2.1.1"
-    "@walletconnect/core" "2.9.2"
+    "@walletconnect/core" "2.10.0"
     "@walletconnect/jsonrpc-provider" "1.0.13"
     "@walletconnect/jsonrpc-utils" "1.0.8"
     "@walletconnect/logger" "2.0.1"
-    "@walletconnect/sign-client" "2.9.2"
-    "@walletconnect/types" "2.9.2"
-    "@walletconnect/utils" "2.9.2"
+    "@walletconnect/sign-client" "2.10.0"
+    "@walletconnect/types" "2.10.0"
+    "@walletconnect/utils" "2.10.0"
 
 "@walletconnect/window-getters@1.0.0":
   version "1.0.0"
@@ -4046,6 +4316,11 @@ abitype@0.9.3:
   resolved "https://registry.yarnpkg.com/abitype/-/abitype-0.9.3.tgz#294d25288ee683d72baf4e1fed757034e3c8c277"
   integrity sha512-dz4qCQLurx97FQhnb/EIYTk/ldQ+oafEDUqC0VVIeQS1Q48/YWt/9YNfMmp9SLFqN41ktxny3c8aYxHjmFIB/w==
 
+abitype@0.9.8:
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/abitype/-/abitype-0.9.8.tgz#1f120b6b717459deafd213dfbf3a3dd1bf10ae8c"
+  integrity sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==
+
 accepts@~1.3.8:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.8.tgz#0bf0be125b67014adcb0b0921e62db7bffe16b2e"
@@ -4063,6 +4338,11 @@ aes-js@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/aes-js/-/aes-js-3.0.0.tgz#e21df10ad6c2053295bcbb8dab40b09dbea87e4d"
   integrity sha512-H7wUZRn8WpTq9jocdxQ2c8x2sKo9ZVmzfRE13GiNJXfp7NcKYEdvl3vspKjXox6RIG2VtaRe4JFvxG4rqp2Zuw==
+
+aes-js@4.0.0-beta.5:
+  version "4.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/aes-js/-/aes-js-4.0.0-beta.5.tgz#8d2452c52adedebc3a3e28465d858c11ca315873"
+  integrity sha512-G965FqalsNyrPqgEGON7nIx1e/OVENSgiEIzyC63haUMuvNnwIgIjMs52hlTCKhkBny7A2ORNlfY9Zu+jmGk1Q==
 
 aes-js@^3.1.2:
   version "3.1.2"
@@ -5732,7 +6012,7 @@ ethereumjs-util@^7.0.3:
     ethereum-cryptography "^0.1.3"
     rlp "^2.2.4"
 
-ethers@5.7.2, ethers@^5.7.1:
+ethers@5.7.2, ethers@^5.5.2, ethers@^5.7.1, ethers@^5.7.2:
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.7.2.tgz#3a7deeabbb8c030d4126b24f84e525466145872e"
   integrity sha512-wswUsmWo1aOK8rR7DIKiWSw9DbLWe6x98Jrn8wcTflTVvaXhAMaB5zGAXy0GYQEQp9iO1iSHWVyARQm11zUtyg==
@@ -5767,6 +6047,24 @@ ethers@5.7.2, ethers@^5.7.1:
     "@ethersproject/wallet" "5.7.0"
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
+
+ethers@^6.7.1:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.7.1.tgz#9c65e8b5d8e9ad77b7e8cf1c46099892cfafad49"
+  integrity sha512-qX5kxIFMfg1i+epfgb0xF4WM7IqapIIu50pOJ17aebkxxa4BacW5jFrQRmCJpDEg2ZK2oNtR5QjrQ1WDBF29dA==
+  dependencies:
+    "@adraffy/ens-normalize" "1.9.2"
+    "@noble/hashes" "1.1.2"
+    "@noble/secp256k1" "1.7.1"
+    "@types/node" "18.15.13"
+    aes-js "4.0.0-beta.5"
+    tslib "2.4.0"
+    ws "8.5.0"
+
+eventemitter2@^6.4.5:
+  version "6.4.9"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
+  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
 
 eventemitter3@^4.0.7:
   version "4.0.7"
@@ -6465,6 +6763,11 @@ iconv-lite@0.4.24:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
+idb@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/idb/-/idb-7.1.1.tgz#d910ded866d32c7ced9befc5bfdf36f572ced72b"
+  integrity sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==
+
 ieee754@^1.1.4, ieee754@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
@@ -6850,6 +7153,11 @@ isomorphic-ws@^4.0.1:
   resolved "https://registry.yarnpkg.com/isomorphic-ws/-/isomorphic-ws-4.0.1.tgz#55fd4cd6c5e6491e76dc125938dd863f5cd4f2dc"
   integrity sha512-BhBvN2MBpWTaSHdWRb/bwdZJ1WaehQ2L1KngkCkfLUGF0mAWAT1sQUQacEmQ0jXkFw/czDXPNQSL5u2/Krsz1w==
 
+isows@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/isows/-/isows-1.0.3.tgz#93c1cf0575daf56e7120bab5c8c448b0809d0d74"
+  integrity sha512-2cKei4vlmg2cxEjm3wVSqn8pcoRF/LX/wpifuuNquFO4SQmPwarClT+SUCA2lt+l581tTeZIPIZuIDo2jWN1fg==
+
 jayson@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/jayson/-/jayson-4.1.0.tgz#60dc946a85197317f2b1439d672a8b0a99cea2f9"
@@ -6867,6 +7175,11 @@ jayson@^4.1.0:
     json-stringify-safe "^5.0.1"
     uuid "^8.3.2"
     ws "^7.4.5"
+
+js-base64@^3.7.2:
+  version "3.7.5"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.5.tgz#21e24cf6b886f76d6f5f165bfcd69cc55b9e3fca"
+  integrity sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==
 
 js-cookie@^2.2.1:
   version "2.2.1"
@@ -8143,7 +8456,7 @@ react-style-singleton@^2.2.1:
     invariant "^2.2.4"
     tslib "^2.0.0"
 
-react-table@7.8.0:
+react-table@7.8.0, react-table@^7.8.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.8.0.tgz#07858c01c1718c09f7f1aed7034fcfd7bda907d2"
   integrity sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==
@@ -9065,6 +9378,11 @@ tslib@1.14.1, tslib@^1.11.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
+tslib@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
+  integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
 tslib@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.1.tgz#fd8c9a0ff42590b25703c0acb3de3d3f4ede0410"
@@ -9407,6 +9725,20 @@ viem@^1.0.0:
     isomorphic-ws "5.0.0"
     ws "8.12.0"
 
+viem@^1.19.11:
+  version "1.19.11"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-1.19.11.tgz#de4ee7537ee036894bd818aa316a8faecaf017e9"
+  integrity sha512-dbsXEWDBZkByuzJXAs/e01j7dpUJ5ICF5WcyntFwf8Y97n5vnC/91lAleSa6DA5V4WJvYZbhDpYeTctsMAQnhA==
+  dependencies:
+    "@adraffy/ens-normalize" "1.10.0"
+    "@noble/curves" "1.2.0"
+    "@noble/hashes" "1.3.2"
+    "@scure/bip32" "1.3.2"
+    "@scure/bip39" "1.2.1"
+    abitype "0.9.8"
+    isows "1.0.3"
+    ws "8.13.0"
+
 vite@^3.2.0:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.7.tgz#35a62826bd4d6b778ae5db8766d023bcd4e7bef3"
@@ -9453,6 +9785,11 @@ watchpack@^1.7.4:
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
+
+webextension-polyfill@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.10.0.tgz#ccb28101c910ba8cf955f7e6a263e662d744dbb8"
+  integrity sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
@@ -9579,15 +9916,20 @@ ws@8.12.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.12.0.tgz#485074cc392689da78e1828a9ff23585e06cddd8"
   integrity sha512-kU62emKIdKVeEIOIKVegvqpXMSTAMLJozpHZaJNDYqBjzlSYXQGviYwN1osDLJ9av68qHd4a2oSjd7yD4pacig==
 
+ws@8.13.0, ws@^8.5.0:
+  version "8.13.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.13.0.tgz#9a9fb92f93cf41512a0735c8f4dd09b8a1211cd0"
+  integrity sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==
+
+ws@8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
+  integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
+
 ws@^7.4.5, ws@^7.5.1:
   version "7.5.9"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
-
-ws@^8.5.0:
-  version "8.13.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.13.0.tgz#9a9fb92f93cf41512a0735c8f4dd09b8a1211cd0"
-  integrity sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.2"

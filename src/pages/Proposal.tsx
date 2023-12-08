@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { RiArrowLeftLine } from "react-icons/ri";
+
 import { useCurrentDao, useDaoProposal } from "@daohaus/moloch-v3-hooks";
 import {
   ProposalActionData,
@@ -12,6 +14,7 @@ import {
   PROPOSAL_TYPE_LABELS,
   TXLego,
 } from "@daohaus/utils";
+import { ButtonRouterLink } from "../components/ButtonRouterLink";
 
 const LoadingContainer = styled.div`
   margin-top: 5rem;
@@ -43,9 +46,6 @@ const RightCard = styled(Card)`
   }
 `;
 
-// TODO: Import TxLegos
-const TX: Record<string, TXLego> = {};
-
 export const Proposal = () => {
   const { proposal } = useDaoProposal();
   const { daoChain, daoId } = useCurrentDao();
@@ -65,46 +65,56 @@ export const Proposal = () => {
     );
 
   return (
-    <BiColumnLayout
-      title={proposal?.title}
-      subtitle={`${proposal?.proposalId} | ${getProposalTypeLabel(
-        proposal?.proposalType,
-        PROPOSAL_TYPE_LABELS
-      )}`}
-      left={
-        <OverviewCard>
-          {daoChain && daoId && proposal && (
-            <ProposalDetails
+    <>
+      <ButtonRouterLink
+        color="secondary"
+        variant="outline"
+        to={`/molochV3/${daoChain}/${daoId}`}
+        IconLeft={RiArrowLeftLine}
+      >
+        DAO
+      </ButtonRouterLink>
+      <BiColumnLayout
+        title={proposal?.title}
+        subtitle={`${proposal?.proposalId} | ${getProposalTypeLabel(
+          proposal?.proposalType,
+          PROPOSAL_TYPE_LABELS
+        )}`}
+        left={
+          <OverviewCard>
+            {daoChain && daoId && proposal && (
+              <ProposalDetails
+                daoChain={daoChain}
+                daoId={daoId}
+                proposal={proposal}
+                decodeError={false}
+                includeLinks
+              />
+            )}
+            <ProposalActionData
               daoChain={daoChain}
               daoId={daoId}
               proposal={proposal}
               decodeError={false}
+            />
+          </OverviewCard>
+        }
+        right={
+          <RightCard>
+            <ProposalActions
+              proposal={proposal}
+              daoChain={daoChain}
+              daoId={daoId}
+            />
+            <ProposalHistory
+              proposalId={proposal.proposalId}
+              daoChain={daoChain}
+              daoId={daoId}
               includeLinks
             />
-          )}
-          <ProposalActionData
-            daoChain={daoChain}
-            daoId={daoId}
-            proposal={proposal}
-            decodeError={false}
-          />
-        </OverviewCard>
-      }
-      right={
-        <RightCard>
-          <ProposalActions
-            proposal={proposal}
-            daoChain={daoChain}
-            daoId={daoId}
-          />
-          <ProposalHistory
-            proposalId={proposal.proposalId}
-            daoChain={daoChain}
-            daoId={daoId}
-            includeLinks
-          />
-        </RightCard>
-      }
-    />
+          </RightCard>
+        }
+      />
+    </>
   );
 };
