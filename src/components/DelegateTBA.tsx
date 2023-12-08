@@ -21,6 +21,7 @@ import {
   useDaoMember,
 } from "@daohaus/moloch-v3-hooks";
 import {
+  ABI,
   EthAddress,
   encodeFunction,
   handleErrorMessage,
@@ -112,7 +113,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
         contract: {
           type: "static",
           contractName: "CURRENT_TBA",
-          abi: erc6551AccountAbiV3,
+          abi: erc6551AccountAbiV3 as ABI,
           targetAddress: tbaAddress,
         },
         method: "execute",
