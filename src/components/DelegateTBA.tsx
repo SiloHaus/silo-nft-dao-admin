@@ -15,7 +15,11 @@ import {
   WrappedInput,
   useToast,
 } from "@daohaus/ui";
-import { useCurrentDao, useDaoData, useDaoMember } from "@daohaus/moloch-v3-hooks";
+import {
+  useCurrentDao,
+  useDaoData,
+  useDaoMember,
+} from "@daohaus/moloch-v3-hooks";
 import {
   EthAddress,
   encodeFunction,
@@ -27,7 +31,7 @@ import { LOCAL_ABI } from "@daohaus/abis";
 import { useDHConnect } from "@daohaus/connect";
 
 import { useTba } from "../hooks/useTba";
-import TBA_ACCOUNT from "../abis/tbaAccount.json";
+import { erc6551AccountAbiV2 } from "@tokenbound/sdk";
 import { styled } from "styled-components";
 import { APP_FORM } from "../legos/forms";
 import { MolochFields } from "@daohaus/moloch-v3-fields";
@@ -57,12 +61,15 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
   });
   const { daoChainId, chainId } = useDHConnect();
 
-  const { isFetched, isFetching, member: tbaMember } = useDaoMember({
+  const {
+    isFetched,
+    isFetching,
+    member: tbaMember,
+  } = useDaoMember({
     daoChain: daoChain || "0x5",
     daoId: daoId || "",
     memberAddress: tba,
   });
-
 
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -105,7 +112,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
         contract: {
           type: "static",
           contractName: "CURRENT_TBA",
-          abi: TBA_ACCOUNT,
+          abi: erc6551AccountAbiV2,
           targetAddress: tbaAddress,
         },
         method: "executeCall",
@@ -142,7 +149,11 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button color="secondary" size="sm">
-            Delegate{tbaMember?.delegatingTo != currentUser || tbaMember?.delegatingTo != tba  && <Tooltip content="Delegate is not owner or tba" />}
+            Delegate
+            {tbaMember?.delegatingTo != currentUser ||
+              (tbaMember?.delegatingTo != tba && (
+                <Tooltip content="Delegate is not owner or tba" />
+              ))}
           </Button>
         </DialogTrigger>
 

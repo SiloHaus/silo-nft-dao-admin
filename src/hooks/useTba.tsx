@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { TokenboundClient } from "@tokenbound/sdk";
+import { TBVersion, TokenboundClient } from "@tokenbound/sdk";
 
 import { HAUS_NETWORK_DATA, ValidNetwork } from "@daohaus/keychain-utils";
 import { EthAddress } from "@daohaus/utils";
@@ -19,7 +19,10 @@ const fetchTbaForNft = async ({
     throw new Error("Invalid ChainId");
   }
 
-  const tokenboundClient = new TokenboundClient({ chainId: networkId });
+  const tokenboundClient = new TokenboundClient({
+    chainId: networkId,
+    version: TBVersion.V2,
+  });
 
   const tokenBoundAccount = await tokenboundClient.getAccount({
     tokenContract: contractAddress,
@@ -46,7 +49,10 @@ const fetchIsTba = async ({
     throw new Error("Invalid ChainId");
   }
 
-  const tokenboundClient = new TokenboundClient({ chainId: networkId });
+  const tokenboundClient = new TokenboundClient({
+    chainId: networkId,
+    version: TBVersion.V2,
+  });
 
   const isAccountDeployed = await tokenboundClient.checkAccountDeployment({
     accountAddress: accountAddress,
