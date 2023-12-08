@@ -21,7 +21,7 @@ const fetchTbaForNft = async ({
 
   const tokenboundClient = new TokenboundClient({
     chainId: networkId,
-    version: TBVersion.V2,
+    version: TBVersion.V3,
   });
 
   const tokenBoundAccount = await tokenboundClient.getAccount({
@@ -51,7 +51,7 @@ const fetchIsTba = async ({
 
   const tokenboundClient = new TokenboundClient({
     chainId: networkId,
-    version: TBVersion.V2,
+    version: TBVersion.V3,
   });
 
   const isAccountDeployed = await tokenboundClient.checkAccountDeployment({

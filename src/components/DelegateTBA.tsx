@@ -31,7 +31,7 @@ import { LOCAL_ABI } from "@daohaus/abis";
 import { useDHConnect } from "@daohaus/connect";
 
 import { useTba } from "../hooks/useTba";
-import { erc6551AccountAbiV2 } from "@tokenbound/sdk";
+import { erc6551AccountAbiV3 } from "@tokenbound/sdk";
 import { styled } from "styled-components";
 import { APP_FORM } from "../legos/forms";
 import { MolochFields } from "@daohaus/moloch-v3-fields";
@@ -112,15 +112,16 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
         contract: {
           type: "static",
           contractName: "CURRENT_TBA",
-          abi: erc6551AccountAbiV2,
+          abi: erc6551AccountAbiV3,
           targetAddress: tbaAddress,
         },
-        method: "executeCall",
+        method: "execute",
         disablePoll: true,
         args: [
           { type: "static", value: sharesAddress },
           { type: "static", value: 0 },
           { type: "static", value: encodedDelegate },
+          { type: "static", value: 0 },
         ],
       },
       lifeCycleFns: {
