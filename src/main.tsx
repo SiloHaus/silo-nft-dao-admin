@@ -8,6 +8,7 @@ import { App } from "./App";
 
 import "./App.css";
 import { siloTheme } from "./theme/theme";
+import { Banner } from "./components/Banner";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <HausThemeProvider themeOverrides={siloTheme}>
+          <Banner />
           <App />
         </HausThemeProvider>
       </QueryClientProvider>
