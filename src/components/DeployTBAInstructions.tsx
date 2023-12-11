@@ -8,6 +8,7 @@ import {
   Link,
   ParLg,
   ParMd,
+  ParSm,
 } from "@daohaus/ui";
 import { TOKENBOUND_URL } from "../utils/constants";
 import { styled } from "styled-components";
@@ -55,7 +56,10 @@ export const DeployTBAInstructions = ({
 
   return (
     <StepContainer>
-      <ParLg>Follow the steps below to deploy TBA for this avatar.</ParLg>
+      <ParLg>
+        A TBA lets you own assets and participate in DAOs. All as your NFT.
+      </ParLg>
+      <ParSm>Follow the steps below to deploy TBA for this avatar.</ParSm>
 
       <div>
         <ParMd>
@@ -63,28 +67,33 @@ export const DeployTBAInstructions = ({
         </ParMd>
         <LinkContainer>
           <DataMd>
-            Open the{" "}
-            <Link
-              href={`${TOKENBOUND_URL[daoChain]}/${contractAddress}/${tokenId}`}
-            >
-              <DataMd>TokenBound</DataMd>
-            </Link>{" "}
-            app.
+            Open the tokenbound app. (TokenBound is like etherscan for TBAs.)
           </DataMd>
         </LinkContainer>
       </div>
       <div>
         <ParMd>
-          <Bold>Step 2</Bold>
+          <Bold>Step 2: Deploy</Bold>
         </ParMd>
-        <DataMd>Deploy the TokenBound account.</DataMd>
+        <DataMd>Click the big button to <strong>deploy</strong> the TokenBound account.</DataMd>
       </div>
 
       <div>
         <ParMd>
           <Bold>Step 3</Bold>
         </ParMd>
-        <ParMd>Return to the DAO</ParMd>
+        <ParMd>
+          <strong>Return to the DAO.</strong> You can now delegate to your self
+          or even connect to the dao directly using your TBA and wallet connect.
+        </ParMd>
+      </div>
+      <div>
+        <ParMd> </ParMd>
+        <Link
+          href={`${TOKENBOUND_URL[daoChain]}/${contractAddress}/${tokenId}`}
+        >
+          <DataMd>Go to the TokenBound app now</DataMd>
+        </Link>{" "}
       </div>
     </StepContainer>
   );

@@ -162,7 +162,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
         <DialogContent title="Delegate TBA">
           <Container>
             <ParMd>
-              Delegate to {checked ? "a different Address" : "the NFT Owner"}:
+              Delegate to {checked ? "a different Address" : "your self"}:
             </ParMd>
             {!checked ? (
               <AddressDisplay address={currentUser} truncate={true} />

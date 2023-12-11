@@ -8,6 +8,7 @@ import {
   Link,
   ParLg,
   ParMd,
+  ParSm,
 } from "@daohaus/ui";
 import { TOKENBOUND_URL } from "../utils/constants";
 import { styled } from "styled-components";
@@ -55,7 +56,7 @@ export const ConnectTBAInstructions = ({
 
   return (
     <StepContainer>
-      <ParLg>Follow the steps below to connect this NFT to the DAO.</ParLg>
+      <ParLg>Follow the steps below to connect this NFT to the DAO using wallet connect.</ParLg>
 
       <div>
         <ParMd>

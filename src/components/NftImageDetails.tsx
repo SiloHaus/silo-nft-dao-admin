@@ -10,7 +10,9 @@ import {
   Input,
   Link,
   Loading,
+  ParLg,
   ParMd,
+  ParSm,
   Tooltip,
   WarningText,
   WrappedInput,
@@ -99,7 +101,9 @@ export const NftImageDetails = ({
   if (daoId && currentUser) {
     return (
       <Container>
+        <ParSm>A TBA lets you own assets and participate in DAOs. All as your NFT.</ParSm>
         <NftCardImage src={nftImage} />
+
         {isClaimed ? (
           <>
             <ParMd>Power: {fromWei(tbaMember?.shares || "0")}</ParMd>
