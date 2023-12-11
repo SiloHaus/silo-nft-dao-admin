@@ -170,4 +170,8 @@ export const siloTheme: ThemeOverrides = {
       color: siloMono.step5,
     },
   },
+  banner: {
+    color: siloMono.step2,
+    bg: siloMono.step1,
+  },
 };
