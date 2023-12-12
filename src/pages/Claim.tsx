@@ -27,14 +27,23 @@ export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
     <SingleColumnLayout
       title="Activate Your Avatar"
       actions={
+        // <ButtonRouterLink
+        //   to={`/molochV3/${daoChain}/${daoId}`}
+        //   IconRight={RiArrowRightLine}
+        // >
+        //   Go to DAO
+        // </ButtonRouterLink>
         <ButtonRouterLink
-          to={`/molochV3/${daoChain}/${daoId}`}
+          color="secondary"
+          to={`/molochV3/${daoChain}/${dao.id}/member/${address}`}
           IconRight={RiArrowRightLine}
+          disabled={!address}
         >
-          Go to DAO
+          My Profile
         </ButtonRouterLink>
       }
     >
+      
       {!address && (
         <ContentContainer>
           <ParXl>SiloHaus RDF airdrop tool</ParXl>
