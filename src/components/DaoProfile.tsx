@@ -86,7 +86,6 @@ export const DaoProfile = ({ dao, daoChain }: DaoProfileProps) => {
       )}
       {address && (
         <ButtonRouterLink
-          size="sm"
           color="secondary"
           to={`/molochV3/${daoChain}/${dao.id}/member/${address}`}
         >
