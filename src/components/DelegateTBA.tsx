@@ -30,6 +30,7 @@ import {
 import { useTxBuilder } from "@daohaus/tx-builder";
 import { LOCAL_ABI } from "@daohaus/abis";
 import { useDHConnect } from "@daohaus/connect";
+import { RiCheckboxCircleFill } from "react-icons/ri/index.js";
 
 import { useTba } from "../hooks/useTba";
 import { erc6551AccountAbiV3 } from "@tokenbound/sdk";
@@ -146,14 +147,20 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
 
   if (isLoading) return <Loading />;
 
+  console.log("tba ", tba);
+  console.log("tbaMember?.delegatingTo  ", tbaMember?.delegatingTo );
+
   if (isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button color="secondary" size="sm">
-            Delegate
-            {tbaMember?.delegatingTo != currentUser ||
-              (tbaMember?.delegatingTo != tba && (
+            Delegate{" "}
+            {tbaMember?.delegatingTo.toLocaleLowerCase() == currentUser.toLocaleLowerCase() && (<Tooltip triggerEl={<RiCheckboxCircleFill color="hsl(131, 41.0%, 46.5%)" />} content="Delegating to self" />)}
+            {tbaMember?.delegatingTo.toLocaleLowerCase() == tba.toLocaleLowerCase() && (<Tooltip content="Delegated to TBA" />)}
+
+            {tbaMember?.delegatingTo.toLocaleLowerCase() != currentUser.toLocaleLowerCase() &&
+              (tbaMember?.delegatingTo.toLocaleLowerCase() != tba.toLocaleLowerCase() && (
                 <Tooltip content="Delegate is not owner or tba" />
               ))}
           </Button>

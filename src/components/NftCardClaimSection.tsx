@@ -42,10 +42,10 @@ export const NftCardClaimSection = ({
 
   return (
     <>
-      <ClaimPar>
+      {sdata?.lootPerNft?.result && Number(sdata?.lootPerNft?.result) > 0 && (<ClaimPar>
         Claimable {dao?.lootTokenSymbol}:{" "}
         {fromWei(sdata?.lootPerNft?.result || "0")}
-      </ClaimPar>
+      </ClaimPar>)}
 
       {shamanAddress && (
         <ClaimButton

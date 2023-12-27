@@ -54,4 +54,10 @@ export const APP_TX = {
     method: "claim",
     disablePoll: true,
   },
+  CLAIM_AND_DEPLOY_FOR_NFT: {
+    id: "CLAIM_AND_DEPLOY_FOR_NFT",
+    contract: APP_CONTRACT.LOCAL_CLAIM_SHAMAN,
+    method: "claimAndDeploy",
+    disablePoll: true,
+  },
 };

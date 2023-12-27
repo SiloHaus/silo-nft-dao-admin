@@ -37,6 +37,7 @@ import { useDHConnect } from "@daohaus/connect";
 import { useTba } from "../hooks/useTba";
 import { styled } from "styled-components";
 import { tbaAppLink } from "../utils/tokenboundHelpers";
+import { ConnectTBAButton } from "./ConnectTBAButton";
 
 const Container = styled.div`
   display: flex;
@@ -55,6 +56,12 @@ const NftCardImage = styled.img`
   max-height: 30rem;
   margin: 0 auto;
   border-radius: ${({ theme }) => theme.card.radius};
+`;
+
+const AddressDisplayWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
 `;
 
 type ButtonProps = {
@@ -107,24 +114,33 @@ export const NftImageDetails = ({
         {isClaimed ? (
           <>
             <ParMd>Power: {fromWei(tbaMember?.shares || "0")}</ParMd>
-            <ParMd>
+            {Number(tbaMember?.loot )> 0 && (<ParMd>
               Meme Token: {fromWei(tbaMember?.loot || "0")}{" "}
               {dao?.lootTokenSymbol}
-            </ParMd>
+            </ParMd>)}
             <ParMd>Delegating To:</ParMd>
-            {tbaMember?.delegatingTo && (
-              <AddressDisplay address={tbaMember.delegatingTo} truncate />
+            {tbaMember?.delegatingTo.toLowerCase() == currentUser.toLowerCase() && (
+              <AddressDisplayWrapper><ParSm>(Self)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
+            )}
+            {tbaMember?.memberAddress && tbaMember?.delegatingTo == tbaMember?.memberAddress && (
+              <AddressDisplayWrapper><ParSm>(TBA)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /><ConnectTBAButton
+                tokenId={tokenId}
+                contractAddress={contractAddress}
+              /></AddressDisplayWrapper>)}
+            {tbaMember?.delegatingTo.toLowerCase() == currentUser.toLowerCase() && tbaMember?.memberAddress && tbaMember?.delegatingTo == tbaMember?.memberAddress && (
+              <AddressDisplayWrapper><ParSm>Other:</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
             )}
           </>
         ) : (
           <ParMd>Not Claimed</ParMd>
-        )}
+        )
+        }
         <LinkBox>
           <Link href={tbaAppLink({ contractAddress, tokenId, daoChain })}>
             TokenBound
           </Link>
         </LinkBox>
-      </Container>
+      </Container >
     );
   }
 };

@@ -14,7 +14,6 @@ import {
 import { useCurrentDao, useDaoData } from "@daohaus/moloch-v3-hooks";
 import { EthAddress, ZERO_ADDRESS } from "@daohaus/utils";
 
-import { ConnectTBAButton } from "./ConnectTBAButton";
 import { useTba } from "../hooks/useTba";
 import { NftCardClaimSection } from "./NftCardClaimSection";
 import { useClaimShaman } from "../hooks/useClaimShaman";
@@ -59,7 +58,8 @@ const NftCardImageOverlay = styled.div`
   cursor: pointer;
   top: 0;
   right: 0;
-  font-size: 2rem;
+  font-size: 4rem;
+  color: ${({ theme }) => theme.secondary.step9};
   border-radius: ${({ theme }) => theme.card.radius};
   opacity: 0.7;
 `;
@@ -84,11 +84,12 @@ const LowerSection = styled.div`
 const ActionButton = styled.div`
   display: flex;
   flex-direction: row;
+  
   gap: 1rem;
 
-  button {
-    flex: 1;
-  }
+  // button {
+  //   flex: 1;
+  // }
 `;
 
 type NftCardProps = {
@@ -155,11 +156,6 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
             <LowerSection>
               {tba && <AddressDisplay address={tba} truncate copy />}
               <ActionButton>
-                <ConnectTBAButton
-                  tokenId={nft.tokenID}
-                  contractAddress={nft.contractAddress}
-                />
-
                 <DelegateTBA
                   tokenId={nft.tokenID}
                   contractAddress={nft.contractAddress}

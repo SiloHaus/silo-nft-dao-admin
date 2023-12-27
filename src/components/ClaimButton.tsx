@@ -42,7 +42,7 @@ export const ClaimButton = ({
     setIsLoading(true);
 
     await fireTransaction({
-      tx: { ...APP_TX.CLAIM_FOR_NFT, staticArgs: [tokenId] },
+      tx: { ...APP_TX.CLAIM_AND_DEPLOY_FOR_NFT, staticArgs: [tokenId] },
       callerState: {
         shamanAddress: shamanAddress,
       },
