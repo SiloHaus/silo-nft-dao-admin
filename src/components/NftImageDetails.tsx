@@ -36,8 +36,7 @@ import { useDHConnect } from "@daohaus/connect";
 
 import { useTba } from "../hooks/useTba";
 import { styled } from "styled-components";
-import { tbaAppLink } from "../utils/tokenboundHelpers";
-import { ConnectTBAButton } from "./ConnectTBAButton";
+import { openseaAppLink, tbaAppLink } from "../utils/tokenboundHelpers";
 
 const Container = styled.div`
   display: flex;
@@ -123,12 +122,9 @@ export const NftImageDetails = ({
               <AddressDisplayWrapper><ParSm>(Self)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
             )}
             {tbaMember?.memberAddress && tbaMember?.delegatingTo == tbaMember?.memberAddress && (
-              <AddressDisplayWrapper><ParSm>(TBA)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /><ConnectTBAButton
-                tokenId={tokenId}
-                contractAddress={contractAddress}
-              /></AddressDisplayWrapper>)}
-            {tbaMember?.delegatingTo.toLowerCase() == currentUser.toLowerCase() && tbaMember?.memberAddress && tbaMember?.delegatingTo == tbaMember?.memberAddress && (
-              <AddressDisplayWrapper><ParSm>Other:</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
+              <AddressDisplayWrapper><ParSm>(TBA)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>)}
+            {tbaMember?.delegatingTo.toLowerCase() != currentUser.toLowerCase() && tbaMember?.memberAddress && tbaMember?.delegatingTo != tbaMember?.memberAddress && (
+              <AddressDisplayWrapper><ParSm>(Other)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
             )}
           </>
         ) : (
@@ -138,6 +134,9 @@ export const NftImageDetails = ({
         <LinkBox>
           <Link href={tbaAppLink({ contractAddress, tokenId, daoChain })}>
             TokenBound
+          </Link>
+          <Link href={openseaAppLink({ contractAddress, tokenId, daoChain })}>
+            OpenSea
           </Link>
         </LinkBox>
       </Container >

@@ -22,6 +22,7 @@ import { DaoContainer } from "./components/layout/DaoContainer";
 import { ClaimContainer } from "./components/layout/ClaimContainer";
 import { Dao } from "./pages/Dao";
 import { About } from "./pages/About";
+import { AllSafes } from "./pages/AllSafes";
 
 export const Routes = ({
   setDaoChainId,
@@ -56,6 +57,7 @@ export const Routes = ({
       <Route path={MULTI_DAO_ROUTER} element={<DaoContainer />}>
         <Route index element={<Dao />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="safes" element={<AllSafes />} />
         <Route path="settings/update" element={<UpdateSettings />} />
         <Route path="proposals" element={<Proposals />} />
         <Route path="proposal/:proposalId" element={<Proposal />} />

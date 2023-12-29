@@ -10,6 +10,7 @@ import {
   Input,
   Loading,
   ParMd,
+  ParSm,
   Tooltip,
   WarningText,
   WrappedInput,
@@ -46,6 +47,12 @@ const Container = styled.div`
   gap: 1.5rem;
 `;
 
+const AddressDisplayWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+`;
+
 type ButtonProps = {
   tokenId: string;
   contractAddress: string;
@@ -75,6 +82,8 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
 
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [txWaiting, setTxWating] = useState(false);
+
   const [inputAddress, setInputAddress] = useState(currentUser);
 
   const mismatchedChain = daoChainId !== chainId;
@@ -100,6 +109,8 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
       sharesAddress,
       tbaAddress
     );
+    setTxWating(true);
+
 
     const encodedDelegate = encodeFunction(LOCAL_ABI.SHARES, "delegate", [
       userAddress,
@@ -132,12 +143,14 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
             error,
           });
           errorToast({ title: "Delegate Failed", description: errMsg });
+          setTxWating(false);
         },
         onTxSuccess: () => {
           defaultToast({
             title: "Delegate Success",
             description: "Please wait...",
           });
+          setTxWating(false);
         },
       },
     });
@@ -148,7 +161,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
   if (isLoading) return <Loading />;
 
   console.log("tba ", tba);
-  console.log("tbaMember?.delegatingTo  ", tbaMember?.delegatingTo );
+  console.log("tbaMember?.delegatingTo  ", tbaMember?.delegatingTo);
 
   if (isDeployed && tba && daoId && currentUser && dao?.sharesAddress) {
     return (
@@ -168,12 +181,17 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
 
         <DialogContent title="Delegate TBA">
           <Container>
-            <ParMd>
-              Delegate to {checked ? "a different Address" : "your self"}:
-            </ParMd>
-            {!checked ? (
-              <AddressDisplay address={currentUser} truncate={true} />
-            ) : (
+            <ParMd>Currently Delegating To:</ParMd>
+            {tbaMember?.delegatingTo.toLowerCase() == currentUser.toLowerCase() && (
+              <AddressDisplayWrapper><ParSm>(Self)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
+            )}
+            {tbaMember?.memberAddress && tbaMember?.delegatingTo == tbaMember?.memberAddress && (
+              <AddressDisplayWrapper><ParSm>(TBA)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>)}
+            {tbaMember?.delegatingTo.toLowerCase() != currentUser.toLowerCase() && tbaMember?.memberAddress && tbaMember?.delegatingTo != tbaMember?.memberAddress && (
+              <AddressDisplayWrapper><ParSm>(Other)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
+            )}
+
+            {checked && (
               <Input
                 id="delegateAddress"
                 onChange={handleChange}
@@ -182,24 +200,29 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
                 placeholder={"0x..."}
               />
             )}
+
+
             <Checkbox
               onCheckedChange={toggleChecked}
               checked={checked}
               defaultChecked={false}
               title="Delegate to a different address"
             />
-            <Button
-              onClick={() =>
-                handleClick(
-                  tba,
-                  inputAddress || currentUser,
-                  dao?.sharesAddress
-                )
-              }
-              disabled={mismatchedChain}
-            >
-              Delegate
-            </Button>
+
+              <Button
+                onClick={() =>
+                  handleClick(
+                    tba,
+                    inputAddress || currentUser,
+                    dao?.sharesAddress
+                  )
+                }
+                disabled={mismatchedChain || txWaiting}
+              >
+                Delegate {checked ? "" : "To Your Self"} {txWaiting && <Loading />}
+              </Button>
+
+
           </Container>
         </DialogContent>
       </Dialog>

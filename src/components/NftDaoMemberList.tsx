@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import styled, { useTheme } from "styled-components";
 
-import { Card, DataMd, DataSm, ParLg, ParSm, ParXs, Select } from "@daohaus/ui";
+import { Card, DataMd, DataSm, ParLg, ParSm, ParXs, Select, Tooltip } from "@daohaus/ui";
 import {
   useCurrentDao,
   useDaoData,
@@ -10,6 +10,7 @@ import {
 import { MemberProfileAvatar } from "@daohaus/moloch-v3-macro-ui";
 import { formatValueTo, fromWei, votingPowerPercentage } from "@daohaus/utils";
 import { ValidNetwork } from "@daohaus/keychain-utils";
+import { CgProfile } from "react-icons/cg";
 
 const MemberListContainer = styled(Card)`
   display: flex;
@@ -24,7 +25,7 @@ const MemberItem = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: .5rem;
 `;
 
 const MemberStats = styled.div`
@@ -63,10 +64,12 @@ export const NftDaoMemberList = ({
   const { members } = useDaoMembers({
     daoId,
     daoChain,
-    filter: { shares_gte: "1", dao: daoId },
+    filter: { delegateShares_gte: "1", dao: daoId },
   });
+
   const { dao } = useDaoData();
   const theme = useTheme();
+  console.log("members", members);
 
   // const handleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
   //   console.log("e", e.target.value);
@@ -105,7 +108,10 @@ export const NftDaoMemberList = ({
                 {`${votingPowerPercentage(
                   dao.totalShares,
                   member.delegateShares
-                )} %`}
+                )}%`}
+              </ParXs>
+              <ParXs color={theme.secondary.step10}>
+              {member.shares >= "1"  && <Tooltip content="TBA" />}
               </ParXs>
             </MemberItem>
           );

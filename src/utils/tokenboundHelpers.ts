@@ -1,5 +1,5 @@
 import { ValidNetwork } from "@daohaus/keychain-utils";
-import { TOKENBOUND_URL } from "./constants";
+import { OPENSEA_URL, TOKENBOUND_URL } from "./constants";
 
 export const tbaAppLink = ({
   contractAddress,
@@ -13,5 +13,20 @@ export const tbaAppLink = ({
   if (!daoChain || !tokenId || !contractAddress) return undefined;
   return `${
     TOKENBOUND_URL[daoChain as ValidNetwork]
+  }/${contractAddress}/${tokenId}`;
+};
+
+export const openseaAppLink = ({
+  contractAddress,
+  tokenId,
+  daoChain,
+}: {
+  tokenId?: string;
+  contractAddress?: string;
+  daoChain?: string;
+}) => {
+  if (!daoChain || !tokenId || !contractAddress) return undefined;
+  return `${
+    OPENSEA_URL[daoChain as ValidNetwork]
   }/${contractAddress}/${tokenId}`;
 };
