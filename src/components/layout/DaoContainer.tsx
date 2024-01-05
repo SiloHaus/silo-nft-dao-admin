@@ -30,6 +30,7 @@ const RightColumnContainer = styled.div`
   }
 `;
 
+
 export const DaoContainer = () => {
   const { proposalId, memberAddress, daoChain, daoId } = useParams<{
     daoChain: ValidNetwork;
@@ -68,6 +69,7 @@ const Dao = ({
   });
 
   return (
+
     <CurrentDaoProvider
       userAddress={address}
       targetDao={{
@@ -85,6 +87,7 @@ const Dao = ({
         appState={{ dao, memberAddress: address }}
       >
         <OuterLayout>
+
           <Header>
             <div className="left-nav">{<Brand />}</div>
             <DaoHausNav />
@@ -115,5 +118,6 @@ const Dao = ({
         </OuterLayout>
       </TXBuilder>
     </CurrentDaoProvider>
+
   );
 };

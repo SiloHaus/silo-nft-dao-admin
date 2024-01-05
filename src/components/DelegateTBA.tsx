@@ -53,6 +53,35 @@ const AddressDisplayWrapper = styled.div`
   gap: 1.5rem;
 `;
 
+const LinkAsButton = styled.a`
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  cursor: pointer;
+  background-color: #383838;
+  border: 0.1rem solid #383838;
+  &:hover {
+  background-color: #663333;
+  border: 0.1rem solid #663333;
+  }
+  align-items: center;
+  align-items: center;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.6rem;
+    font-weight: 700;
+    height: 4.8rem;
+    justify-content: center;
+    letter-spacing: 1.8px;
+    outline: none;
+    padding: 1.2rem;
+    text-decoration: none;
+    transition: 0.2s all;
+    width: fit-content;
+`;
+
+
 type ButtonProps = {
   tokenId: string;
   contractAddress: string;
@@ -167,7 +196,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button color="secondary" size="sm">
+          <LinkAsButton>
             Delegate{" "}
             {tbaMember?.delegatingTo.toLocaleLowerCase() == currentUser.toLocaleLowerCase() && (<Tooltip triggerEl={<RiCheckboxCircleFill color="hsl(131, 41.0%, 46.5%)" />} content="Delegating to self" />)}
             {tbaMember?.delegatingTo.toLocaleLowerCase() == tba.toLocaleLowerCase() && (<Tooltip content="Delegated to TBA" />)}
@@ -176,7 +205,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
               (tbaMember?.delegatingTo.toLocaleLowerCase() != tba.toLocaleLowerCase() && (
                 <Tooltip content="Delegate is not owner or tba" />
               ))}
-          </Button>
+          </LinkAsButton>
         </DialogTrigger>
 
         <DialogContent title="Delegate TBA">

@@ -21,10 +21,10 @@ export const APP_FIELD: Record<string, CustomFieldLego> = {
     placeholder: "http://",
     expectType: "url",
   },
-  TEST_FIELD: {
-    id: "testField",
-    type: "testField",
-    label: "Test Field",
-    placeholder: "Enter something",
-  },
+  // TEST_FIELD: {
+  //   id: "testField",
+  //   type: "testFieldz",
+  //   label: "Test Field",
+  //   placeholder: "Enter something",
+  // },
 };

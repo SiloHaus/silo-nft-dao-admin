@@ -46,7 +46,7 @@ export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
       
       {!address && (
         <ContentContainer>
-          <ParXl>SiloHaus RDF airdrop tool</ParXl>
+          <ParXl>SiloHaus RDF governance drop tool</ParXl>
           <ParMd>Connect your wallet to see your available avatars.</ParMd>
         </ContentContainer>
       )}

@@ -32,8 +32,9 @@ export const AllSafes = () => {
           DAO
         </ButtonRouterLink>
       </ButtonRow>
-      {dao.vaults.map((vault) => (
+      {dao.vaults.map((vault, idx) => (
         <CondensedSafeCard
+          key={idx}
           dao={dao}
           daoChain={daoChain}
           safe={vault}

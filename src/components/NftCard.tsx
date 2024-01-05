@@ -23,6 +23,7 @@ import { useState } from "react";
 import { NftImageDetails } from "./NftImageDetails";
 
 import { MdOutlineOpenInNew } from "react-icons/md";
+import { RageQuitTBA } from "./RageQuitTBA";
 
 const ClaimLink = styled(RouterLink)`
   text-decoration: none;
@@ -160,6 +161,10 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
                   tokenId={nft.tokenID}
                   contractAddress={nft.contractAddress}
                 />
+                <RageQuitTBA
+                  tokenId={nft.tokenID}
+                  contractAddress={nft.contractAddress}
+                ></RageQuitTBA>
               </ActionButton>
             </LowerSection>
           )}

@@ -75,7 +75,7 @@ export const ClaimButton = ({
       disabled={isClaimed || isLoading || mismatchedChain}
       isLoading={isLoading}
     >
-      {isClaimed ? "Already Activated" : "Claim airdrop"}
+      {isClaimed ? "Already Activated" : "Claim Governance Drop"}
     </Button>
   );
 };

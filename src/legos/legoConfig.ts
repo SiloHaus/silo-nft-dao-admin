@@ -3,10 +3,12 @@ import { FieldLegoBase, FormLegoBase } from "@daohaus/utils";
 import { TestField } from "../components/customFields/fieldTest";
 import { APP_FORM } from "./forms";
 import { COMMON_FORMS, PROPOSAL_FORMS } from "@daohaus/moloch-v3-legos";
+import { RagequitToken } from "../components/customFields/RageQuitToken";
 
 export const AppFieldLookup = {
   ...MolochFields,
-  testField: TestField,
+  tbaRageQuitToken: RagequitToken,
+  testFieldz: TestField
 };
 
 export type CustomFieldLego = FieldLegoBase<typeof AppFieldLookup>;
