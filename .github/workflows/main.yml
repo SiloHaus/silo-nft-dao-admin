@@ -1,4 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
+# fails if the build fails
 name: Deploy static content to Pages
 
 on:
