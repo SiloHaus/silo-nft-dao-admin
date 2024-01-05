@@ -34,7 +34,7 @@ export default ({ mode }) => {
         },
       },
     },
-
+    base: "/silo-nft-dao-admin/",
     build: {
       target: ["es2020"],
     },
