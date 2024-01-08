@@ -26,6 +26,8 @@ export const Claim = ({ dao }: { dao: MolochV3Dao }) => {
   return (
     <SingleColumnLayout
       title="Activate Your Avatar"
+      subtitle="Welcome Player!"
+      description="Connect your wallet to claim your avatar. After you claim your avatar, you can manage delegation on your profile page to use it to vote on proposals and participate in the DAO."
       actions={
         // <ButtonRouterLink
         //   to={`/molochV3/${daoChain}/${daoId}`}

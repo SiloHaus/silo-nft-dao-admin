@@ -63,7 +63,7 @@ export const Member = () => {
   const { memberAddress } = useParams();
 
   const { isDeployed, tbaAddress } = useTbaMember({
-    memberAddress: address as EthAddress,
+    memberAddress: memberAddress as EthAddress,
     chainId: daoChain,
   });
 
@@ -101,7 +101,7 @@ export const Member = () => {
         <>
           {memberAddress && (
             <>
-              {isDeployed && address && <TbaProfile tbaAddress={address} />}
+              {isDeployed && memberAddress ? (<TbaProfile tbaAddress={memberAddress} membership={member} />) : (<ParLg>Player</ParLg>)}
               <ProfileCard
                 daoChain={daoChain}
                 daoId={daoId}

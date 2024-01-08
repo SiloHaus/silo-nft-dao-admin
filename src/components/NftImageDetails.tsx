@@ -37,6 +37,7 @@ import { useDHConnect } from "@daohaus/connect";
 import { useTba } from "../hooks/useTba";
 import { styled } from "styled-components";
 import { openseaAppLink, tbaAppLink } from "../utils/tokenboundHelpers";
+import { RiSkull2Fill } from "react-icons/ri";
 
 const Container = styled.div`
   display: flex;
@@ -57,10 +58,32 @@ const NftCardImage = styled.img`
   border-radius: ${({ theme }) => theme.card.radius};
 `;
 
+const NftCardImageOverlay = styled.div`
+  display: flex;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  font-size: 4rem;
+  color: ${({ theme }) => theme.primary.step5};
+  border-radius: ${({ theme }) => theme.card.radius};
+  opacity: 0.7;
+`;
+
+const NftImageWrapper = styled.div`
+  position: relative;
+  width: 60rem;
+`;
+
 const AddressDisplayWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
+`;
+
+const Skull2FillOutline = styled(RiSkull2Fill)`
+stroke-width: 1.2px !important;
+stroke: ${({ theme }) => theme.primary.step1};
 `;
 
 type ButtonProps = {
@@ -107,13 +130,20 @@ export const NftImageDetails = ({
   if (daoId && currentUser) {
     return (
       <Container>
-        <ParSm>A TBA lets you own assets and participate in DAOs. All as your NFT.</ParSm>
-        <NftCardImage src={nftImage} />
+        <ParSm>A NPC (Network Playable Character) lets you own assets and participate in DAOs. All as your NFT.</ParSm>
+        <NftImageWrapper>
+          <NftCardImage src={nftImage} />
+          {Number(tbaMember?.shares) == 0 && (<NftCardImageOverlay>
+            <Skull2FillOutline  />
+          </NftCardImageOverlay>)}
+        </NftImageWrapper>
 
         {isClaimed ? (
           <>
             <ParMd>Power: {fromWei(tbaMember?.shares || "0")}</ParMd>
-            {Number(tbaMember?.loot )> 0 && (<ParMd>
+            <ParMd>Alive or Dead: {Number(tbaMember?.shares) == 0 ? "Dead" : "Alive"}</ParMd>
+
+            {Number(tbaMember?.loot) > 0 && (<ParMd>
               Meme Token: {fromWei(tbaMember?.loot || "0")}{" "}
               {dao?.lootTokenSymbol}
             </ParMd>)}

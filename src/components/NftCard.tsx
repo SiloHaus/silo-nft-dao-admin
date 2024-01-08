@@ -32,6 +32,7 @@ const ClaimLink = styled(RouterLink)`
 const CardContainer = styled(Card)`
   padding: 0;
   padding-top: 1rem;
+  padding-bottom: 1rem;
   width: 30rem;
 
   display: flex;
@@ -131,7 +132,7 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
             </NftCardImageOverlay>
           </NftCardImageWrapper>
         </DialogTrigger>
-        <DialogContent title="TBA Details">
+        <DialogContent title="NPC (Network Playable Character) Details">
           <NftImageDetails
             tokenId={nft.tokenID}
             contractAddress={nft.contractAddress}

@@ -6,6 +6,13 @@ import { H2, H3, Link, ParMd, SingleColumnLayout } from "@daohaus/ui";
 export const About = () => {
   return (
     <SingleColumnLayout>
+      <H2>Understanding NPCs (Network Playable Character)</H2>
+      <ParMd>
+        As the Player you manage a Network Playable Character (NPC) that
+        represents you in the DAO. You can use your NPC to vote on proposals and
+        participate in the DAO. You can also delegate a NPCs vote power to
+        yourself or another player.
+      </ParMd>
       <H2>Understanding Token Bound Accounts (TBAs)</H2>
 
       <ParMd>

@@ -59,7 +59,7 @@ export const DeployTBAInstructions = ({
       <ParLg>
         A TBA lets you own assets and participate in DAOs. All as your NFT.
       </ParLg>
-      <ParSm>Follow the steps below to deploy TBA for this avatar.</ParSm>
+      <ParSm>Follow the steps below to deploy TBA for this avatar. This is done automatically on your first claim</ParSm>
 
       <div>
         <ParMd>

@@ -116,6 +116,8 @@ export const Profile = ({
               })}
             />
           </ProfileDataGrid>
+            
+
           {membership.delegatingTo !== membership.memberAddress && (
             <DataIndicatorContainer>
               <DataIndicatorLabelMd>Delegating To</DataIndicatorLabelMd>
