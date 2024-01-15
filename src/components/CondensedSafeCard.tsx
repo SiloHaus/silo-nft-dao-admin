@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { DaoSafe, MolochV3Dao } from '@daohaus/moloch-v3-data';
+import { IFindQueryResult } from "@daohaus/data-fetch-utils";
+
 import {
   AddressDisplay,
   Bold,
@@ -15,8 +17,8 @@ import {
   ParXs,
   Tag,
 } from '@daohaus/ui';
-import { formatValueTo, generateGnosisUiLink } from '@daohaus/utils';
-import { Keychain, getNetwork } from '@daohaus/keychain-utils';
+import { EthAddress, formatValueTo, generateGnosisUiLink } from '@daohaus/utils';
+import { Keychain, ValidNetwork, getNetwork } from '@daohaus/keychain-utils';
 import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -31,6 +33,7 @@ import { RiMore2Fill } from "react-icons/ri/index.js";
 import { DataGrid, StyledLink } from './layout/GeneralLayouts';
 import { ButtonRouterLink } from './ButtonRouterLink';
 import { StyledRouterLink } from './ProfileCard.styles';
+import { SafeInfo, fetchSafe } from '../utils/safes';
 
 export const SafeContainer = styled(Card)`
   padding: 2rem;
@@ -180,6 +183,25 @@ export const CondensedSafeCard = ({
   daoChain,
   includeLinks = false,
 }: SafeCardProps) => {
+  const [safeData, setSafeData] = useState<IFindQueryResult<SafeInfo>>();
+
+
+  useEffect(() => {
+
+    const getSafeInfo = async (managerAccountAddress: EthAddress) => {
+      const safeInfo = await fetchSafe({
+        safeAddress: managerAccountAddress,
+        networkId: daoChain as ValidNetwork,
+      });
+      console.log('safeInfo', safeInfo);
+      setSafeData(safeInfo);
+    }
+
+    if (safe.safeAddress) {
+      getSafeInfo(safe.safeAddress as EthAddress);
+    }
+  }, [safe, daoChain]);
+
   const isTreasury = useMemo(() => {
     return safe.safeAddress === dao.safeAddress;
   }, [safe, dao]);
@@ -198,6 +220,7 @@ export const CondensedSafeCard = ({
                 explorerNetworkId={daoChain as keyof Keychain}
               />
               {isTreasury && <Tag tagColor="pink">Ragequittable</Tag>}
+              {safeData && safeData.data?.modules && safeData.data?.modules.length > 1 && <Tag tagColor="yellow">Managed</Tag>}
             </TagSection>
           </div>
           <DataIndicator

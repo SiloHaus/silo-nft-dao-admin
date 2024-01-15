@@ -5,12 +5,13 @@ import { DaoHausNav, useDHConnect } from "@daohaus/connect";
 import { TXBuilder } from "@daohaus/tx-builder";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import { CurrentDaoProvider, useDaoData } from "@daohaus/moloch-v3-hooks";
-import { Card, Footer, MainLayout, OuterLayout, widthQuery } from "@daohaus/ui";
+import { Footer, MainLayout, OuterLayout, widthQuery } from "@daohaus/ui";
 import { Header } from "./SharedLayout";
 import { Brand } from "../Brand";
 import { BiColumnLayout } from "./BiColumnLayout/BiColumnLayout";
 import { DaoProfile } from "../DaoProfile";
 import { NftDaoMemberList } from "../NftDaoMemberList";
+import { FooterJoint } from "./FooterJoint";
 
 const LeftColumnContainer = styled.div`
   display: flex;
@@ -89,7 +90,7 @@ const Dao = ({
         <OuterLayout>
 
           <Header>
-            <div className="left-nav">{<Brand />}</div>
+            <div className="left-nav"></div>
             <DaoHausNav />
           </Header>
 
@@ -114,7 +115,7 @@ const Dao = ({
               }
             ></BiColumnLayout>
           </MainLayout>
-          <Footer />
+          <FooterJoint />
         </OuterLayout>
       </TXBuilder>
     </CurrentDaoProvider>

@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <HashRouter>
       <QueryClientProvider client={queryClient}>
         <HausThemeProvider themeOverrides={siloTheme}>
-          <Banner />
+          {/* <Banner /> */}
           <App />
         </HausThemeProvider>
       </QueryClientProvider>

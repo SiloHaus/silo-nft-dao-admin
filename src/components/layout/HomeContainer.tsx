@@ -10,7 +10,7 @@ export const HomeContainer = () => {
       leftNav={<H4>SiloHAUS NFT DAO Admin Tool</H4>}
       pathname={location.pathname}
       navLinks={[{ label: "Home", href: `/` }]}
-      footer={<Footer />}
+      // footer={<Footer />}
     >
       <Outlet />
     </DHLayout>

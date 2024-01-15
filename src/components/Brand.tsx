@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import siloLogo from "../assets/silo-logo.png";
+import { Link } from "@daohaus/ui";
 
 const ImageContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const ImageContainer = styled.div`
 export const Brand = () => {
   return (
     <ImageContainer>
-      <img src={siloLogo} />
+      <Link showExternalIcon={false} href="http://silo.gg"><img src={siloLogo} alt="Silo RDF" title="SILO RDF A DAOhaus joint" /></Link>
     </ImageContainer>
   );
 };

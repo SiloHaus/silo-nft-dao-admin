@@ -9,6 +9,7 @@ import { MainLayout, OuterLayout } from "@daohaus/ui";
 import { Claim } from "../../pages/Claim";
 import { Header } from "./SharedLayout";
 import { Brand } from "../Brand";
+import { FooterJoint } from "./FooterJoint";
 
 export const ClaimContainer = () => {
   const { proposalId, memberAddress, daoChain, daoId } = useParams<{
@@ -68,13 +69,15 @@ const ClaimGuts = ({
       >
         <OuterLayout>
           <Header>
-            <div className="left-nav">{<Brand />}</div>
+            {/* <div className="left-nav">{<Brand />}</div> */}
+            <div className="left-nav"></div>
             <DaoHausNav />
           </Header>
 
           <MainLayout>
             <Claim dao={dao} />
           </MainLayout>
+          <FooterJoint />
         </OuterLayout>
       </TXBuilder>
     </CurrentDaoProvider>
