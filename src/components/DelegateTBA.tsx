@@ -40,6 +40,7 @@ import { APP_FORM } from "../legos/forms";
 import { MolochFields } from "@daohaus/moloch-v3-fields";
 import { AppFieldLookup } from "../legos/legoConfig";
 import { FormBuilder } from "@daohaus/form-builder";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -199,7 +200,7 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
           <LinkAsButton>
             Delegate{" "}
             {tbaMember?.delegatingTo.toLocaleLowerCase() == currentUser.toLocaleLowerCase() && (<Tooltip triggerEl={<RiCheckboxCircleFill color="hsl(131, 41.0%, 46.5%)" />} content="Delegating to self" />)}
-            {tbaMember?.delegatingTo.toLocaleLowerCase() == tba.toLocaleLowerCase() && (<Tooltip content="Delegated to TBA" />)}
+            {tbaMember?.delegatingTo.toLocaleLowerCase() == tba.toLocaleLowerCase() && (<Tooltip content="Delegated to NPC" />)}
 
             {tbaMember?.delegatingTo.toLocaleLowerCase() != currentUser.toLocaleLowerCase() &&
               (tbaMember?.delegatingTo.toLocaleLowerCase() != tba.toLocaleLowerCase() && (
@@ -208,14 +209,14 @@ export const DelegateTBA = ({ tokenId, contractAddress }: ButtonProps) => {
           </LinkAsButton>
         </DialogTrigger>
 
-        <DialogContent title="Delegate TBA">
+        <DialogContent title="Delegate NPC">
           <Container>
             <ParMd>Currently Delegating To:</ParMd>
             {tbaMember?.delegatingTo.toLowerCase() == currentUser.toLowerCase() && (
               <AddressDisplayWrapper><ParSm>(Self)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
             )}
             {tbaMember?.memberAddress && tbaMember?.delegatingTo == tbaMember?.memberAddress && (
-              <AddressDisplayWrapper><ParSm>(TBA)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>)}
+              <AddressDisplayWrapper><Link to="/about"><ParSm>(NPC)</ParSm></Link><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>)}
             {tbaMember?.delegatingTo.toLowerCase() != currentUser.toLowerCase() && tbaMember?.memberAddress && tbaMember?.delegatingTo != tbaMember?.memberAddress && (
               <AddressDisplayWrapper><ParSm>(Other)</ParSm><AddressDisplay address={tbaMember.delegatingTo} truncate /></AddressDisplayWrapper>
             )}

@@ -3,13 +3,15 @@ import { RegisterOptions, useFormContext } from 'react-hook-form';
 
 import { toWholeUnits, handleBaseUnits } from '@daohaus/utils';
 import { Buildable, Button, WrappedInput, Field } from '@daohaus/ui';
-import { useConnectedMember, useDaoData, useDaoMember } from '@daohaus/moloch-v3-hooks';
+import { useConnectedMember, useCurrentDao, useDaoData, useDaoMember } from '@daohaus/moloch-v3-hooks';
 import { Keychain } from '@daohaus/keychain-utils';
 
 export const RagequitToken = (props: Buildable<Field>) => {
   const { id } = props;
   const { setValue, getValues,  } = useFormContext();
   const { dao } = useDaoData();
+  const { daoChain } = useCurrentDao();
+
   if (!dao) return null;
 
   const tbaAddress  = getValues("tba");
@@ -19,7 +21,7 @@ export const RagequitToken = (props: Buildable<Field>) => {
 
   const { member } = useDaoMember({
     daoId: dao.id,
-    daoChain: "0x5" as keyof Keychain,
+    daoChain: daoChain as keyof Keychain,
     memberAddress: tbaAddress,
   });
 

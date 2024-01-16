@@ -11,6 +11,9 @@ import { MemberProfileAvatar } from "@daohaus/moloch-v3-macro-ui";
 import { formatValueTo, fromWei, votingPowerPercentage } from "@daohaus/utils";
 import { ValidNetwork } from "@daohaus/keychain-utils";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import { StyledLink } from "./layout/GeneralLayouts";
+import { StyledRouterLink } from "./ProfileCard.styles";
 
 const MemberListContainer = styled(Card)`
   display: flex;
@@ -111,7 +114,7 @@ export const NftDaoMemberList = ({
                 )}%`}
               </ParXs>
               <ParXs color={theme.secondary.step10}>
-              {member.shares >= "1"  && <Tooltip content="TBA" />}
+              {member.shares >= "1"  && <Tooltip content={<StyledRouterLink to="/about">NPC</StyledRouterLink>} />}
               </ParXs>
             </MemberItem>
           );
