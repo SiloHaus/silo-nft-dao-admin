@@ -32,7 +32,7 @@ const fetchNftsForAccount = async ({
     includeMetadata: true,
   });
 
-  console.log(">>>> nftBalances", nftBalances);
+  // console.log(">>>> nftBalances", nftBalances);
 
   const nftsWithClaimStatus = await Promise.all(
     nftBalances.balances.map(async (nft, i) => {
