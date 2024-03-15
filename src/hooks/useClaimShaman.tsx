@@ -14,6 +14,7 @@ const fetchShaman = async ({
   chainId?: ValidNetwork;
   rpcs?: Keychain;
 }) => {
+
   if (!chainId || !shamen) {
     throw new Error("Missing Args");
   }
@@ -22,7 +23,10 @@ const fetchShaman = async ({
     rpcs,
   });
 
+  const targetShamanNameV2 = "NFT6551ClaimerShamanV2";
   const targetShamanName = "NFT6551ClaimerShaman";
+
+
 
   const claimShaman = shamen.find(async (shaman) => {
     try {
@@ -33,8 +37,9 @@ const fetchShaman = async ({
         args: [],
       });
 
-      return shamanName === targetShamanName;
+      return shamanName === targetShamanNameV2 || shamanName === targetShamanName;
     } catch (e) {
+      console.log("error", e);
       return false;
     }
   });
@@ -88,7 +93,7 @@ export const useClaimShaman = ({
     throw new Error("Missing Args");
   }
   const { data, error, ...rest } = useQuery(
-    [`claimShaman-${dao?.id}}`],
+    [`claimShaman-${dao?.id}`],
     () => fetchShaman({ shamen: dao?.shamen, chainId }),
     { enabled: !!dao && !!dao.shamen && !!chainId }
   );

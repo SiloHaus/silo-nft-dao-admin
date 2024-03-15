@@ -9,6 +9,7 @@ export const SEQUENCE_ENDPOINTS: Keychain = {
   "0x89": "https://polygon-indexer.sequence.app",
   "0xa": "https://optimism-indexer.sequence.app",
   "0xa4b1": "https://arbitrum-indexer.sequence.app",
+  "0x2105": "https://base-indexer.sequence.app",
 };
 
 // TODO: check these urls
@@ -19,6 +20,7 @@ export const TOKENBOUND_URL: Keychain = {
   "0x89": "https://tokenbound.org/assets/polygon",
   "0xa": "https://tokenbound.org/assets/optimism",
   "0xa4b1": "https://tokenbound.org/assets/arbitrum",
+  "0x2105": "https://tokenbound.org/assets/base",
 };
 
 export const OPENSEA_URL: Keychain = {
@@ -28,6 +30,7 @@ export const OPENSEA_URL: Keychain = {
   "0x89": "https://opensea.io/assets/polygon",
   "0xa": "https://opensea.io/assets/optimism",
   "0xa4b1": "https://opensea.io/assets/arbitrum",
+  "0x2105": "https://opensea.io/assets/base",
 };
 
 export const SEQUENCE_CHAIN_NAME: Keychain = {
@@ -37,4 +40,5 @@ export const SEQUENCE_CHAIN_NAME: Keychain = {
   "0x89": "polygon",
   "0xa": "optimism",
   "0xa4b1": "arbitrum",
+  "0x2105": "base"
 };

@@ -22,6 +22,7 @@ export default ({ mode }) => {
         NX_POLYGONPOS_ALCHEMY_KEY: process.env.VITE_POLYGONPOS_ALCHEMY_KEY,
         NX_GOERLI_RPC: process.env.VITE_GOERLI_RPC,
         NX_OPTIMISM_RPC: process.env.VITE_OPTIMISM_RPC,
+        NX_BASE_RPC: process.env.VITE_BASE_RPC,
       },
     },
     optimizeDeps: {

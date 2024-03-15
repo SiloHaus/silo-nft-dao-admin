@@ -42,7 +42,7 @@ export const ProfileNftList = ({
   dao: MolochV3Dao;
   isHolder?: boolean;
 }) => {
-  const { sdata, shamanAddress } = useClaimShaman({
+  const { sdata, shamanAddress, error } = useClaimShaman({
     dao,
     chainId: daoChain,
   });
@@ -53,6 +53,10 @@ export const ProfileNftList = ({
     shamanAddress,
     chainId: daoChain,
   });
+
+  // console.log(">>>> accountNfts", accountNfts, isLoading);
+  // console.log(">>>> sdata", sdata);
+  // console.log(">>>> shamanAddress", shamanAddress, address, daoChain);
 
   if (isLoading) return <Loading />;
 

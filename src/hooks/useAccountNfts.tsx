@@ -20,7 +20,6 @@ const fetchNftsForAccount = async ({
     throw new Error("Missing Args");
   }
   const sequenceEndPoint = SEQUENCE_ENDPOINTS[chainId as ValidNetwork];
-
   if (!sequenceEndPoint) {
     throw new Error("Invalid ChainId");
   }
@@ -32,6 +31,8 @@ const fetchNftsForAccount = async ({
     accountAddress: accountAddress,
     includeMetadata: true,
   });
+
+  console.log(">>>> nftBalances", nftBalances);
 
   const nftsWithClaimStatus = await Promise.all(
     nftBalances.balances.map(async (nft, i) => {

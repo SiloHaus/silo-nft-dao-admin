@@ -43,6 +43,7 @@ export const ClaimList = ({
     shamanAddress: shamanAddress,
   });
 
+
   if (isLoading) return <Loading />;
 
   if (!isLoading && accountNfts?.length === 0) {

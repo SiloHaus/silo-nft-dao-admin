@@ -35,7 +35,7 @@ export const ProfileCard = ({
     address: member?.memberAddress || profileAddress || "",
   });
 
-  console.log("currentProfile", currentProfile);
+  console.log("currentProfile >>>", currentProfile);
 
   if (
     // !member ||

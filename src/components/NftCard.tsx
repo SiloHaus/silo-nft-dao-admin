@@ -120,6 +120,8 @@ export const NftCard = ({ nft, isClaim, isHolder }: NftCardProps) => {
   });
   const [open, setOpen] = useState(false);
 
+  // console.log(">>>>> nft", nft);
+
   return (
     <CardContainer>
       <Dialog open={open} onOpenChange={setOpen}>
